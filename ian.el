@@ -1706,3 +1706,18 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;;; Clippy
 ;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
 ;; (require 'clippy)
+
+
+;; Newticker
+(defun read-sexp-from-file (filename)
+  "reads one sexp from a file"
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (read (current-buffer))))
+
+(require 'newsticker)
+(setq newsticker-frontend 'newsticker-plainview)
+(setq newsticker-retrieval-interval (* 2 60 60))
+(setq newsticker-url-list-defaults nil)
+(setq newsticker-url-list (read-sexp-from-file (concat user-emacs-directory "feeds")))
+(global-set-key (kbd "C-c C-r") 'newsticker-treeview)
