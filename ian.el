@@ -1721,3 +1721,4 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (setq newsticker-url-list-defaults nil)
 (setq newsticker-url-list (read-sexp-from-file (concat user-emacs-directory "feeds")))
 (global-set-key (kbd "C-c C-r") 'newsticker-treeview)
+(setq newsticker-automatically-mark-items-as-old nil)
