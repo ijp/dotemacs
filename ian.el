@@ -1419,6 +1419,8 @@ If buffer doesn't exist, does nothing."
 (setq erc-part-reason 'my-erc-part)
 (setq erc-quit-reason 'my-erc-quit)
 
+(erc-keep-place-mode 1)
+
 
 (put 'dired-find-alternate-file 'disabled nil)
 
