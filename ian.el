@@ -671,16 +671,6 @@
 ;; (map-keymap 'convert-key-to-hyper ctl-x-map)
 
 
-
-
-;; APL
-(require 'apl)
-;;(apl-set-font '("gnu-unifont" . "ISO10646-1"))
-(load "~/src/emacs/inferior-apl.el")
-
-
-
-
 ;; Browse
 (global-set-key (kbd "M-#") 'browse-url)
 (global-set-key (kbd "C-'") 'browse-url-at-point)
