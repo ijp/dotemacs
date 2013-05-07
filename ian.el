@@ -130,10 +130,6 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-;; git
-;;(add-to-list 'load-path "~/src/emacs/git-emacs")
-;;(require 'git-emacs)
-
 ;; org-mode
 (setq load-path (cons "~/src/emacs/org-mode/lisp/" load-path))
 ;(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
@@ -697,17 +693,6 @@
       (global-set-key (kbd "C-x C-f") 'lusty-file-explorer)
       (global-set-key (kbd "C-x b") 'lusty-buffer-explorer)
       (message "lusty"))))
-
-
-;; my customisations to git-emacs
-;; (defun gitk (arg)
-;;   "my rebinding of git-emacs' gitk"
-;;   (interactive "P")
-;;   (if (consp arg)
-;;       (start-process "gitk" nil gitk-program "--all")
-;;     (start-process "gitk" nil gitk-program)))
-
-;; (define-key git-global-map "k" 'gitk)
 
 
 ;; Tea Time
