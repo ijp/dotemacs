@@ -361,21 +361,6 @@
 (global-pretty-mode 1)
 ; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
 
-(add-to-list 'load-path "~/src/emacs/emms/lisp")
-(require 'emms-setup)
-(emms-standard)
-; emms-browser
-(emms-default-players)
-(require 'emms-source-file)
-(require 'emms-source-playlist)
-(global-set-key (kbd "H-p") 'emms-pause) ;; doesn't work anymore in gnome3
-;; (require 'emms-mode-line)
-;; (emms-mode-line nil)
-;; (require 'emms-playing-time)
-;; (emms-playing-time nil)
-(require 'emms-volume)
-;; emms-volume-minor-mode is awesome
-
 ;; sql stuff
 (require 'sql-indent)
 (require 'sql-transform)
