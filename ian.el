@@ -130,28 +130,8 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-;; org-mode
-(setq load-path (cons "~/src/emacs/org-mode/lisp/" load-path))
-;(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
-(require 'org-install)
-;(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key "\C-cc" 'org-capture)
-
 ;(global-font-lock-mode 1)
-;(add-hook 'org-mode-hook 'turn-on-font-lock)
-(setq org-log-done t)
-(setq org-agenda-files (list "~/org/notes.org"
-                             "~/org/appointments.org"
-                             "~/org/habits.org"
-                             "~/org/coursera.org"
-                             ))
-(setq org-habit-show-habits-only-for-today nil ) ; did I turn habit on
-                                        ; with customize?
-;; I think either org mode or emacs starter kit changes this setting :(
-(add-hook 'org-mode-hook (lambda () (toggle-truncate-lines -1)))
+
 ;; javascript
 ;(autoload 'js2-mode "js2" nil t)
 ;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -721,17 +701,6 @@
 ;; https://code.google.com/p/a2bot/source/browse/trunk/data/yow.lines?r=2
 (setq yow-file "~/.emacs.d/yow.lines")
 
-
-
-(setq org-todo-keywords
-      '((sequence "TODO" "|" "DONE")
-        ;; bugs
-        (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" )
-        ))
-(setq org-default-notes-file "~/org/notes.org")
-
-
-
 (global-set-key (kbd "C-c q") 'refill-mode)
 
 
@@ -746,10 +715,6 @@
 
 
 (global-set-key "\C-xc" 'mode-compile)
-
-;; (add-hook 'message-mode-hook 'turn-on-orgstruct)
-;; (add-hook 'message-mode-hook 'turn-on-orgstruct++)
-
 
 ;; put this file in the dot[e]macs register ;)
 (set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
@@ -1115,16 +1080,6 @@ If buffer doesn't exist, does nothing."
 ;; C-M-' markerpen-clear-all-marks
 
 
-;; org contrib
-;; if this doesn't work out try deft (see bucket.org)
-(setq load-path (cons "~/src/emacs/org-mode/contrib/lisp/" load-path))
-(require 'org-velocity)
-(setq org-velocity-bucket "~/org/bucket.org")
-(global-set-key (kbd "M-N") 'org-velocity-read)
-;; site recommend C-c v, use that?
-
-
-
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
 
@@ -1139,28 +1094,10 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "blase" "blasé")
 
 
-;; (add-to-list 'load-path "~/src/emacs/deft")
-;; (require 'deft)
-;; (setq deft-text-mode 'org-mode)
-;; (setq deft-extension "org")
-;; (global-set-key (kbd "C-;") 'deft)
-
-
 (require 'typing)
 
 
 (put 'dired-find-alternate-file 'disabled nil)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((scheme . t)
-   (emacs-lisp . t)
-   (ruby . t)
-   (python . t)))
-
-
-(add-hook 'message-mode 'turn-on-orgstruct)
-(add-hook 'message-mode 'turn-on-orgstruct++)
 
 ;; gists
 ;; elpa version isn't working for me for whatever reason
@@ -1187,10 +1124,6 @@ If buffer doesn't exist, does nothing."
 
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
 (add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
-
-
-(setq org-src-window-setup 'other-window)
-(setq org-src-fontify-natively t)
 
 
 ;;; chess
@@ -1294,14 +1227,6 @@ If buffer doesn't exist, does nothing."
 (setq ispell-dictionary "english")
 
 
-;; see (info "(org) Breaking down tasks")
-(defun org-summary-todo (n-done n-not-done)
-  "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  (let (org-log-done org-log-states)   ; turn off logging
-    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-
-(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-
 (require 'htmlfontify)
 (defun html-entity-encode-region (start end)
   ;; Thanks to fledermaus for pointing out the functions below, so I
@@ -1339,6 +1264,65 @@ If buffer doesn't exist, does nothing."
 ;;; Clippy
 ;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
 ;; (require 'clippy)
+
+
+;;;; Org Mode
+(setq load-path (cons "~/src/emacs/org-mode/lisp/" load-path))
+;(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
+(require 'org-install)
+;(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-cc" 'org-capture)
+
+(setq org-log-done t)
+(setq org-agenda-files (list "~/org/notes.org"
+                             "~/org/appointments.org"
+                             "~/org/habits.org"
+                             "~/org/coursera.org"
+                             ))
+(setq org-habit-show-habits-only-for-today nil ) ; did I turn habit on
+                                        ; with customize?
+;; I think either org mode or emacs starter kit changes this setting :(
+(add-hook 'org-mode-hook (lambda () (toggle-truncate-lines -1)))
+
+(setq org-todo-keywords
+      '((sequence "TODO" "|" "DONE")
+        ;; bugs
+        (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" )
+        ))
+(setq org-default-notes-file "~/org/notes.org")
+
+;; org contrib
+;; if this doesn't work out try deft (see bucket.org)
+(setq load-path (cons "~/src/emacs/org-mode/contrib/lisp/" load-path))
+(require 'org-velocity)
+(setq org-velocity-bucket "~/org/bucket.org")
+(global-set-key (kbd "M-N") 'org-velocity-read)
+;; site recommend C-c v, use that?
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((scheme . t)
+   (emacs-lisp . t)
+   (ruby . t)
+   (python . t)))
+
+
+(add-hook 'message-mode 'turn-on-orgstruct)
+(add-hook 'message-mode 'turn-on-orgstruct++)
+
+(setq org-src-window-setup 'other-window)
+(setq org-src-fontify-natively t)
+
+;; see (info "(org) Breaking down tasks")
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
 
 ;;;; Erc
