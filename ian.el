@@ -15,24 +15,14 @@
 (menu-bar-mode t)
 (column-number-mode t)
 (add-to-list 'load-path "~/src/emacs/")
-;; (add-to-list 'load-path "~/src/emacs-themes/color-theme-cool-dark/")
-;; (add-to-list 'load-path "~/src/emacs-themes/color-theme-gnome-3-adwaita/")
 (require 'revbufs)
-
-;;(require 'pink-bliss) ; <3
 
 (require 'color-theme)
 (require 'color-theme-my-forest)
-;; (require 'color-theme-cool-dark)
-;; (require 'color-theme-gnome-3-adwaita)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-my-forest)
-     
-     ;; (color-theme-cool-dark)
-     ;; (color-theme-gnome-3-adwaita)
-     ))
+     (color-theme-my-forest)))
 
 (setq c-default-style "linux")
 ; maybe I should use "linux" style
@@ -832,15 +822,6 @@
 
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
-
-;; Solarized theme (might be worth a shot)
-(add-to-list 'load-path
-"/home/ian/src/emacs/emacs-color-theme-solarized/")
-
-;;(require 'color-theme-solarized)
-;;(color-theme-solarized-dark)
-;;(color-theme-solarized-light)
-
 
 ;; Lusty explorer is worth exploring
 (defvar lusty-on t)
