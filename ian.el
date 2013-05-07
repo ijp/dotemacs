@@ -53,12 +53,8 @@
 ;; need that hook in java too
 (add-hook 'scheme-mode 'run-coding-hook)
 ;; random
-(defalias 'monocle-mode 'glasses-mode)
 (global-set-key (kbd "C-x M-d") 'fixup-whitespace)
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-(defun donuts ()
-  (interactive)
-  (print "Mmmm, donuts."))
 (require 'mwe-log-commands)
 
 ;; mode-compile
@@ -1108,11 +1104,6 @@
           (add-hook hook 'rainbow-delimiters-mode))
         '(emacs-mode-hook lisp-mode-hook scheme-mode-hook))
 
-;; hilarious mode
-(require 'faith)
-
-
-
 ;;; ibuffer
 ;;; http://www.emacswiki.org/emacs/IbufferMode
 (setq ibuffer-saved-filter-groups
@@ -1293,12 +1284,6 @@ If buffer doesn't exist, does nothing."
 
 
 
-;; nyan mode
-(add-to-list 'load-path "~/src/emacs/nyan-mode/")
-(require 'nyan-mode)
-
-
-
 ;; markerpen
 (require 'markerpen)
 ;; Remember you can use prefix args to select pen
@@ -1438,17 +1423,6 @@ If buffer doesn't exist, does nothing."
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
 
-
-;;; from esk
-(defun esk-suck-it (suckee)
-  "Insert a comment of appropriate length about what can suck it."
-  (interactive "MWhat can suck it? ")
-  (let ((prefix (concat ";; " suckee " can s"))
-        (postfix "ck it!")
-        (col (current-column)))
-    (insert prefix)
-    (dotimes (_ (- 80 col (length prefix) (length postfix))) (insert "u"))
-    (insert postfix)))
 
 (setq prolog-program-name "gprolog")
 
