@@ -1,4 +1,3 @@
-;(require 'erc)
 ;(setq visible-bell nil)
 ;(hl-line-mode -1)
 ;(global-auto-revert-mode t)
@@ -675,54 +674,6 @@
 (global-set-key (kbd "M-#") 'browse-url)
 (global-set-key (kbd "C-'") 'browse-url-at-point)
 
-(setq erc-nick "ijp")
-(setq erc-save-buffer-on-part t)
-(add-hook 'erc-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-l")
-                           'erc-save-buffer-in-logs)))
-(add-hook 'erc-mode-hook 'abbrev-mode)
-(setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#scheme" "#guile"
-         "#haskell" "#haskell.jp" "#racket"
-         )
-        ("irc2.2ch.net" "#japanese") ; server uses the  ISO-2022-JP encoding
-        ;- except for the #japanese channel which uses utf-8. I need
-        ;to make the erc-server-coding-system local with make-local-variable
-        ("irc.rizon.net" "#ajatt")
-        ))
-
-
-(defvar my-irc-servers
-  '("irc.freenode.net"
-    "irc.rizon.net"
-    "irc2.2ch.net"))
-
-(defun my-erc-start ()
-  (interactive)
-  (save-current-buffer
-    (erc :server "irc.freenode.net" :port "6667" :nick "ijp")
-    (erc :server "irc.rizon.net" :port "6667" :nick "ijp")
-    (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")
-    ;;(message "TODO: setup for irc.2ch.net")
-    (set-buffer "irc2.2ch.net:6667")
-    (set (make-local-variable 'erc-server-coding-system) '(iso-2022-jp . undecided))))
-
-(defun my-erc-quit-server ()
-  (interactive)
-  (save-current-buffer
-    (dolist (server my-irc-servers)
-      (set-buffer (concat server ":6667"))
-      (erc-quit-server nil))))
-
-;; (setq erc-encoding-coding-alist
-;;       '(("irc2.2ch.net" . iso-2022-jp)))
-
-;; maybe #linuxoutlaws
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
 
 ;;;; Check these are installed
 ;; (require 'xml-rpc)
@@ -959,10 +910,6 @@
         ))
 (setq org-default-notes-file "~/org/notes.org")
 
-;; Don't think this works
-;(add-to-list 'load-path "~/src/emacs/erc-view-log/")
-;(require 'erc-view-log)
-;(add-to-list 'auto-mode-alist '("logs/.*" . erc-view-log-mode))
 
 
 (global-set-key (kbd "C-c q") 'refill-mode)
@@ -1331,15 +1278,7 @@ If buffer doesn't exist, does nothing."
 ;; there are others, but this is fine for now
 
 
-;; erc
-(setq erc-quit-reason 'erc-quit-reason-normal) ; 'erc-quit-reason-zippy
-
-
-
 (require 'srfi)
-
-
-
 
 
 ;;; Emacs Database
@@ -1401,17 +1340,6 @@ If buffer doesn't exist, does nothing."
 (require 'typing)
 
 
-(setq erc-kill-buffer-on-part t)
-(defun my-erc-quit (s)
-  (or s "The garbage collector got me"))
-(defun my-erc-part (s)
-  (or s "(prompt (begin (control f (f 0) (f 0)) (control f (f 0) (f 0))))"))
-(setq erc-part-reason 'my-erc-part)
-(setq erc-quit-reason 'my-erc-quit)
-
-(erc-keep-place-mode 1)
-
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 (org-babel-do-load-languages
@@ -1424,13 +1352,6 @@ If buffer doesn't exist, does nothing."
 
 (add-hook 'message-mode 'turn-on-orgstruct)
 (add-hook 'message-mode 'turn-on-orgstruct++)
-
-;; erc notify
-;; This isn't useful if I can't change it to not popup on visible
-;; buffers in the current frame
-;; (require 'erc-nick-notify)
-;; (setq erc-nick-notify-icon "/usr/share/emacs/23.2/etc/images/icons/hicolor/48x48/apps/emacs.png")
-;; `erc-nick-notify-icon'
 
 ;; gists
 ;; elpa version isn't working for me for whatever reason
@@ -1533,36 +1454,6 @@ If buffer doesn't exist, does nothing."
 
 
 
-(defun erc-cmd-IGNORE (&optional user duration)
-  ;; Duration is in minutes.
-  "Ignore USER.  This should be a regexp matching nick!user@host.
-If no USER argument is specified, list the contents of `erc-ignore-list'."
-  (if user
-      (let ((quoted (regexp-quote user)))
-	(when (and (not (string= user quoted))
-		   (y-or-n-p (format "Use regexp-quoted form (%s) instead? "
-				     quoted)))
-	  (setq user quoted))
-	(erc-display-line
-	 (erc-make-notice (format "Now ignoring %s" user))
-	 'active)
-	(erc-with-server-buffer (add-to-list 'erc-ignore-list user))
-        (if duration
-            (run-at-time (* 60 (timer-duration duration)) nil 'my-unignore user)))
-    (if (null (erc-with-server-buffer erc-ignore-list))
-	(erc-display-line (erc-make-notice "Ignore list is empty") 'active)
-      (erc-display-line (erc-make-notice "Ignore list:") 'active)
-      (mapc #'(lambda (item)
-		(erc-display-line (erc-make-notice item)
-				  'active))
-	    (erc-with-server-buffer erc-ignore-list))))
-  t)
-
-(defun my-unignore (user)
-  (interactive)
-  (and (erc-cmd-UNIGNORE user)
-       (message (format "Now unignoring %s"))))
-
 (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
 
 (setq ido-auto-merge-work-directories-length -1)
@@ -1640,6 +1531,107 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (define-global-abbrev "sequiter" "sequitur") ; bah, that - gets in the
                                         ; way of the abbrevs working right
 
+;; Try and fix my C-x RET
+
+;; <legumbre> ,dk C-x RET f
+;; <fsbot> set-buffer-file-coding-system is an interactive compiled Lisp function
+;; <fsbot> in `mule.el'.
+;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
+
+;;; Clippy
+;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
+;; (require 'clippy)
+
+
+;;;; Erc
+
+(setq erc-nick "ijp")
+(setq erc-save-buffer-on-part t)
+(add-hook 'erc-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-l")
+                           'erc-save-buffer-in-logs)))
+(add-hook 'erc-mode-hook 'abbrev-mode)
+(setq erc-autojoin-channels-alist
+      '(("freenode.net" "#emacs" "#scheme" "#guile"
+         "#haskell" "#haskell.jp" "#racket"
+         )
+        ("irc2.2ch.net" "#japanese") ; server uses the  ISO-2022-JP encoding
+        ;- except for the #japanese channel which uses utf-8. I need
+        ;to make the erc-server-coding-system local with make-local-variable
+        ("irc.rizon.net" "#ajatt")
+        ))
+
+
+(defvar my-irc-servers
+  '("irc.freenode.net"
+    "irc.rizon.net"
+    "irc2.2ch.net"))
+
+(defun my-erc-start ()
+  (interactive)
+  (save-current-buffer
+    (erc :server "irc.freenode.net" :port "6667" :nick "ijp")
+    (erc :server "irc.rizon.net" :port "6667" :nick "ijp")
+    (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")
+    ;;(message "TODO: setup for irc.2ch.net")
+    (set-buffer "irc2.2ch.net:6667")
+    (set (make-local-variable 'erc-server-coding-system) '(iso-2022-jp . undecided))))
+
+(defun my-erc-quit-server ()
+  (interactive)
+  (save-current-buffer
+    (dolist (server my-irc-servers)
+      (set-buffer (concat server ":6667"))
+      (erc-quit-server nil))))
+
+(and
+ (require 'erc-highlight-nicknames)
+ (add-to-list 'erc-modules 'highlight-nicknames)
+ (erc-update-modules))
+
+(setq erc-quit-reason 'erc-quit-reason-normal)
+
+(setq erc-kill-buffer-on-part t)
+(defun my-erc-quit (s)
+  (or s "The garbage collector got me"))
+(defun my-erc-part (s)
+  (or s "(prompt (begin (control f (f 0) (f 0)) (control f (f 0) (f 0))))"))
+(setq erc-part-reason 'my-erc-part)
+(setq erc-quit-reason 'my-erc-quit)
+
+(erc-keep-place-mode 1)
+
+(defun erc-cmd-IGNORE (&optional user duration)
+  ;; Duration is in minutes.
+  "Ignore USER.  This should be a regexp matching nick!user@host.
+If no USER argument is specified, list the contents of `erc-ignore-list'."
+  (if user
+      (let ((quoted (regexp-quote user)))
+	(when (and (not (string= user quoted))
+		   (y-or-n-p (format "Use regexp-quoted form (%s) instead? "
+				     quoted)))
+	  (setq user quoted))
+	(erc-display-line
+	 (erc-make-notice (format "Now ignoring %s" user))
+	 'active)
+	(erc-with-server-buffer (add-to-list 'erc-ignore-list user))
+        (if duration
+            (run-at-time (* 60 (timer-duration duration)) nil 'my-unignore user)))
+    (if (null (erc-with-server-buffer erc-ignore-list))
+	(erc-display-line (erc-make-notice "Ignore list is empty") 'active)
+      (erc-display-line (erc-make-notice "Ignore list:") 'active)
+      (mapc #'(lambda (item)
+		(erc-display-line (erc-make-notice item)
+				  'active))
+	    (erc-with-server-buffer erc-ignore-list))))
+  t)
+
+(defun my-unignore (user)
+  (interactive)
+  (and (erc-cmd-UNIGNORE user)
+       (message (format "Now unignoring %s"))))
+
 (setq erc-join-buffer 'bury)
 (setq erc-track-shorten-aggressively 'max)
 ;; ^^ problematic when there is only one channel, hmm
@@ -1681,23 +1673,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
                              (sort (cdr x) 'string-lessp))))
             (incf count)))))))
 
-;; Try and fix my C-x RET
-
-;; <legumbre> ,dk C-x RET f
-;; <fsbot> set-buffer-file-coding-system is an interactive compiled Lisp function
-;; <fsbot> in `mule.el'.
-;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
-
 (add-to-list 'load-path "/home/ian/src/emacs/erc-shoot")
 (require 'erc-shoot)
-
-
-
-
-
-;;; Clippy
-;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
-;; (require 'clippy)
 
 
 ;; Newticker
