@@ -1096,13 +1096,6 @@ If buffer doesn't exist, does nothing."
 ;; not sure if necessary -- maybe reinstall ess from elpa
 
 
-;; stolen from forcer
-(defun google (what)
-  "Use google to search for WHAT."
-  (interactive "sSearch: ")
-  (browse-url (format "http://www.google.co.uk/search?q=%s" what)))
-
-
 ;; Try and fix my C-x RET
 
 ;; <legumbre> ,dk C-x RET f
