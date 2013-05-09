@@ -434,32 +434,6 @@
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
-;; Erlang mode was installed from distribution
-(setq erlang-root-dir "/usr/lib/erlang")
-
-;; Erlang  + Distel
-(add-to-list 'load-path "~/src/emacs/distel/elisp")
-(require 'distel)
-(distel-setup)
-
-;;; recommended by
-;;; http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html
-(defconst distel-shell-keys
-  '(("\C-\M-i"   erl-complete)
-    ("\M-?"      erl-complete)
-    ("\M-."      erl-find-source-under-point)
-    ("\M-,"      erl-find-source-unwind)
-    ("\M-*"      erl-find-source-unwind)
-    )
-  "Additional keys to bind when in Erlang shell.")
-
-(add-hook 'erlang-shell-mode-hook
-                                        (lambda ()
-                                                ;; add some Distel bindings to the Erlang shell
-                                                (dolist (spec distel-shell-keys)
-                                                        (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
-
-
 ;; yasnippet
 (add-to-list 'load-path "~/src/emacs/yasnippet-0.6.1c")
 (require 'yasnippet)
