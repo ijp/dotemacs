@@ -758,14 +758,6 @@
 (load-file "~/src/emacs/graphviz-dot-mode.el") 
 
 
-;; (add-to-list 'load-path "~/src/emacs/workgroups.el/")
-;; (require 'workgroups)
-;; (setq wg-prefix-key (kbd "C-c w")) ; C-z by default, maybe I should
-;;                                    ; use that?
-;; (workgroups-mode -1)
-;; (wg-load "~/.emacs.d/wg/wg.bak")
-
-
 (require 'rainbow-delimiters)
 (mapcar (lambda (hook)
           (add-hook hook 'rainbow-delimiters-mode))
