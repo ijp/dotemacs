@@ -889,14 +889,6 @@
 ;; (global-set-key [(meta up)]        'backward-up-list)
 ;; (global-set-key [(meta down)]      'down-list)
 
-
-
-;; whitespace (for whitespace programming language)
-;; NB. Name conflicts with builtin whitespace-mode
-;; (require 'whitespace-mode)
-;; (add-to-list 'auto-mode-alist '("\\.ws$" . whitespace-mode))
-
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
