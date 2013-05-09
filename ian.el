@@ -642,24 +642,6 @@
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
 
-;; Lusty explorer is worth exploring
-(defvar lusty-on t)
-(require 'lusty-explorer)
-(defun toggle-lusty ()
-  (interactive)
-  (if lusty-on
-      (progn
-        (setq lusty-on nil)
-        (global-set-key (kbd "C-x C-f") 'ido-find-file)
-        (global-set-key (kbd "C-x b") 'ido-switch-buffer)
-        (message "ido"))
-    (progn
-      (setq lusty-on t)
-      (global-set-key (kbd "C-x C-f") 'lusty-file-explorer)
-      (global-set-key (kbd "C-x b") 'lusty-buffer-explorer)
-      (message "lusty"))))
-
-
 ;; Tea Time
 (add-to-list 'load-path "~/src/emacs/tea-time")
 (require 'tea-time)
