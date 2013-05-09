@@ -620,25 +620,6 @@
 (global-set-key (kbd "C-c C-a") 'show-all-invisible); may keep this
 
 
-;; highlight-tail is an interesting hack, but I'm not sure it adds
-;; anything to the emacs experience
-
-;; you'll want to turn off line highlightfirst ; hl-line-mode
-;;(require 'highlight-tail)
-;;(message "Highlight-tail loaded - now your Emacs will be even more sexy!")
-;;(("#d8971d" . 0) ("#ddee1f" . 20))
-;; steps 80
-;; timer 0.04
-;; posterior type t
-;; (setq highlight-tail-colors '(("black" . 0)
-;;                               ("#bc2525" . 25)
-;;                               ("black" . 66)))
-;; (setq highlight-tail-steps 14
-;;       highlight-tail-timer 1)
-;; (setq highlight-tail-posterior-type 'const)
-;; (highlight-tail-mode)
-
-
 ;; hide copyleft licenses
 (autoload 'hide-copyleft-region   "hide-copyleft" nil t)
 (mapcar '(lambda (hook) (add-hook hook 'hide-copyleft-region))
