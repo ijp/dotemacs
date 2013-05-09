@@ -383,10 +383,6 @@
 
 
 
-;; (setq default-abbrev-mode t)
-;; (add-hook 'text-mode-hook (lambda () (abbrev-mode 1)))
-
-
 ;; Haskell Mode
 (load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -497,20 +493,6 @@
 
 ; (server-start) ;; not necessary If I'm using --alternate-editor="" option
 
-
-
-;; Abbrevs
-;; Misspellings file taken from
-;; https://secure.wikimedia.org/wikipedia/en/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
-;; and the processed with
-;; sed -e 's/\(.*\)->\(.*\),.*/\1->\2/' -e "/.*[-'\";][^>].*->.*/d" -e
-;; 's/\(.*\)\->\(.*\)/(define-global-abbrev "\1" "\2")/'
-;; .emacs.d/misspelling_abbrevs.bak > .emacs.d/misspelling_abbrevs
-(read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
-;; other misspellings of mine
-(define-global-abbrev "lsit" "list")    ; far too common for me being
-                                        ; a lisper :P
-(define-global-abbrev "hygeinic" "hygienic") ; and for being a schemer
 
 
 (global-set-key (kbd "H-<left>") 'windmove-left)
@@ -1004,16 +986,6 @@ If buffer doesn't exist, does nothing."
 ;; maybe try out `(require 'magit-topgit)` - integrates with topgit.
 ;(require 'magit-blame) ; not in package  I am using
 
-;; Foreign word abbrevs
-;; maybe not bother ??
-;; see also:
-;; https://secure.wikimedia.org/wikipedia/en/wiki/Category:French_loanwords
-;; https://secure.wikimedia.org/wikipedia/en/wiki/Category:English_words_and_phrases_of_foreign_origin
-(define-global-abbrev "facade" "façade")
-(define-global-abbrev "naive" "naïve")
-(define-global-abbrev "naivete" "naïveté")
-(define-global-abbrev "touche" "touché")
-
 
 ;; systemd
 (add-to-list 'auto-mode-alist '("\\.service$" . conf-mode))
@@ -1052,9 +1024,6 @@ If buffer doesn't exist, does nothing."
 
 
 (add-to-list 'auto-mode-alist '("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode))
-
-
-(define-global-abbrev "blase" "blasé")
 
 
 (require 'typing)
@@ -1180,11 +1149,6 @@ If buffer doesn't exist, does nothing."
   (browse-url (format "http://www.google.co.uk/search?q=%s" what)))
 
 
-(define-global-abbrev "unhygeinic" "unhygienic")
-(define-global-abbrev "hygeinic" "hygienic")
-(define-global-abbrev "sequiter" "sequitur") ; bah, that - gets in the
-                                        ; way of the abbrevs working right
-
 ;; Try and fix my C-x RET
 
 ;; <legumbre> ,dk C-x RET f
@@ -1195,6 +1159,30 @@ If buffer doesn't exist, does nothing."
 ;;; Clippy
 ;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
 ;; (require 'clippy)
+
+
+;;;; Abbrevs
+
+;; Misspellings file taken from
+;; https://secure.wikimedia.org/wikipedia/en/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
+;; and the processed with
+;; sed -e 's/\(.*\)->\(.*\),.*/\1->\2/' -e "/.*[-'\";][^>].*->.*/d" -e
+;; 's/\(.*\)\->\(.*\)/(define-global-abbrev "\1" "\2")/'
+;; .emacs.d/misspelling_abbrevs.bak > .emacs.d/misspelling_abbrevs
+(read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
+;; other misspellings of mine
+(define-global-abbrev "lsit" "list")
+(define-global-abbrev "hygeinic" "hygienic")
+(define-global-abbrev "unhygeinic" "unhygienic")
+;; can't have "non-sequiter" because - doesn't play nicely with abbrevs
+(define-global-abbrev "sequiter" "sequitur")
+
+;; Foreign word abbrevs
+(define-global-abbrev "facade" "façade")
+(define-global-abbrev "naive" "naïve")
+(define-global-abbrev "naivete" "naïveté")
+(define-global-abbrev "touche" "touché")
+(define-global-abbrev "blase" "blasé")
 
 
 ;;;; Org Mode
