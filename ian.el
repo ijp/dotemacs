@@ -1367,10 +1367,9 @@ If buffer doesn't exist, does nothing."
       (set-buffer (concat server ":6667"))
       (erc-quit-server nil))))
 
-(and
- (require 'erc-highlight-nicknames)
- (add-to-list 'erc-modules 'highlight-nicknames)
- (erc-update-modules))
+;; Note, this needs color.el which was actually added in emacs 24
+(add-to-list 'load-path "/home/ian/src/emacs/erc-hl-nicks/")
+(require 'erc-hl-nicks)
 
 (setq erc-quit-reason 'erc-quit-reason-normal)
 
