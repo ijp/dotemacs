@@ -1030,6 +1030,7 @@ If buffer doesn't exist, does nothing."
 ;; (require 'clippy)
 
 
+
 ;;;; Fun stuff
 (require 'tetris)
 (require 'gnugo)
