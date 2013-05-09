@@ -229,12 +229,6 @@
 (add-hook 'ruby-mode-hook         'hs-minor-mode)
 
 
-;; No longer use it
-;; (add-to-list 'load-path "~/src/emacs/google-weather-el")
-;; (require 'google-weather)
-;; (require 'org-google-weather)
-
-
 (global-set-key (kbd "\C-c ;") 'comment-or-uncomment-region)
 
 (split-window-vertically)
