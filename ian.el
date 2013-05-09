@@ -918,14 +918,6 @@ If buffer doesn't exist, does nothing."
 (global-set-key (kbd "C-x M-k") 'kill-buffer-and-file)
 
 
-
-(autoload 'j-mode "j-mode.el" "Major mode for J." t)
-(autoload 'j-shell "j-mode.el" "Run J from emacs." t)
-(setq auto-mode-alist
-      (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
-(setq j-path "/home/ian/j701/bin")
-
-
 ;; Taken from
 ;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
 ;; I wonder why I never thought of this
