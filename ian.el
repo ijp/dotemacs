@@ -913,14 +913,6 @@ If buffer doesn't exist, does nothing."
 
 (require 'srfi)
 
-
-;; markerpen
-(require 'markerpen)
-;; Remember you can use prefix args to select pen
-;; C-M-, markerpen-mark-region
-;; C-M-' markerpen-clear-all-marks
-
-
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
 
