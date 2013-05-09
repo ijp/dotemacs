@@ -443,10 +443,6 @@
 (global-set-key (kbd "C-'") 'browse-url-at-point)
 
 
-; (server-start) ;; not necessary If I'm using --alternate-editor="" option
-
-
-
 (global-set-key (kbd "H-<left>") 'windmove-left)
 (global-set-key (kbd "H-<right>") 'windmove-right)
 (global-set-key (kbd "H-<down>") 'windmove-down)
