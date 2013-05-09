@@ -44,7 +44,6 @@
 (add-hook 'scheme-mode 'run-coding-hook)
 ;; random
 (global-set-key (kbd "C-x M-d") 'fixup-whitespace)
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 (require 'mwe-log-commands)
 
 ;; mode-compile
@@ -223,8 +222,6 @@
 	       (lambda (arg) (ruby-end-of-block)) nil))
 (add-hook 'ruby-mode-hook         'hs-minor-mode)
 
-
-(global-set-key (kbd "\C-c ;") 'comment-or-uncomment-region)
 
 (split-window-vertically)
 (other-window 1)
