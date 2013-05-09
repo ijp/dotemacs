@@ -897,9 +897,11 @@
 ;; (add-to-list 'auto-mode-alist '("\\.ws$" . whitespace-mode))
 
 
+;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
 ;; thank god emacs made that back up the day before
+;; ------------------------
 
 (defun kill-buffer-and-file (arg)
   "Kills a buffer, and the file the BUFFER is visiting, if it is visiting one.
