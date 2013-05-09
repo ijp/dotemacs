@@ -593,11 +593,6 @@
 ;; should be necessary, but starter kit overrides it
 (global-set-key (kbd "C-c TAB") 'ido-imenu)
 
-
-;; I found this yow.lines at
-;; https://code.google.com/p/a2bot/source/browse/trunk/data/yow.lines?r=2
-(setq yow-file "~/.emacs.d/yow.lines")
-
 (global-set-key (kbd "C-c q") 'refill-mode)
 
 
@@ -916,16 +911,7 @@ If buffer doesn't exist, does nothing."
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
 
-;;; games
-(require 'tetris)
-(require 'gnugo)
-
-
 (add-to-list 'auto-mode-alist '("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode))
-
-
-(require 'typing)
-
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1043,6 +1029,15 @@ If buffer doesn't exist, does nothing."
 ;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
 ;; (require 'clippy)
 
+
+;;;; Fun stuff
+(require 'tetris)
+(require 'gnugo)
+(require 'typing)
+
+;; I found this yow.lines at
+;; https://code.google.com/p/a2bot/source/browse/trunk/data/yow.lines?r=2
+(setq yow-file "~/.emacs.d/yow.lines")
 
 ;;;; Abbrevs
 
