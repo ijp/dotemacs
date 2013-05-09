@@ -393,14 +393,6 @@
 
 ;(add-hook 'haskell-mode-hook 'font-lock-mode) ; Needed?
 
-(defvar normal-guilep t)
-(defun toggle-guile-binary ()
-  (interactive)
-  "Toggles the guile binary for geiser between \"guile\" and \"guile-ncurses-shell\""
-  (if normal-guilep
-      (setq geiser-guile-binary "guile-ncurses-shell")
-    (setq geiser-guile-binary "guile")))
-
 
 ;; from http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (defun make-buffer-executable-except-r6rs-libs ()
