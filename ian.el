@@ -879,16 +879,6 @@
 ;; y-or-no-p, not yes-or-no-p
 (require 'quick-yes)
 
-;; neil van dyke recommends these for use with quack, they should be
-;; in a local keymap though
-
-;; (global-set-key [(meta left)]      'backward-sexp)
-;; (global-set-key [(meta right)]     'forward-sexp)
-;; (global-set-key [(meta backspace)] 'backward-kill-sexp)
-;; (global-set-key [(meta delete)]    'kill-sexp)
-;; (global-set-key [(meta up)]        'backward-up-list)
-;; (global-set-key [(meta down)]      'down-list)
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
