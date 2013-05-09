@@ -1155,38 +1155,6 @@ If buffer doesn't exist, does nothing."
 (setq sql-sqlite-program "sqlite3")
 
 
-
-
-;;; fade-out-kill-buffer.el -- fade to black when killing buffer
-;; Ryan Yeske 20051013
-;; modified by tali713 http://paste.lisp.org/display/131107
-(defvar fade-out-tick .05)
-(defun fade-out-kill-buffer (buffer)
-  (interactive `(,(ido-completing-read "Fade kill buffer: "
-                                       (remove-if (lambda (name)
-                                                    (string-match "^ " name))
-                                                  (map-buffer (buffer-name)
-                                                    (buffer-list))))))
-  (with-current-buffer buffer
-    (let ((str (buffer-string)))
-      (when (kill-buffer buffer)
-        (with-temp-buffer
-          (insert str)
-          (switch-to-buffer (current-buffer))
-          (goto-char (point-min))
-          (setq cursor-type nil)
-          (dotimes (i 20)
-            (put-text-property (point-min) (point-max)
-                               'face (list :foreground 
-                                           (format "gray%d"
-                                                  ;(* 5  (1+ i))))) ; for white background
-                                                   (- 100 (* 5 (1+ i))))))
-            (sit-for 0)
-            (sleep-for fade-out-tick)))))))
-;;(global-set-key (kbd "C-x k") 'fade-out-kill-buffer)
-;;(global-set-key (kbd "C-c k") 'fade-out-kill-buffer)
-
-
 (setq ispell-dictionary "english")
 
 
