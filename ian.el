@@ -440,35 +440,6 @@
 (global-set-key (kbd "H-<down>") 'windmove-down)
 (global-set-key (kbd "H-<up>") 'windmove-up)
 
-
-
-;;; Scheme indentation
-(put 'with-test-prefix 'scheme-indent-function 1)
-(put 'pass-if 'scheme-indent-function 1);; Guile Testing
-(put 'call-with-input-string 'scheme-indent-function 1)
-(put 'with-syntax* 'scheme-indent-function 1)
-(put 'with-code-coverage 'scheme-indent-function 1)
-(put 'with-implicit 'scheme-indent-function 1)
-(put 'cases 'scheme-indent-function 2)
-(put 'when-let 'scheme-indent-function 1)
-(put 'syntax-parameterize 'scheme-indent-function 1)
-;; vv I don't actually use those two, but I'd hate if I accidentally
-;; reindented someone elses code
-(put 'while 'scheme-indent-function 1)
-(put 'until 'scheme-indent-function 1)
-;; I wonder if I can write general with- and call-with- rules
-
-(put 'test-case 'scheme-indent-function 2)
-
-(put 'syntax-parse 'scheme-indent-function 1)
-
-(put 'catch 'scheme-indent-function 1)
-(put 'call-with-prompt 'scheme-indent-function 1)
-
-;(put 'mlet 'scheme-indent-function 1)
-
-(put 'stream-case 'scheme-indent-function 1)
-
 ;;; Diminish
 (require 'diminish)
 (eval-after-load 'paredit
@@ -974,6 +945,22 @@ If buffer doesn't exist, does nothing."
 
 
 
+;;;; Scheme
+(defun (my-scheme-setup-indents list)
+  (mapc (lambda (p)
+          (let ((level (car p))
+                (vars  (cdr p)))
+            (mapc (lambda (var)
+                    (put var 'scheme-indent-function level))
+                  vars)))
+        list))
+
+(my-scheme-setup-indents
+ '((1 with-test-prefix pass-if call-with-input-string with-syntax*
+      with-code-coverage with-implicit catch call-with-prompt stream-case
+      when-let syntax-parameterize syntax-parse while until)
+   (2 cases test-case)))
+
 ;;;; Gnus
 (setq gnus-select-method '(nntp "news.btinternet.com"))
 ;; news.btopenworld.com was also suggested, but this seems to work fine
