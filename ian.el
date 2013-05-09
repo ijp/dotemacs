@@ -988,18 +988,6 @@ If buffer doesn't exist, does nothing."
 (require 'srfi)
 
 
-;;; Emacs Database
-;; (add-to-list 'load-path "~/src/elisp/edb-1.31/lisp/")
-;; (require 'database)
-;; (defun my-dired-edb-interact ()
-;;   (interactive)
-;;   (let ((filename (dired-get-filename)))
-;;     (if (string-match "[.]edb$" filename)
-;;         (edb-interact filename nil)
-;;       (db-find-file filename))))
-
-
-
 ;; markerpen
 (require 'markerpen)
 ;; Remember you can use prefix args to select pen
