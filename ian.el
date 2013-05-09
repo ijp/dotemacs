@@ -519,15 +519,6 @@
 (define-global-abbrev "hygeinic" "hygienic") ; and for being a schemer
 
 
-;; Recreate Scratch Buffer
-;; from http://www.emacswiki.org/emacs/RecreateScratchBuffer
-(defun create-scratch-buffer nil
-  "create a scratch buffer"
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (lisp-interaction-mode))
-
-
 (global-set-key (kbd "H-<left>") 'windmove-left)
 (global-set-key (kbd "H-<right>") 'windmove-right)
 (global-set-key (kbd "H-<down>") 'windmove-down)
