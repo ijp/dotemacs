@@ -349,23 +349,6 @@
   ("Enter a function name: "
    "(define (" str ("Enter an argument name: " " " str) ")" \n "#f)" \n \n)
   ")")
-(define-skeleton html-tag-skel
-  ;; should store previous tag as default
-  "A skeleton for creating html tags"
-  "Type of tag:"
-  "<" str
-  ("Attribute: " " " str "=\"" (read-string (concat str "= ")) "\"")
-  ">" _ "</" str ">")
-;; Need to add it to the html one only
-;(global-set-key (kbd "C-c t") 'html-tag-skel)
-;; (setq skeleton-pair t)
-;; (local-set-key "<" 'skeleton-pair-insert-maybe)
-;;
-;; (push '(?< (setq v1 (skeleton-read "Type of tag:"))
-;;            ("Attribute: " " " str "=\"" (read-string (concat str "= ")) "\"")
-;;            ">" _ "</" v1 ">") skeleton-pair-alist)
-
-
 
 ;; Haskell Mode
 (load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
