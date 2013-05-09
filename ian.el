@@ -78,11 +78,6 @@
 (setq quack-default-program "ikarus")
 (add-hook 'inferior-scheme-mode-hook (lambda () (paredit-mode +1)))
 
-;; scheme-complete
-(autoload 'scheme-complete-or-indent "scheme-complete" nil t)
- (eval-after-load 'scheme
-   '(define-key scheme-mode-map "\t" 'scheme-complete-or-indent))
-
 ;; web stuff
 (require 'haml-mode)
 (require 'sass-mode)
