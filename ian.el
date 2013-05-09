@@ -519,11 +519,6 @@
                 ;; i should have scratch auto insert fortunes
                 )
               auto-insert-alist))
-;; gnus
-(setq gnus-select-method '(nntp "news.btinternet.com"))
-;; news.btopenworld.com was also suggested, but this seems to work fine
-
-
 ;; From
 ;; http://atomized.org/2011/01/toggle-between-root-non-root-in-emacs-with-tramp/
 ;; He uses C-c C-x C-q and C-c x f but I'm unsure at the moment
@@ -995,6 +990,10 @@ If buffer doesn't exist, does nothing."
 
 
 
+;;;; Gnus
+(setq gnus-select-method '(nntp "news.btinternet.com"))
+;; news.btopenworld.com was also suggested, but this seems to work fine
+
 ;;;; BBDB
 (add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
 ;; add tex to tex search path
