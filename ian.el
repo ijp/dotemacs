@@ -822,42 +822,6 @@
 
 
 
-;; bbdb
-(add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
-;; add tex to tex search path
-;; add info to info search path
-(require 'bbdb)
-(bbdb-initialize 'gnus 'message)
-;(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-;;done automatically by above
-(setq bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook)
-(setq bbdb/news-auto-create-p 'bbdb-ignore-some-messages-hook)
-(setq bbdb-ignore-some-messages-alist
-      ;; doesn't work if they already have an entry?
-      ;; I think I can hack around this by writing a function creating
-      ;; a bbdb-always-add-addresses function that checks for invalid
-      ;; names and returns nil on invalid, or 'ask if valid
-      '(("From" . "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org")
-        ("Newsgroups:" . "gmane.lisp.scheme.reports")))
-;(setq bbdb/news-auto-create-p t)
-(setq bbdb-north-american-phone-numbers-p nil)
-(setq bbdb-use-pop-up nil)
-(setq bbdb-offer-save 'save-automagically)
-
-(defun net-address-trash-p (net-address)
-  (string-match "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org"
-                net-address))
-
-
-(defun my-always-add-addresses ()
-  "Checks if net address is trash, if so don't add it to BBDB"
-  (if (net-address-trash-p net)
-      ;(progn (message "trash") nil)
-      nil
-    'ask))
-
-(setq bbdb-always-add-addresses 'my-always-add-addresses)
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
@@ -1031,6 +995,42 @@ If buffer doesn't exist, does nothing."
 
 
 
+;;;; BBDB
+(add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
+;; add tex to tex search path
+;; add info to info search path
+(require 'bbdb)
+(bbdb-initialize 'gnus 'message)
+;(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+;;done automatically by above
+(setq bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook)
+(setq bbdb/news-auto-create-p 'bbdb-ignore-some-messages-hook)
+(setq bbdb-ignore-some-messages-alist
+      ;; doesn't work if they already have an entry?
+      ;; I think I can hack around this by writing a function creating
+      ;; a bbdb-always-add-addresses function that checks for invalid
+      ;; names and returns nil on invalid, or 'ask if valid
+      '(("From" . "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org")
+        ("Newsgroups:" . "gmane.lisp.scheme.reports")))
+;(setq bbdb/news-auto-create-p t)
+(setq bbdb-north-american-phone-numbers-p nil)
+(setq bbdb-use-pop-up nil)
+(setq bbdb-offer-save 'save-automagically)
+
+(defun net-address-trash-p (net-address)
+  (string-match "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org"
+                net-address))
+
+
+(defun my-always-add-addresses ()
+  "Checks if net address is trash, if so don't add it to BBDB"
+  (if (net-address-trash-p net)
+      ;(progn (message "trash") nil)
+      nil
+    'ask))
+
+(setq bbdb-always-add-addresses 'my-always-add-addresses)
+
 ;;;; Fun stuff
 (require 'tetris)
 (require 'gnugo)
