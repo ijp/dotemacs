@@ -1004,14 +1004,6 @@ If buffer doesn't exist, does nothing."
 (add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
 
 
-;;; chess
-(add-to-list 'load-path "~/src/emacs/emacs-chess/")
-(require 'chess)
-(setq chess-default-engine 'chess-gnuchess)
-;; make it smaller by default
-;; turn off sounds
-;; open in same frame
-
 (defun iota (n) (number-sequence 0 (- n 1)))
 
 
