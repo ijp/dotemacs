@@ -873,12 +873,6 @@
 
 (setq bbdb-always-add-addresses 'my-always-add-addresses)
 
-
-;; M-y for yes-or-no-p
-;; no idea how useful it is, because every example I'm getting is
-;; y-or-no-p, not yes-or-no-p
-(require 'quick-yes)
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
