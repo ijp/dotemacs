@@ -443,12 +443,6 @@
 (global-set-key (kbd "C-'") 'browse-url-at-point)
 
 
-;;;; Check these are installed
-;; (require 'xml-rpc)
-;; (require 'lisppaste)
-;; (require 'android-mode)
-
-
 ; (server-start) ;; not necessary If I'm using --alternate-editor="" option
 
 
