@@ -686,10 +686,6 @@
 ;; put this file in the dot[e]macs register ;)
 (set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
 
-(require 'sr-speedbar)
-(global-set-key (kbd "C-c s") 'sr-speedbar-toggle)
-
-
 ;; Temporary until I see if dired-x or dired-aux provide this
 ;; functionality (dired-do-find-marked-files ?)
 ;; from http://stackoverflow.com/questions/1110118/in-emacs-dired-how-to-find-visit-multiple-files
