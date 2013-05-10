@@ -468,6 +468,7 @@
 ;;
 ;; /* memset (&hints, 0, sizeof (struct addrinfo)); */
 ;; /* memset (&addr, 0, sizeof (struct in_addr)); */
+(setq comment-empty-lines t)
 
 ;; (add-hook 'scheme-mode-hook
 ;;           (lambda ()
