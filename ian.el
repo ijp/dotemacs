@@ -327,7 +327,6 @@
 
 (global-set-key "\C-xc" 'mode-compile)
 
-;; put this file in the dot[e]macs register ;)
 (set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
 
 ;; Temporary until I see if dired-x or dired-aux provide this
