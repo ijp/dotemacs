@@ -713,14 +713,6 @@ If buffer doesn't exist, does nothing."
 (global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
 
 
-;; Magit
-;; (add-to-list 'load-path "~/src/emacs/magit/")
-(require 'magit)
-(setq magit-save-some-buffers nil)
-;; maybe try out `(require 'magit-topgit)` - integrates with topgit.
-;(require 'magit-blame) ; not in package  I am using
-
-
 ;; systemd
 (add-to-list 'auto-mode-alist '("\\.service$" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.unit$" . conf-mode))
@@ -852,6 +844,11 @@ If buffer doesn't exist, does nothing."
 
 
 
+;; Magit
+(add-to-list 'load-path "~/src/emacs/magit/")
+(require 'magit)
+(setq magit-save-some-buffers nil)
+
 ;;;; Scheme
 (defun my-scheme-setup-indents (list)
   (mapc (lambda (p)
