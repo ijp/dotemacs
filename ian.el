@@ -87,7 +87,6 @@
 ;;  nxml-degraded t)
 ;; (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo-mode))
 ;;
-;(eval-after-load 'js2-mode '(add-hook 'js2-mode-hook 'moz-minor-mode))
 
 ; From http://emacs-fu.blogspot.com/2009/11/making-buffer-names-unique.html
 (require 'uniquify)
@@ -111,12 +110,6 @@
         (line-beginning-position 2)))))
 
 ;(global-font-lock-mode 1)
-
-;; javascript
-;(autoload 'js2-mode "js2" nil t)
-;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-;(setq js2-highlight-level 3)
-
 
 ;; Rainbow Mode
 (add-to-list 'load-path "~/src/emacs/jd-el")
