@@ -766,10 +766,6 @@ If buffer doesn't exist, does nothing."
    (ruby . t)
    (python . t)))
 
-
-(add-hook 'message-mode 'turn-on-orgstruct)
-(add-hook 'message-mode 'turn-on-orgstruct++)
-
 (setq org-src-window-setup 'other-window)
 (setq org-src-fontify-natively t)
 
