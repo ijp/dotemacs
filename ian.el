@@ -479,9 +479,6 @@ If buffer doesn't exist, does nothing."
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
 (add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
 
-
-(defun iota (n) (number-sequence 0 (- n 1)))
-
 ;; no more annoying behavour in paredit after #
 ;; need to figure this out better for bytevectors etc.
 ;; may just set it to (lambda (a b) nil)
