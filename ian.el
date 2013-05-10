@@ -760,11 +760,6 @@ If buffer doesn't exist, does nothing."
 ;; <fsbot> in `mule.el'.
 ;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
 
-;;; Clippy
-;; (add-to-list 'load-path "/home/ian/src/emacs/clippy.el/")
-;; (require 'clippy)
-
-
 
 ;; Magit
 (add-to-list 'load-path "~/src/emacs/magit/")
