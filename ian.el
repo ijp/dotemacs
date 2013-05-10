@@ -458,14 +458,6 @@
 ;; /* memset (&addr, 0, sizeof (struct in_addr)); */
 (setq comment-empty-lines t)
 
-;; (add-hook 'scheme-mode-hook
-;;           (lambda ()
-;;             (set (make-local-variable 'comment-add) 1)))
-;; is recommended in legalese.el, but I haven't noticed a difference?
-;; Maybe it's already fine?
-
-
-
 ;; Experimenting with different hiding things hideshow , which I bound
 ;; to C-c + is good because it lets you toggle, but it's a shitty
 ;; keybinding C-c C-h would be better I think,but I'm going to try out
