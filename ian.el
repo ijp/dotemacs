@@ -430,18 +430,6 @@
 
 
 (setq comment-style 'extra-line)
-;; same as 'indent', but you get multiline quotes rather than single
-;; quotes i.e.
-;;
-;; /* 
-;;  * memset (&hints, 0, sizeof (struct addrinfo));
-;;  * memset (&addr, 0, sizeof (struct in_addr));
-;;  */
-;;
-;; instead of
-;;
-;; /* memset (&hints, 0, sizeof (struct addrinfo)); */
-;; /* memset (&addr, 0, sizeof (struct in_addr)); */
 (setq comment-empty-lines t)
 
 ;; Experimenting with different hiding things hideshow , which I bound
