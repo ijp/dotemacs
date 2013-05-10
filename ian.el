@@ -702,7 +702,7 @@ If buffer doesn't exist, does nothing."
 ;; idea from http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
 (global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
 
-;; Magit
+;;;; Magit
 (add-to-list 'load-path "~/src/emacs/magit/")
 (require 'magit)
 (setq magit-save-some-buffers nil)
@@ -1013,7 +1013,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (require 'erc-shoot)
 
 
-;; Newticker
+;;;; Newticker
 (defun read-sexp-from-file (filename)
   "reads one sexp from a file"
   (with-temp-buffer
