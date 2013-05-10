@@ -53,9 +53,6 @@
 (autoload 'mode-compile-kill "mode-compile")
 (global-set-key "\C-ck" 'mode-compile-kill)
 
-(add-to-list 'auto-mode-alist '("\\.sls$" . scheme-mode))
-(add-to-list 'auto-mode-alist '("\\.sps$" . scheme-mode))
-
 ;; geiser
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
 (load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
@@ -569,18 +566,10 @@ If buffer doesn't exist, does nothing."
 (global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
 
 
-;; systemd
-(add-to-list 'auto-mode-alist '("\\.service$" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.unit$" . conf-mode))
-;; there are others, but this is fine for now
-
-
 (require 'srfi)
 
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
-
-(add-to-list 'auto-mode-alist '("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -675,6 +664,16 @@ If buffer doesn't exist, does nothing."
 ;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
 
 
+;;;; Misc
+(setq auto-mode-alist
+      (append
+       '(("\\.sls$" . scheme-mode)
+         ("\\.sps$" . scheme-mode)
+         ("\\.service$" . conf-mode)
+         ("\\.unit$" . conf-mode)
+         ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
+         ("\\.m$" . octave-mode))
+       auto-mode-alist))
 ;;;; Spellcheck
 (setq ispell-dictionary "british")
 (setq flyspell-use-meta-tab nil);; isn't working
@@ -1009,5 +1008,3 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (setq newsticker-url-list (read-sexp-from-file (concat user-emacs-directory "feeds")))
 (global-set-key (kbd "C-c C-r") 'newsticker-treeview)
 (setq newsticker-automatically-mark-items-as-old nil)
-
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
