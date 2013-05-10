@@ -1,4 +1,3 @@
-(require 'tramp)
 (add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
 (delete-selection-mode t)
 (menu-bar-mode t)
@@ -515,10 +514,6 @@ If buffer doesn't exist, does nothing."
 
 (setq prolog-program-name "gprolog")
 
-
-
-(setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
-
 (setq sql-sqlite-program "sqlite3")
 
 (require 'htmlfontify)
@@ -542,6 +537,11 @@ If buffer doesn't exist, does nothing."
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
          ("\\.m$" . octave-mode))
        auto-mode-alist))
+
+;;;; Tramp
+(require 'tramp)
+(setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
+
 ;;;; Ido
 (global-set-key (kbd "C-c TAB") 'ido-imenu)
 (require 'ido-hacks) ;; OMFG
