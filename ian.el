@@ -53,12 +53,6 @@
 (autoload 'mode-compile-kill "mode-compile")
 (global-set-key "\C-ck" 'mode-compile-kill)
 
-;(require 'el-expectations)
-
-(add-to-list 'load-path "~/src/emacs/rspec-mode")
-(require 'rspec-mode)
-;(require 'rspec-expectations)
-
 (add-to-list 'auto-mode-alist '("\\.sls$" . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.sps$" . scheme-mode))
 
