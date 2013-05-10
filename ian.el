@@ -76,13 +76,6 @@
 ;; (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo-mode))
 ;;
 
-; From http://emacs-fu.blogspot.com/2009/11/making-buffer-names-unique.html
-(require 'uniquify)
-(setq
- uniquify-buffer-name-style 'post-forward
- uniquify-separator ":"
- uniquify-strip-common-suffix nil)
-
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
@@ -126,12 +119,6 @@
 (add-to-list 'auto-mode-alist '("\\.ml\\w?" . tuareg-mode))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
-
-;; Sick fed up of the git trying to use less
-;; needs to be _BEFORE_ the first call to shell
-(setenv "PAGER" "cat")
-
-(setenv "NODE_NO_READLINE" "1")
 
 (global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
 ;; I wish there was a programming "super mode" i could hook into
@@ -189,7 +176,6 @@
 (add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
 (require 'ioccur)
 
-;(setq initial-scratch-message nil)
 (require 'pretty-mode)
 (global-pretty-mode 1)
 ; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
@@ -293,8 +279,6 @@
 
 (global-set-key "\C-xc" 'mode-compile)
 
-(set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
-
 ;; Temporary until I see if dired-x or dired-aux provide this
 ;; functionality (dired-do-find-marked-files ?)
 ;; from http://stackoverflow.com/questions/1110118/in-emacs-dired-how-to-find-visit-multiple-files
@@ -308,18 +292,6 @@
          (mapc 'find-file fn-list)))))
 ;;; Not necessary in Emacs 24 I think, since F = dired-do-find-marked-files
 
-
-;; might be useful, means I can just use C-SPC after C-u C-SPACE,
-;; rather than having to keep using a prefix
-(setq set-mark-command-repeat-pop t)
-
-(setq user-mail-address "ianprice90@googlemail.com")
-(require 'legalese)
-(setq legalese-default-license 'bsd)
-
-
-(setq comment-style 'extra-line)
-(setq comment-empty-lines t)
 
 ;; Experimenting with different hiding things hideshow , which I bound
 ;; to C-c + is good because it lets you toggle, but it's a shitty
@@ -384,11 +356,6 @@
 ;; name
 ;; used-mode
 ;; mode
-
-;; just follow them god damn it
-(setq vc-follow-symlinks t)
-
-
 
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
@@ -477,11 +444,6 @@ If buffer doesn't exist, does nothing."
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
 
-
-(setq prolog-program-name "gprolog")
-
-(setq sql-sqlite-program "sqlite3")
-
 (require 'htmlfontify)
 (defun html-entity-encode-region (start end)
   ;; Thanks to fledermaus for pointing out the functions below, so I
@@ -494,6 +456,27 @@ If buffer doesn't exist, does nothing."
 
 
 ;;;; Misc
+(setenv "PAGER" "cat")
+(setenv "NODE_NO_READLINE" "1")
+
+(set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
+;; might be useful, means I can just use C-SPC after C-u C-SPACE,
+;; rather than having to keep using a prefix
+(setq user-mail-address "ianprice90@googlemail.com")
+(setq set-mark-command-repeat-pop t)
+(setq prolog-program-name "gprolog")
+(setq sql-sqlite-program "sqlite3")
+(setq vc-follow-symlinks t)
+
+(require 'uniquify)
+(setq
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":"
+ uniquify-strip-common-suffix nil)
+
+(require 'legalese)
+(setq legalese-default-license 'bsd)
+
 (setq auto-mode-alist
       (append
        '(("\\.sls$" . scheme-mode)
