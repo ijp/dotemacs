@@ -262,15 +262,6 @@
 (add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
 (require 'ioccur)
 
-
-(define-skeleton ruby-class
-  "Ruby class skeleton"
-  "Enter the name of the class: "
-  "class " str \n \n
-  ("Enter the name of a method:" "def " str \n  -2 "end" \n \n)
-  -2 "end" \n)
-
-
 ;(setq initial-scratch-message nil)
 (require 'pretty-mode)
 (global-pretty-mode 1)
