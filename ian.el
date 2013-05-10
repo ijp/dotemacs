@@ -292,36 +292,6 @@
 (require 'sql-transform)
 ;(require 'plsql)
 
-(defun scheme-library-name ()
-  "Determines the scheme library name based on the buffer name, otherwise empty string"
-  (interactive)
-  (let ((buffer-name (buffer-file-name))
-        (name-regex ".*/\\(.*?\\)\\..*"))
-    (if (string-match name-regex buffer-name)
-        (match-string 1 buffer-name)
-      "")))
-(define-skeleton let-ans
-  "A skeleton for wrapping a lisp expression in a let statement"
-  nil
-  "(let ((" (read-string "What name are you binding to? " nil nil "ans") " " _ "))" \n
-  - ")")
-
-(define-skeleton scheme-library
-  "A skeleton for creating Scheme-libraries"
-  nil
-  "#!r6rs\n(library "
-  ; library name
-  "(" (read-string "Enter a library name: " nil nil (scheme-library-name)) ")"
-  "\n"
-  ; export list
-  "(export " ("Enter an export: " str \n) ")" \n
-  ; import list
-  "(import " ("Enter an import: " "(" str ")" \n) ")" \n \n
-  ; definitions
-  ("Enter a function name: "
-   "(define (" str ("Enter an argument name: " " " str) ")" \n "#f)" \n \n)
-  ")")
-
 ;; Haskell Mode
 (load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -836,6 +806,31 @@ If buffer doesn't exist, does nothing."
       with-code-coverage with-implicit catch call-with-prompt stream-case
       when-let syntax-parameterize syntax-parse while until)
    (2 cases test-case)))
+
+(defun scheme-library-name ()
+  "Determines the scheme library name based on the buffer name, otherwise empty string"
+  (interactive)
+  (let ((buffer-name (buffer-file-name))
+        (name-regex ".*/\\(.*?\\)\\..*"))
+    (if (string-match name-regex buffer-name)
+        (match-string 1 buffer-name)
+      "")))
+
+(define-skeleton scheme-library
+  "A skeleton for creating Scheme-libraries"
+  nil
+  "#!r6rs\n(library "
+  ; library name
+  "(" (read-string "Enter a library name: " nil nil (scheme-library-name)) ")"
+  "\n"
+  ; export list
+  "(export " ("Enter an export: " str \n) ")" \n
+  ; import list
+  "(import " ("Enter an import: " "(" str ")" \n) ")" \n \n
+  ; definitions
+  ("Enter a function name: "
+   "(define (" str ("Enter an argument name: " " " str) ")" \n "#f)" \n \n)
+  ")")
 
 ;;;; Gnus
 (setq gnus-select-method '(nntp "news.btinternet.com"))
