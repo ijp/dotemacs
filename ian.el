@@ -134,45 +134,6 @@
 	       (lambda (arg) (ruby-end-of-block)) nil))
 (add-hook 'ruby-mode-hook         'hs-minor-mode)
 
-;;
-;; Never understood why Emacs doesn't have this function.
-;;
-(defun rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-	n(filename (buffer-file-name)))
-    (if (not filename)
-	(message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
-	(progn (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
-
-;;
-;; Never understood why Emacs doesn't have this function, either.
-;;
-(defun move-buffer-file (dir)
-  "Moves both current buffer and file it's visiting to DIR."
-  (interactive "DNew directory: ")
-  (let* ((name (buffer-name))
-	 (filename (buffer-file-name))
-	 (dir
-          (if (string-match dir "\\(?:/\\|\\\\)$")
-              (substring dir 0 -1) dir))
-	 (newname (concat dir "/" name)))
-
-    (if (not filename)
-	(message "Buffer '%s' is not visiting a file!" name)
-      (progn (copy-file filename newname 1)
-             (delete-file filename)
-             (set-visited-file-name newname)
-             (set-buffer-modified-p nil)
-             t))))
-
-
 (add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
 (require 'ioccur)
 
@@ -363,32 +324,6 @@
 ;; thank god emacs made that back up the day before
 ;; ------------------------
 
-(defun kill-buffer-and-file (arg)
-  "Kills a buffer, and the file the BUFFER is visiting, if it is visiting one.
-If called with a prefix argument, kills the current buffer.
-If called without a prefix argument, reads a buffer name using ido-read-buffer.
-If buffer doesn't exist, does nothing."
-  (interactive "P")
-  (let ((buffer (get-buffer (if arg
-                                (current-buffer)
-                              (ido-read-buffer "Kill buffer: ")))))
-    (when buffer
-      (let ((file-name (buffer-file-name buffer)))
-        (kill-buffer buffer)
-        (when file-name 
-          (delete-file file-name))))))
-(global-set-key (kbd "C-x M-k") 'kill-buffer-and-file)
-
-
-;; Taken from
-;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
-;; I wonder why I never thought of this
-(defun back-to-indentation-or-beginning ()
-  (interactive)
-  (if (= (point) (save-excursion (back-to-indentation) (point)))
-      (beginning-of-line)
-    (back-to-indentation)))
-(global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
 
 
 (require 'srfi)
@@ -444,6 +379,66 @@ If buffer doesn't exist, does nothing."
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
 
+
+;;;; Functions
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+	n(filename (buffer-file-name)))
+    (if (not filename)
+	(message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+	(progn (rename-file name new-name 1)
+               (rename-buffer new-name)
+               (set-visited-file-name new-name)
+               (set-buffer-modified-p nil))))))
+
+(defun move-buffer-file (dir)
+  "Moves both current buffer and file it's visiting to DIR."
+  (interactive "DNew directory: ")
+  (let* ((name (buffer-name))
+	 (filename (buffer-file-name))
+	 (dir
+          (if (string-match dir "\\(?:/\\|\\\\)$")
+              (substring dir 0 -1) dir))
+	 (newname (concat dir "/" name)))
+
+    (if (not filename)
+	(message "Buffer '%s' is not visiting a file!" name)
+      (progn (copy-file filename newname 1)
+             (delete-file filename)
+             (set-visited-file-name newname)
+             (set-buffer-modified-p nil)
+             t))))
+
+(defun kill-buffer-and-file (arg)
+  "Kills a buffer, and the file the BUFFER is visiting, if it is visiting one.
+If called with a prefix argument, kills the current buffer.
+If called without a prefix argument, reads a buffer name using ido-read-buffer.
+If buffer doesn't exist, does nothing."
+  (interactive "P")
+  (let ((buffer (get-buffer (if arg
+                                (current-buffer)
+                              (ido-read-buffer "Kill buffer: ")))))
+    (when buffer
+      (let ((file-name (buffer-file-name buffer)))
+        (kill-buffer buffer)
+        (when file-name 
+          (delete-file file-name))))))
+(global-set-key (kbd "C-x M-k") 'kill-buffer-and-file)
+
+;; Taken from
+;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
+;; I wonder why I never thought of this
+(defun back-to-indentation-or-beginning ()
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+      (beginning-of-line)
+    (back-to-indentation)))
+(global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
+
 (require 'htmlfontify)
 (defun html-entity-encode-region (start end)
   ;; Thanks to fledermaus for pointing out the functions below, so I
@@ -454,7 +449,6 @@ If buffer doesn't exist, does nothing."
   (hfy-html-dekludge-buffer)
   (widen))
 
-
 ;;;; Misc
 (setenv "PAGER" "cat")
 (setenv "NODE_NO_READLINE" "1")
