@@ -633,11 +633,6 @@
 ;;highlighting myself
 ;;http://community.schemewiki.org/?emacs-syntax-hilight
 
-
-
-(load-file "~/src/emacs/graphviz-dot-mode.el") 
-
-
 (require 'rainbow-delimiters)
 (mapcar (lambda (hook)
           (add-hook hook 'rainbow-delimiters-mode))
