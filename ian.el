@@ -133,26 +133,6 @@
 
 (setenv "NODE_NO_READLINE" "1")
 
-;; better M-x compile
-;; from emacswiki http://www.emacswiki.org/emacs/CompileCommand
- (require 'compile)
- (add-hook 'c-mode-hook
-           (lambda ()
-	     (unless (file-exists-p "Makefile")
-	       (set (make-local-variable 'compile-command)
-                    ;; emulate make's .c.o implicit pattern rule, but with
-                    ;; different defaults for the CC, CPPFLAGS, and CFLAGS
-                    ;; variables:
-                    ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
-		    (let ((file (file-name-nondirectory buffer-file-name)))
-                      (format "%s -c -o %s.o %s %s %s"
-                              (or (getenv "CC") "gcc")
-                              (file-name-sans-extension file)
-                              (or (getenv "CPPFLAGS") "-DDEBUG=9")
-                              (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
-			      file))))))
-
-
 (global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
 ;; I wish there was a programming "super mode" i could hook into
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
