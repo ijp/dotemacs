@@ -194,13 +194,6 @@
 	       (lambda (arg) (ruby-end-of-block)) nil))
 (add-hook 'ruby-mode-hook         'hs-minor-mode)
 
-
-(split-window-vertically)
-(other-window 1)
-(eshell) ;; nice idea steve yegge
-(other-window 1)
-
-
 ;;
 ;; Never understood why Emacs doesn't have this function.
 ;;
