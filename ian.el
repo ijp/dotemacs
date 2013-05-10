@@ -89,11 +89,6 @@
 ;;
 ;(eval-after-load 'js2-mode '(add-hook 'js2-mode-hook 'moz-minor-mode))
 
-(setq auto-mode-alist
-      (append '(("\\.js$" . espresso-mode)("\\.json$" . espresso-mode))
-              auto-mode-alist))
-(eval-after-load 'espresso-mode '(add-hook 'esspresso-mode-hook
-'moz-minor-mode))
 ; From http://emacs-fu.blogspot.com/2009/11/making-buffer-names-unique.html
 (require 'uniquify)
 (setq
