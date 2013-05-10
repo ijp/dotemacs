@@ -558,13 +558,6 @@ If buffer doesn't exist, does nothing."
   (hfy-html-dekludge-buffer)
   (widen))
 
-;; Try and fix my C-x RET
-
-;; <legumbre> ,dk C-x RET f
-;; <fsbot> set-buffer-file-coding-system is an interactive compiled Lisp function
-;; <fsbot> in `mule.el'.
-;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
-
 
 ;;;; Misc
 (setq auto-mode-alist
