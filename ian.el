@@ -318,13 +318,7 @@
 (setq auto-insert-query nil)              ; stop asking already, jeez
 (setq auto-insert-directory (concat dotfiles-dir "inserts"))
 (auto-insert-mode 1)
-(setq auto-insert-alist
-      (append '(("\\.sls$" . scheme-library)
-                ;;("\\*scratch\\*" . "test.autoinsert")
-                ;; ( scratch . fortune)
-                ;; i should have scratch auto insert fortunes
-                )
-              auto-insert-alist))
+(setq auto-insert-alist (cons '("\\.sls$" . scheme-library) auto-insert-alist))
 ;; From
 ;; http://atomized.org/2011/01/toggle-between-root-non-root-in-emacs-with-tramp/
 ;; He uses C-c C-x C-q and C-c x f but I'm unsure at the moment
