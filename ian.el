@@ -309,8 +309,6 @@
 (global-set-key (kbd "C-x 9") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-x TAB") 'indent-rigidly)
-;; should be necessary, but starter kit overrides it
-(global-set-key (kbd "C-c TAB") 'ido-imenu)
 
 (global-set-key (kbd "C-c q") 'refill-mode)
 
@@ -460,9 +458,6 @@ If buffer doesn't exist, does nothing."
 
 (require 'srfi)
 
-(require 'ido-hacks) ;; OMFG
-(ido-hacks-mode t)
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; gists
@@ -506,12 +501,6 @@ If buffer doesn't exist, does nothing."
 
 ;; I get errors for this, but I'm not sure what the deal is yet
 
-;; (add-to-list 'load-path "~/src/emacs/ido-ubiquitous/")
-;; (require 'ido-ubiquitous)
-;; (ido-ubiquitous t)
-
-(ido-everywhere 1)
-
 (add-to-list 'load-path "~/src/emacs/multi-web-mode/")
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'html-mode)
@@ -529,8 +518,6 @@ If buffer doesn't exist, does nothing."
 
 
 (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
-
-(setq ido-auto-merge-work-directories-length -1)
 
 (setq sql-sqlite-program "sqlite3")
 
@@ -555,6 +542,12 @@ If buffer doesn't exist, does nothing."
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
          ("\\.m$" . octave-mode))
        auto-mode-alist))
+;;;; Ido
+(global-set-key (kbd "C-c TAB") 'ido-imenu)
+(require 'ido-hacks) ;; OMFG
+(ido-hacks-mode t)
+(setq ido-auto-merge-work-directories-length -1)
+
 ;;;; Spellcheck
 (setq ispell-dictionary "british")
 (setq flyspell-use-meta-tab nil);; isn't working
