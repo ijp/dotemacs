@@ -154,28 +154,6 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
 
-(defun split-window-horizontally-and-switch ()
-  "Splits the window in 2 Horizontally. Then switches to it"
-  (interactive)
-  (split-window-horizontally)
-  (other-window 1))
-(defun split-window-vertically-and-switch ()
-  "Splits the window in 2 Vertically. Then switches to it"
-  (interactive)
-  (split-window-vertically)
-  (other-window 1))
-
-;;; Commented out because I never use them
-;;(global-set-key "\C-x5" 'split-window-horizontally-and-switch)
-;;(global-set-key "\C-x4" 'split-window-vertically-and-switch)
-
-
-;split-window-vertically2
-;split-window-horizontally3
-;other-window
-;     (global-set-key "\C-cw" 'compare-windows) ;there is also a global-unset-key
-
-
 ;; Sick fed up of the git trying to use less
 ;; needs to be _BEFORE_ the first call to shell
 (setenv "PAGER" "cat")
