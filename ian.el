@@ -247,16 +247,6 @@
          (mapc 'find-file fn-list)))))
 ;;; Not necessary in Emacs 24 I think, since F = dired-do-find-marked-files
 
-
-;; Experimenting with different hiding things hideshow , which I bound
-;; to C-c + is good because it lets you toggle, but it's a shitty
-;; keybinding C-c C-h would be better I think,but I'm going to try out
-;; hide-region for a while as it seems more flexible
-(require 'hide-region)
-(global-set-key (kbd "C-c C-h") 'hide-region-hide)
-;; doesn't seem to play nicely with transient mark mode
-(global-set-key (kbd "C-c M-h") 'hide-region-unhide)
-
 ;; hide copyleft licenses
 (autoload 'hide-copyleft-region   "hide-copyleft" nil t)
 (mapcar '(lambda (hook) (add-hook hook 'hide-copyleft-region))
