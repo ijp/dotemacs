@@ -1,10 +1,4 @@
 (require 'tramp)
-; ctags settings from http://www.emacswiki.org/emacs/BuildTags
-(setq path-to-ctags "/usr/bin/ctags")
-(defun create-tags (dir-name)
-  "Create tags file"
-  (interactive "Directory: ")
-  (shell-command (format "%s -f %s/TAGS -e -R %s" path-to-ctags dir-name dir-name)))
 (add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
 (delete-selection-mode t)
 (menu-bar-mode t)
