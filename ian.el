@@ -325,9 +325,6 @@
 ;; ------------------------
 
 
-
-(require 'srfi)
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; gists
@@ -545,6 +542,8 @@ If buffer doesn't exist, does nothing."
   ("Enter a function name: "
    "(define (" str ("Enter an argument name: " " " str) ")" \n "#f)" \n \n)
   ")")
+
+(require 'srfi)
 
 ;;;; Gnus
 (setq gnus-select-method '(nntp "news.btinternet.com"))
