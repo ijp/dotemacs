@@ -635,52 +635,6 @@
 ;; need to find out how to refresh when I add a new include
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
-
-;;(global-whitespace-mode 1) ;; keep on till it gets annoying
-;; interferes with erc highlighting WTF?
-
-;; having a hell of a time with vvvv
-
-;; (setq whitespace-style
-;;       ;'(trailing lines space-before-tab indentation space-after-tab)
-;;       (append whitespace-style ;;original
-;;               '(newline newline-mark tabs tab-mark))
-;;       ;; '(newline−mark tabs tab-mark newline
-;;       ;; trailing lines space−before−tab indentation space−after−tab)
-;;       ;; '(;spaces tabs newline
-;;       ;;   ;;        space-mark tab-mark newline-marka
-;;       ;;   trailing newline newline-mark; spaces; trailing
-;;       ;;   )
-;;       )
-;; ;; using ¶ for newline and ▷ for tab was an idea from Xah Lee
-;; ;; rest are as default
-;; (setq whitespace-display-mappings
-;;       '((newline−mark 10
-;;                       [182 10])
-;;         (tab−mark 9
-;;                   [9655]
-;;                   [187 9]
-;;                   [92 9])
-;;         (space−mark 32
-;;                     [183]
-;;                     [46])
-;;         (space−mark 160
-;;                     [164]
-;;                     [95])
-;;         (space−mark 2208
-;;                     [2212]
-;;                     [95])
-;;         (space−mark 2336
-;;                     [2340]
-;;                     [95])
-;;         (space−mark 3616
-;;                     [3620]
-;;                     [95])
-;;         (space−mark 3872
-;;                     [3876]
-;;                     [95])))
-
-
 ;; not sure I really need quack, but then I'd need to do my
 ;;highlighting myself
 ;;http://community.schemewiki.org/?emacs-syntax-hilight
