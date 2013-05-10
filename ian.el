@@ -468,11 +468,6 @@
 ;;highlighting myself
 ;;http://community.schemewiki.org/?emacs-syntax-hilight
 
-(require 'rainbow-delimiters)
-(mapcar (lambda (hook)
-          (add-hook hook 'rainbow-delimiters-mode))
-        '(emacs-mode-hook lisp-mode-hook scheme-mode-hook))
-
 ;;; ibuffer
 ;;; http://www.emacswiki.org/emacs/IbufferMode
 (setq ibuffer-saved-filter-groups
