@@ -858,7 +858,7 @@ If buffer doesn't exist, does nothing."
 
 
 ;;;; Scheme
-(defun (my-scheme-setup-indents list)
+(defun my-scheme-setup-indents (list)
   (mapc (lambda (p)
           (let ((level (car p))
                 (vars  (cdr p)))
