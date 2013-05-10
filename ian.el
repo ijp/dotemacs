@@ -320,11 +320,6 @@
 (add-hook 'emacs-lisp-mode-hook
           (lambda () (setq mode-name "elisp")))
 
-;; idea from
-;; http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
-(global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
-
-
 ;; Auto inserts
 ;; Doing it this way sucks, next time use define-auto-insert
 
@@ -613,12 +608,6 @@ If buffer doesn't exist, does nothing."
 (add-to-list 'load-path "~/src/emacs/gist.el/")
 (require 'gist)
 
-
-(setq flyspell-use-meta-tab nil);; isn't working
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mode-map (kbd "M-TAB") nil)))
-
 (add-to-list 'load-path "/home/ian/src/emacs/hideshow-org/")
 (require 'hideshow-org)
 (global-set-key (kbd "C-c f") 'hs-org/minor-mode)
@@ -686,10 +675,6 @@ If buffer doesn't exist, does nothing."
 
 (setq sql-sqlite-program "sqlite3")
 
-
-(setq ispell-dictionary "english")
-
-
 (require 'htmlfontify)
 (defun html-entity-encode-region (start end)
   ;; Thanks to fledermaus for pointing out the functions below, so I
@@ -708,6 +693,15 @@ If buffer doesn't exist, does nothing."
 ;; <fsbot> It is bound to C-x RET f, <menu-bar> <options> <mule>
 
 
+;;;; Spellcheck
+(setq ispell-dictionary "british")
+(setq flyspell-use-meta-tab nil);; isn't working
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mode-map (kbd "M-TAB") nil)))
+;; idea from http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
+(global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
+
 ;; Magit
 (add-to-list 'load-path "~/src/emacs/magit/")
 (require 'magit)
