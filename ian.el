@@ -374,14 +374,6 @@
 ;; doesn't seem to play nicely with transient mark mode
 (global-set-key (kbd "C-c M-h") 'hide-region-unhide)
 
-
-
-;; could be useful
-(require 'hidesearch)
-(global-set-key (kbd "C-c C-s") 'hidesearch)
-(global-set-key (kbd "C-c C-a") 'show-all-invisible); may keep this
-
-
 ;; hide copyleft licenses
 (autoload 'hide-copyleft-region   "hide-copyleft" nil t)
 (mapcar '(lambda (hook) (add-hook hook 'hide-copyleft-region))
