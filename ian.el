@@ -320,12 +320,6 @@
 (global-set-key (kbd "M-#") 'browse-url)
 (global-set-key (kbd "C-'") 'browse-url-at-point)
 
-
-(global-set-key (kbd "H-<left>") 'windmove-left)
-(global-set-key (kbd "H-<right>") 'windmove-right)
-(global-set-key (kbd "H-<down>") 'windmove-down)
-(global-set-key (kbd "H-<up>") 'windmove-up)
-
 ;;; Diminish
 (require 'diminish)
 (eval-after-load 'paredit
