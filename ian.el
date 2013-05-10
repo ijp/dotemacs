@@ -566,12 +566,6 @@
 ;;; Not necessary in Emacs 24 I think, since F = dired-do-find-marked-files
 
 
-;; ASM
-(add-hook 'asm-mode-hook
-          (lambda ()
-            (local-set-key (kbd "<RET>") 'newline)))
-
-
 ;; might be useful, means I can just use C-SPC after C-u C-SPACE,
 ;; rather than having to keep using a prefix
 (setq set-mark-command-repeat-pop t)
