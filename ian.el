@@ -612,11 +612,6 @@ If buffer doesn't exist, does nothing."
 
 (defun iota (n) (number-sequence 0 (- n 1)))
 
-
-;; thanks pjb
-(defun just-one-line ()
-  (interactive)
-  (flush-lines "^$"))
 ;; starter kit rebinds it
 (global-set-key (kbd "C-x C-o") 'delete-blank-lines)
 
