@@ -266,42 +266,6 @@
 ;;highlighting myself
 ;;http://community.schemewiki.org/?emacs-syntax-hilight
 
-;;; ibuffer
-;;; http://www.emacswiki.org/emacs/IbufferMode
-(setq ibuffer-saved-filter-groups
-      ;; or maybe just ibuffer-filter-groups?
-      '(("default"
-         ("dired" (mode . dired-mode))
-         ("emacs" (or
-                   (name . "^\\*scratch\\*$")
-                   (name . "^\\*Messages\\*$")
-                   (filename . "~/.emacs.d/ian.el")))
-         ("erc" (mode . erc-mode))
-         ("gnus" (or
-                  (mode . gnus-group-mode)
-                  (mode . gnus-summary-mode)
-                  (mode . gnus-article-mode)
-                  (name . "^\\.newsrc-dribble$")
-                  (name . "^.bbdb$")
-                  (name . "^\\*BBDB\\*$")))
-         ("scheme" (or
-                    (mode . scheme-mode)
-                    (mode . geiser-repl-mode)
-                    (name . "^.*[Gg]eiser.*$")
-                    (name . "^\\*scheme\\*$"))))))
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-switch-to-saved-filter-groups "default")))
-;; default filterings are as follows
-;; predicate
-;; content
-;; size-lt
-;; size-gt
-;; filename
-;; name
-;; used-mode
-;; mode
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
@@ -329,7 +293,6 @@
 
 
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
-(add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
 
 ;; no more annoying behavour in paredit after #
 ;; need to figure this out better for bytevectors etc.
@@ -461,6 +424,35 @@ If buffer doesn't exist, does nothing."
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
          ("\\.m$" . octave-mode))
        auto-mode-alist))
+
+;;;; Ibuffer
+(setq ibuffer-saved-filter-groups
+      ;; or maybe just ibuffer-filter-groups?
+      '(("default"
+         ("dired" (mode . dired-mode))
+         ("emacs" (or
+                   (name . "^\\*scratch\\*$")
+                   (name . "^\\*Messages\\*$")
+                   (filename . "~/.emacs.d/ian.el")))
+         ("erc" (mode . erc-mode))
+         ("gnus" (or
+                  (mode . gnus-group-mode)
+                  (mode . gnus-summary-mode)
+                  (mode . gnus-article-mode)
+                  (name . "^\\.newsrc-dribble$")
+                  (name . "^.bbdb$")
+                  (name . "^\\*BBDB\\*$")))
+         ("scheme" (or
+                    (mode . scheme-mode)
+                    (mode . geiser-repl-mode)
+                    (name . "^.*[Gg]eiser.*$")
+                    (name . "^\\*scheme\\*$"))))))
+
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-switch-to-saved-filter-groups "default")))
+
+(add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
 
 ;;;; Tramp
 (require 'tramp)
