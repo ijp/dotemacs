@@ -748,11 +748,6 @@ If buffer doesn't exist, does nothing."
   (hfy-html-dekludge-buffer)
   (widen))
 
-
-;;(require 'ess)
-;; not sure if necessary -- maybe reinstall ess from elpa
-
-
 ;; Try and fix my C-x RET
 
 ;; <legumbre> ,dk C-x RET f
