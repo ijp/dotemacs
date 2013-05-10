@@ -311,17 +311,6 @@
 
 (global-set-key (kbd "C-c q") 'refill-mode)
 
-
-;; for GDB
-(setq gdb-many-windows t)
-;; needs to toggle off when done
-;; ask on #emacs
-;; (add-hook 'gdb-mode-hook 'tool-bar-mode)
-;; (setq 'gud-kill-buffer-hook nil)
-;; (add-hook 'gud-kill-buffer-hook 'tool-bar-mode)
-;; (turn-off-tool-bar)
-
-
 (global-set-key "\C-xc" 'mode-compile)
 
 (set-register ?e `(file . ,(concat dotfiles-dir "ian.el")))
