@@ -338,23 +338,6 @@
 (global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
 
 
-;; I'm a moron, the following is done by emacs if you use
-;; auto-insert-mode and aren't stupid enough to accidentally override
-;; its default auto-insert-alist
-;;
-;; (defun headerify-name (name)
-;;   (concat "__" (replace-regexp-in-string "\\." "_"  (upcase (file-name-nondirectory name)))))
-;;
-;; (define-skeleton c-header-guard
-;;   "boilerplate for ensuring header included only once"
-;;   nil
-;;   (let ((name (headerify-name (buffer-file-name))))
-;;     (list nil 
-;;      "#ifndef " name '\n
-;;      "#define " name '\n
-;;      '_
-;;      "\n#endif /* " name " */" '\n)))
-
 ;; Auto inserts
 ;; Doing it this way sucks, next time use define-auto-insert
 
