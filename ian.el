@@ -1,8 +1,3 @@
-;(setq visible-bell nil)
-;(hl-line-mode -1)
-;(global-auto-revert-mode t)
-;(if (eq window-system 'x)
-;    (set-default-font "Inconsolata-10")) ;or perhaps dejavu sans
 (require 'tramp)
 ; ctags settings from http://www.emacswiki.org/emacs/BuildTags
 (setq path-to-ctags "/usr/bin/ctags")
