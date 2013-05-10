@@ -272,17 +272,6 @@
 
 
 ;(setq initial-scratch-message nil)
-(defun scheme-eval-last-sexp-in-current-buffer ()
-  "Evals the previous sexp in a scheme buffer, and returns the result to the current buffer. Does not return printed output."
-  (interactive)
-  (comint-redirect-send-command-to-process
-   (format "%S" (preceding-sexp))
-    (current-buffer)
-    (scheme-get-process)
-    t))
-(add-hook 'scheme-mode-hook
-          (lambda () (local-set-key (kbd "\C-c C-n") 'scheme-eval-last-sexp-in-current-buffer)))
-
 (require 'pretty-mode)
 (global-pretty-mode 1)
 ; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
