@@ -226,12 +226,6 @@
 
 (define-key global-map "\C-ct" 'tea-time)
 
-
-
-(autoload 'hide-lines "hide-lines" "Hide lines based on a regexp" t)
-(global-set-key (kbd "C-c h") 'hide-lines)
-
-
 (global-set-key (kbd "C-x 9") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-x TAB") 'indent-rigidly)
