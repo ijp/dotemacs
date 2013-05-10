@@ -241,11 +241,6 @@
 (global-pretty-mode 1)
 ; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
 
-;; sql stuff
-(require 'sql-indent)
-(require 'sql-transform)
-;(require 'plsql)
-
 ;; Haskell Mode
 (load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
