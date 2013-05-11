@@ -317,7 +317,7 @@
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
   (let ((name (buffer-name))
-	n(filename (buffer-file-name)))
+	(filename (buffer-file-name)))
     (if (not filename)
 	(message "Buffer '%s' is not visiting a file!" name)
       (if (get-buffer new-name)
