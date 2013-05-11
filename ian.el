@@ -12,7 +12,6 @@
      (color-theme-initialize)
      (color-theme-my-forest)))
 
-(setq c-default-style "linux")
 ; maybe I should use "linux" style
 (add-hook 'c-mode-hook '(lambda ()
                           (local-set-key (kbd "DEL") 'paredit-backward-delete)
@@ -27,8 +26,6 @@
                           ;;(local-set-key (kbd "M-;") 'comment-dwim)
                           (local-set-key (kbd "{") 'paredit-open-curly)
                           (local-set-key (kbd "}") 'paredit-close-curly)))
-;; random
-(global-set-key (kbd "C-x M-d") 'fixup-whitespace)
 (require 'mwe-log-commands)
 
 ;; mode-compile
@@ -87,13 +84,6 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-;(global-font-lock-mode 1)
-
-;; Rainbow Mode
-(add-to-list 'load-path "~/src/emacs/jd-el")
-(require 'rainbow-mode)
-(autoload 'rainbow-mode "rainbow-mode")
-(add-hook 'css-mode-hook 'rainbow-mode)
 (require 'pabbrev)
 ;; Taken from http://www.reddit.com/r/emacs/comments/af2sg/bnfmode_for_emacs/
 (define-generic-mode 'bnf-mode
@@ -124,13 +114,6 @@
 	       (lambda (arg) (ruby-end-of-block)) nil))
 (add-hook 'ruby-mode-hook         'hs-minor-mode)
 
-(add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
-(require 'ioccur)
-
-(require 'pretty-mode)
-(global-pretty-mode 1)
-; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
-
 ;; from http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (defun make-buffer-executable-except-r6rs-libs ()
   ;; *cough* hack *cough*
@@ -146,9 +129,6 @@
 ;; (remove-hook 'after-save-hook
 ;;              'make-buffer-executable-except-r6rs-libs
 ;;              nil)
-
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (add-to-list 'load-path "/home/ian/src/emacs/company")
 (autoload 'company-mode "company" nil t)
@@ -192,9 +172,6 @@
 (setq auto-insert-directory (concat dotfiles-dir "inserts"))
 (auto-insert-mode 1)
 (setq auto-insert-alist (cons '("\\.sls$" . scheme-library) auto-insert-alist))
-
-(require 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
 
 ;; Tea Time
 (add-to-list 'load-path "~/src/emacs/tea-time")
@@ -242,9 +219,6 @@
 ;; thank god emacs made that back up the day before
 ;; ------------------------
 
-
-(put 'dired-find-alternate-file 'disabled nil)
-
 ;; gists
 ;; elpa version isn't working for me for whatever reason
 ;;(setq gist-use-curl t)
@@ -260,9 +234,6 @@
 (require 'hideshow-org)
 (global-set-key (kbd "C-c f") 'hs-org/minor-mode)
 ; hs-org/minor-mode
-
-
-(add-hook 'java-mode-hook (lambda () (c-set-style "java")))
 
 ;; no more annoying behavour in paredit after #
 ;; need to figure this out better for bytevectors etc.
@@ -389,6 +360,10 @@ If buffer doesn't exist, does nothing."
 (setq prolog-program-name "gprolog")
 (setq sql-sqlite-program "sqlite3")
 (setq vc-follow-symlinks t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(setq c-default-style "linux")
+(add-hook 'java-mode-hook (lambda () (c-set-style "java")))
+(put 'dired-find-alternate-file 'disabled nil)
 
 (require 'uniquify)
 (setq
@@ -401,6 +376,20 @@ If buffer doesn't exist, does nothing."
 (autoload 'hide-copyleft-region   "hide-copyleft" nil t)
 (add-hook 'coding-hook 'hide-copyleft-region)
 
+(require 'pretty-mode)
+(global-pretty-mode 1)
+
+(add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
+(require 'ioccur)
+
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
+
+(add-to-list 'load-path "~/src/emacs/jd-el")
+(require 'rainbow-mode)
+(autoload 'rainbow-mode "rainbow-mode")
+(add-hook 'css-mode-hook 'rainbow-mode)
+
 (setq auto-mode-alist
       (append
        '(("\\.sls$" . scheme-mode)
@@ -410,6 +399,8 @@ If buffer doesn't exist, does nothing."
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
          ("\\.m$" . octave-mode))
        auto-mode-alist))
+
+(global-set-key (kbd "C-x M-d") 'fixup-whitespace)
 
 (mapc '(lambda (hook) (add-hook hook 'run-coding-hook))
       '(emacs-lisp-mode-hook lisp-mode-hook cperl-mode-hook
