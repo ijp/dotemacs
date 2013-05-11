@@ -110,13 +110,6 @@
  nil ;; extra function hooks
  "Major mode for BNF highlighting.")
 
-;(add-to-list 'load-path "~/src/emacs/ocaml-emacs")
-;(load "~/src/emacs/ocaml-emacs/ocaml.emacs")
-(add-to-list 'load-path  "~/src/emacs/tuareg-2.0.1")
-(add-to-list 'auto-mode-alist '("\\.ml\\w?" . tuareg-mode))
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
-
 (global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
 ;; I wish there was a programming "super mode" i could hook into
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
@@ -312,6 +305,12 @@
 (multi-web-global-mode 1)
 
 
+;;;; Tuareg
+(add-to-list 'load-path  "~/src/emacs/tuareg-2.0.1")
+(add-to-list 'auto-mode-alist '("\\.ml\\w?" . tuareg-mode))
+(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+(autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
+
 ;;;; Functions
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
