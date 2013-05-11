@@ -244,15 +244,6 @@
          (mapc 'find-file fn-list)))))
 ;;; Not necessary in Emacs 24 I think, since F = dired-do-find-marked-files
 
-;; hide copyleft licenses
-(autoload 'hide-copyleft-region   "hide-copyleft" nil t)
-(mapcar '(lambda (hook) (add-hook hook 'hide-copyleft-region))
-        '(emacs-lisp-mode-hook lisp-mode-hook
-          cperl-mode-hook perl-mode-hook c-mode-hook
-          autolisp-mode-hook haskell-mode-hook scheme-mode-hook
-          ruby-mode-hook python-mode-hook tuareg-mode-hook
-          erlang-mode-hook))
-
 (require 'c-eldoc)
 ;; Add in commonly used packages/include directorys
 (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ -I/usr/include `guile-config compile`") ; not sure if /usr/include is necessary but oh well
@@ -411,6 +402,8 @@ If buffer doesn't exist, does nothing."
 
 (require 'legalese)
 (setq legalese-default-license 'bsd)
+(autoload 'hide-copyleft-region   "hide-copyleft" nil t)
+(add-hook 'coding-hook 'hide-copyleft-region)
 
 (setq auto-mode-alist
       (append
