@@ -14,7 +14,6 @@
 
 (setq c-default-style "linux")
 ; maybe I should use "linux" style
-(add-hook 'c-mode-hook 'run-coding-hook)
 (add-hook 'c-mode-hook '(lambda ()
                           (local-set-key (kbd "DEL") 'paredit-backward-delete)
                           (local-set-key (kbd "<delete>") 'paredit-forward-delete)
@@ -28,8 +27,6 @@
                           ;;(local-set-key (kbd "M-;") 'comment-dwim)
                           (local-set-key (kbd "{") 'paredit-open-curly)
                           (local-set-key (kbd "}") 'paredit-close-curly)))
-;; need that hook in java too
-(add-hook 'scheme-mode 'run-coding-hook)
 ;; random
 (global-set-key (kbd "C-x M-d") 'fixup-whitespace)
 (require 'mwe-log-commands)
@@ -424,6 +421,12 @@ If buffer doesn't exist, does nothing."
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode)        
          ("\\.m$" . octave-mode))
        auto-mode-alist))
+
+(mapc '(lambda (hook) (add-hook hook 'run-coding-hook))
+      '(emacs-lisp-mode-hook lisp-mode-hook cperl-mode-hook
+        perl-mode-hook c-mode-hook autolisp-mode-hook haskell-mode-hook
+        scheme-mode-hook ruby-mode-hook python-mode-hook
+        tuareg-mode-hook erlang-mode-hook java-mode-hook))
 
 ;;;; Ibuffer
 (setq ibuffer-saved-filter-groups
