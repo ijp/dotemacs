@@ -131,17 +131,6 @@
 (global-pretty-mode 1)
 ; (add-hook 'my-pretty-language-hook 'turn-on-pretty-mode
 
-;; Haskell Mode
-(load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
-;(add-hook 'haskell-mode-hook 'font-lock-mode) ; Needed?
-
-
 ;; from http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (defun make-buffer-executable-except-r6rs-libs ()
   ;; *cough* hack *cough*
@@ -305,6 +294,14 @@
 (multi-web-global-mode 1)
 
 
+;;;; Haskell
+(load "~/src/emacs/haskell-mode-2.8.0/haskell-site-file.el")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
 ;;;; Tuareg
 (add-to-list 'load-path  "~/src/emacs/tuareg-2.0.1")
 (add-to-list 'auto-mode-alist '("\\.ml\\w?" . tuareg-mode))
