@@ -9,4 +9,4 @@ gnutls-utils is needed for gnus
 sudo yum install emacs-color-theme emacs-color-theme-el emacs-w3m emacs-w3m-el emacs-erlang emacs-erlang-el emacs-el aspell aspell-en gnutls-utils
  sudo yum install levien-inconsolata-fonts
 
-symlink gnus.el to ~/.gnus.el
+symlink mygnus.el to ~/.gnus.el
