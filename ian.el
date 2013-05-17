@@ -421,7 +421,7 @@ If buffer doesn't exist, does nothing."
           (lambda ()
             (ibuffer-switch-to-saved-filter-groups "default")))
 
-(add-hook 'ibuffer-hook (lambda () (local-unset-key "C-x C-f")))
+(add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "C-x C-f"))))
 
 ;;;; Tramp
 (require 'tramp)
