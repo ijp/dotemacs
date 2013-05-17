@@ -691,7 +691,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 	 'active)
 	(erc-with-server-buffer (add-to-list 'erc-ignore-list user))
         (if duration
-            (run-at-time (* 60 (timer-duration duration)) nil 'my-unignore user)))
+            (run-at-time (* 60 (timer-duration duration)) nil 'erc-cmd-UNIGNORE user)))
     (if (null (erc-with-server-buffer erc-ignore-list))
 	(erc-display-line (erc-make-notice "Ignore list is empty") 'active)
       (erc-display-line (erc-make-notice "Ignore list:") 'active)
@@ -700,11 +700,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 				  'active))
 	    (erc-with-server-buffer erc-ignore-list))))
   t)
-
-(defun my-unignore (user)
-  (interactive)
-  (and (erc-cmd-UNIGNORE user)
-       (message (format "Now unignoring %s"))))
 
 (setq erc-join-buffer 'bury)
 (setq erc-track-shorten-aggressively 'max)
