@@ -745,6 +745,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (add-to-list 'load-path "/home/ian/src/emacs/erc-shoot")
 (require 'erc-shoot)
 
+(setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"))
 
 ;;;; Newticker
 (defun read-sexp-from-file (filename)
