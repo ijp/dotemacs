@@ -703,8 +703,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (setq erc-join-buffer 'bury)
 (setq erc-track-shorten-aggressively 'max)
-;; ^^ problematic when there is only one channel, hmm
-
+(setq erc-track-shorten-start 2) ;; fixes the one channel issue
 
 ;; ta offby1
 ;; modified from something from bpt
