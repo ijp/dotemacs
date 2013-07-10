@@ -746,6 +746,34 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"))
 
+;; Taken from jlf
+(defun erc-set-topic (topic)
+  "Prompt for a TOPIC for the current channel."
+  (interactive
+   (list
+    (let* ((prompt (concat "Set topic of " (erc-default-target) ": "))
+	   (cur-topic
+	    (when erc-channel-topic
+	      (let ((ss (split-string erc-channel-topic "\C-o")))
+		(cons (apply 'concat (if (cdr ss) (butlast ss) ss)) 0))))
+	   (max-len
+	    (ignore-errors
+	      (parse-integer
+	       (cdr (assoc "TOPICLEN"
+			   (erc-with-server-buffer erc-server-parameters))))))
+	   (new-topic nil))
+      (while (or (null new-topic)
+		 (and max-len
+		      (> (length new-topic) max-len)
+		      (prog1
+			  (message "New length of %s exceeds server's maximum of %s" (length new-topic) max-len)
+			;; FIXME there has to be a better approach than sleep-for, but what is it?
+			(sleep-for 2))))
+	(setq new-topic (read-from-minibuffer prompt (or new-topic cur-topic))))
+      new-topic)))
+      (let ((topic-list (split-string topic "\C-o"))) ; strip off the topic setter
+	(erc-cmd-TOPIC (concat (erc-default-target) " " (car topic-list)))))
+
 ;;;; Newticker
 (defun read-sexp-from-file (filename)
   "reads one sexp from a file"
