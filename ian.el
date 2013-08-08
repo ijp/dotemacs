@@ -788,3 +788,15 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (setq newsticker-url-list (read-sexp-from-file (concat user-emacs-directory "feeds")))
 (global-set-key (kbd "C-c C-r") 'newsticker-treeview)
 (setq newsticker-automatically-mark-items-as-old nil)
+
+;; TZ
+;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+(setq display-time-world-list
+      '(("America/Los_Angeles" "Seattle")
+        ("America/New_York" "New York")
+        ("Europe/London" "London")
+        ("Europe/Paris" "Paris")
+        ("Europe/Istanbul" "Istanbul")
+        ("Asia/Calcutta" "Bangalore")
+        ("Asia/Tokyo" "Tokyo")
+        ("Pacific/Auckland" "Auckland")))
