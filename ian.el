@@ -5,12 +5,7 @@
 (add-to-list 'load-path "~/src/emacs/")
 (require 'revbufs)
 
-(require 'color-theme)
-(require 'color-theme-my-forest)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-my-forest)))
+(load-theme 'monokai t)
 
 ; maybe I should use "linux" style
 (add-hook 'c-mode-hook '(lambda ()
