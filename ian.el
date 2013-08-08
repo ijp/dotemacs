@@ -629,7 +629,7 @@ If buffer doesn't exist, does nothing."
 (add-hook 'erc-mode-hook 'abbrev-mode)
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#emacs" "#scheme" "#guile"
-         "#haskell" "#haskell.jp" "#racket"
+         "#haskell" "#haskell.jp" "#racket" "##juggling"
          )
         ("irc2.2ch.net" "#japanese") ; server uses the  ISO-2022-JP encoding
         ;- except for the #japanese channel which uses utf-8. I need
