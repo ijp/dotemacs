@@ -561,7 +561,7 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "naivete" "naïveté")
 (define-global-abbrev "touche" "touché")
 (define-global-abbrev "blase" "blasé")
-
+(define-global-abbrev "detre" "d'être")
 
 ;;;; Org Mode
 (setq load-path (cons "~/src/emacs/org-mode/lisp/" load-path))
