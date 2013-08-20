@@ -46,9 +46,6 @@
 (add-hook 'inferior-scheme-mode-hook (lambda () (paredit-mode +1)))
 
 ;; web stuff
-(require 'haml-mode)
-(require 'sass-mode)
-;;
 ;; Comment out nxhtml stuff while using multi web mode
 ;;
 ;; (load "/home/ian/src/emacs/nxhtml/autostart.el")
