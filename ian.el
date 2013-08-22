@@ -620,12 +620,19 @@ If buffer doesn't exist, does nothing."
       '(("freenode.net" "#emacs" "#scheme" "#guile"
          "#haskell" "#haskell.jp" "#racket" "##juggling"
          )
-        ("irc2.2ch.net" "#japanese") ; server uses the  ISO-2022-JP encoding
-        ;- except for the #japanese channel which uses utf-8. I need
-        ;to make the erc-server-coding-system local with make-local-variable
+        ("irc2.2ch.net" "#japanese" "#おもしろネタ速報" "#漫画雑談")
         ("irc.rizon.net" "#ajatt")
         ))
 
+(defun my-erc-coding-hook (server nick)
+  (when (string-match "2ch\\.net" server)
+    (save-current-buffer ;; necessary?
+      (set-buffer (concat server ":6667"))
+      (set (make-local-variable 'erc-server-coding-system)
+           '(iso-2022-jp . undecided)))))
+
+;; This must come _before_ autojoin in the hook, so pushing it on after.
+(add-hook 'erc-after-connect 'my-erc-coding-hook)
 
 (defvar my-irc-servers
   '("irc.freenode.net"
@@ -637,10 +644,7 @@ If buffer doesn't exist, does nothing."
   (save-current-buffer
     (erc :server "irc.freenode.net" :port "6667" :nick "ijp")
     (erc :server "irc.rizon.net" :port "6667" :nick "ijp")
-    (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")
-    ;;(message "TODO: setup for irc.2ch.net")
-    (set-buffer "irc2.2ch.net:6667")
-    (set (make-local-variable 'erc-server-coding-system) '(iso-2022-jp . undecided))))
+    (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")))
 
 (defun my-erc-quit-server ()
   (interactive)
