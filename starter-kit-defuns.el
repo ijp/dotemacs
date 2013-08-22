@@ -62,7 +62,7 @@ Symbols matching the text at point are put first in the completion list."
            (position (cdr (assoc selected-symbol name-and-pos))))
       (goto-char position))))
 
-;;; These belong in coding-hook:
+;;; These belong in prog-mode-hook:
 
 ;; We have a number of turn-on-* functions since it's advised that lambda
 ;; functions not go in hooks. Repeatedly evaling an add-to-list with a
@@ -97,18 +97,14 @@ Symbols matching the text at point are put first in the completion list."
    nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
           1 font-lock-warning-face t))))
 
-(add-hook 'coding-hook 'local-column-number-mode)
-(add-hook 'coding-hook 'local-comment-auto-fill)
-;(add-hook 'coding-hook 'turn-on-hl-line-mode)
-(add-hook 'coding-hook 'turn-on-save-place-mode)
-(add-hook 'coding-hook 'pretty-lambdas)
-(add-hook 'coding-hook 'add-watchwords)
-(add-hook 'coding-hook 'idle-highlight)
+(add-hook 'prog-mode-hook 'local-column-number-mode)
+(add-hook 'prog-mode-hook 'local-comment-auto-fill)
+;(add-hook 'prog-mode-hook 'turn-on-hl-line-mode)
+(add-hook 'prog-mode-hook 'turn-on-save-place-mode)
+(add-hook 'prog-mode-hook 'pretty-lambdas)
+(add-hook 'prog-mode-hook 'add-watchwords)
+(add-hook 'prog-mode-hook 'idle-highlight)
   
-(defun run-coding-hook ()
-  "Enable things that are convenient across all coding buffers."
-  (run-hooks 'coding-hook))
-
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))

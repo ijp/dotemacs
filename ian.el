@@ -352,7 +352,7 @@ If buffer doesn't exist, does nothing."
 (require 'legalese)
 (setq legalese-default-license 'bsd)
 (autoload 'hide-copyleft-region   "hide-copyleft" nil t)
-(add-hook 'coding-hook 'hide-copyleft-region)
+(add-hook 'prog-mode-hook 'hide-copyleft-region)
 
 (require 'pretty-mode)
 (global-pretty-mode 1)
@@ -379,12 +379,6 @@ If buffer doesn't exist, does nothing."
        auto-mode-alist))
 
 (global-set-key (kbd "C-x M-d") 'fixup-whitespace)
-
-(mapc '(lambda (hook) (add-hook hook 'run-coding-hook))
-      '(emacs-lisp-mode-hook lisp-mode-hook cperl-mode-hook
-        perl-mode-hook c-mode-hook autolisp-mode-hook haskell-mode-hook
-        scheme-mode-hook ruby-mode-hook python-mode-hook
-        tuareg-mode-hook erlang-mode-hook java-mode-hook))
 
 ;;;; Ibuffer
 (setq ibuffer-saved-filter-groups
