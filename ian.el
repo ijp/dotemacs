@@ -613,6 +613,9 @@ If buffer doesn't exist, does nothing."
             (local-set-key (kbd "C-c C-l")
                            'erc-save-buffer-in-logs)))
 (add-hook 'erc-mode-hook 'abbrev-mode)
+
+(erc-autojoin-mode 1)
+
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#emacs" "#scheme" "#guile"
          "#haskell" "#haskell.jp" "#racket" "##juggling"
