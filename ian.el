@@ -616,12 +616,19 @@ If buffer doesn't exist, does nothing."
 
 (erc-autojoin-mode 1)
 
+(defvar rizon-server "irc.x2x.cc"
+  "Which rizon server to connect to.
+irc.rizon.net operates a round robin, where it will connect you
+to one of a bunch of other servers. This is a pain with autojoin,
+so just always connect to one specifically. See
+http://wiki.rizon.net/index.php?title=Servers for a list.")
+
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#scheme" "#guile"
+      `(("freenode.net" "#emacs" "#scheme" "#guile"
          "#haskell" "#haskell.jp" "#racket" "##juggling"
          )
         ("irc2.2ch.net" "#japanese" "#おもしろネタ速報" "#漫画雑談")
-        ("irc.rizon.net" "#ajatt")
+        (,rizon-server "#ajatt")
         ))
 
 (defun my-erc-coding-hook (server nick)
@@ -635,15 +642,15 @@ If buffer doesn't exist, does nothing."
 (add-hook 'erc-after-connect 'my-erc-coding-hook)
 
 (defvar my-irc-servers
-  '("irc.freenode.net"
-    "irc.rizon.net"
+  `("irc.freenode.net"
+    ,rizon-server
     "irc2.2ch.net"))
 
 (defun my-erc-start ()
   (interactive)
   (save-current-buffer
     (erc :server "irc.freenode.net" :port "6667" :nick "ijp")
-    (erc :server "irc.rizon.net" :port "6667" :nick "ijp")
+    (erc :server rizon-server :port "6667" :nick "ijp")
     (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")))
 
 (defun my-erc-quit-server ()
