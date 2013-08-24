@@ -54,7 +54,6 @@
 (require 'starter-kit-misc)
 (require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
-(require 'starter-kit-ruby)
 
 (regen-autoloads)
 (load custom-file 'noerror)
