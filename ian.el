@@ -780,6 +780,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
       (let ((topic-list (split-string topic "\C-o"))) ; strip off the topic setter
 	(erc-cmd-TOPIC (concat (erc-default-target) " " (car topic-list)))))
 
+(erc-match-mode 1)
 (setq erc-fools (read-sexp-from-file (concat user-emacs-directory "fools")))
 (set-face-attribute 'erc-fool-face nil :foreground "orange red")
 (setq erc-fool-highlight-type 'all)
