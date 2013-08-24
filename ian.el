@@ -7,6 +7,12 @@
 
 (load-theme 'monokai t)
 
+(defun read-sexp-from-file (filename)
+  "reads one sexp from a file"
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (read (current-buffer))))
+
 ; maybe I should use "linux" style
 (add-hook 'c-mode-hook '(lambda ()
                           (local-set-key (kbd "DEL") 'paredit-backward-delete)
@@ -774,13 +780,11 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
       (let ((topic-list (split-string topic "\C-o"))) ; strip off the topic setter
 	(erc-cmd-TOPIC (concat (erc-default-target) " " (car topic-list)))))
 
-;;;; Newticker
-(defun read-sexp-from-file (filename)
-  "reads one sexp from a file"
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (read (current-buffer))))
+(setq erc-fools (read-sexp-from-file (concat user-emacs-directory "fools")))
+(set-face-attribute 'erc-fool-face nil :foreground "orange red")
+(setq erc-fool-highlight-type 'all)
 
+;;;; Newticker
 (require 'newsticker)
 (setq newsticker-frontend 'newsticker-plainview)
 (setq newsticker-retrieval-interval (* 2 60 60))
