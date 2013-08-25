@@ -13,20 +13,6 @@
     (insert-file-contents filename)
     (read (current-buffer))))
 
-; maybe I should use "linux" style
-(add-hook 'c-mode-hook '(lambda ()
-                          (local-set-key (kbd "DEL") 'paredit-backward-delete)
-                          (local-set-key (kbd "<delete>") 'paredit-forward-delete)
-                          (local-set-key (kbd "\"") 'paredit-doublequote)
-                          (local-set-key (kbd "(") 'paredit-open-parenthesis)
-                          (local-set-key (kbd ")") 'paredit-close-parenthesis)
-                           (local-set-key (kbd "[") 'paredit-open-bracket)
-                           (local-set-key (kbd "]") 'paredit-close-bracket)
-                          ;;(paredit-mode +1)
-                          ;;(local-unset-key (kbd "M-;"))
-                          ;;(local-set-key (kbd "M-;") 'comment-dwim)
-                          (local-set-key (kbd "{") 'paredit-open-curly)
-                          (local-set-key (kbd "}") 'paredit-close-curly)))
 (require 'mwe-log-commands)
 
 ;; mode-compile
