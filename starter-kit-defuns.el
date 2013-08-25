@@ -5,19 +5,6 @@
 (require 'thingatpt)
 (require 'imenu)
 
-;; Network
-
-(defun view-url ()
-  "Open a new buffer containing the contents of URL."
-  (interactive)
-  (let* ((default (thing-at-point-url-at-point))
-         (url (read-from-minibuffer "URL: " default)))
-    (switch-to-buffer (url-retrieve-synchronously url))
-    (rename-buffer url t)
-    ;; TODO: switch to nxml/nxhtml mode
-    (cond ((search-forward "<?xml" nil t) (xml-mode))
-          ((search-forward "<html" nil t) (html-mode)))))
-
 ;; Buffer-related
 
 (defun ido-imenu ()
@@ -199,29 +186,11 @@ Symbols matching the text at point are put first in the completion list."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
-(defun pairing-bot ()
-  "If you can't pair program with a human, use this instead."
-  (interactive)
-  (message (if (y-or-n-p "Do you have a test for that? ") "Good." "Bad!")))
-
 (defun esk-paredit-nonlisp ()
   "Turn on paredit mode for non-lisps."
   (set (make-local-variable 'paredit-space-delimiter-chars)
        (list ?\"))
   (paredit-mode 1))
-
-(defun message-point ()
-  (interactive)
-  (message "%s" (point)))
-
-(defun toggle-fullscreen ()
-  (interactive)
-  ;; TODO: this only works for X. patches welcome for other OSes.
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                         '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                         '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
-
 
 ;; A monkeypatch to cause annotate to ignore whitespace
 (defun vc-git-annotate-command (file buf &optional rev)
