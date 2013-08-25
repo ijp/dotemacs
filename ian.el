@@ -158,8 +158,6 @@
 
 (global-set-key (kbd "C-c q") 'refill-mode)
 
-(global-set-key "\C-xc" 'mode-compile)
-
 ;; Temporary until I see if dired-x or dired-aux provide this
 ;; functionality (dired-do-find-marked-files ?)
 ;; from http://stackoverflow.com/questions/1110118/in-emacs-dired-how-to-find-visit-multiple-files
