@@ -93,8 +93,10 @@
 (add-to-list 'load-path "/home/ian/src/emacs/company")
 (autoload 'company-mode "company" nil t)
 
-(add-hook 'scheme-mode-hook (lambda () (company-mode +1)))
-(add-hook 'geiser-repl-mode-hook (lambda () (company-mode +1)))
+(defun turn-on-company-mode ()
+  (company-mode +1))
+(add-hook 'scheme-mode-hook #'turn-on-company-mode)
+(add-hook 'geiser-repl-mode-hook #'turn-on-company-mode)
 
 
 ;; Commented out, until I can figure out how to turn this off for
