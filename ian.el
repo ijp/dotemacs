@@ -66,18 +66,13 @@
 (require 'pabbrev)
 
 (global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 ;; I wish there was a programming "super mode" i could hook into
-(add-hook 'c-mode-common-hook   'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(add-hook 'scheme-mode-hook       'hs-minor-mode)
-(add-hook 'lisp-mode-hook       'hs-minor-mode)
-(add-hook 'python-mode-hook       'hs-minor-mode)
 ;; from http://www.emacswiki.org/emacs/HideShow
 (add-to-list 'hs-special-modes-alist
 	     '(ruby-mode
 	       "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
 	       (lambda (arg) (ruby-end-of-block)) nil))
-(add-hook 'ruby-mode-hook         'hs-minor-mode)
 
 ;; from http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (defun make-buffer-executable-except-r6rs-libs ()
