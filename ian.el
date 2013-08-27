@@ -26,16 +26,11 @@
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
 (load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
 (setq geiser-active-implementations '(guile racket)); forget about racket for now :)
-(add-hook 'geiser-repl-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
 (setq geiser-guile-load-init-file-p t)
 (eval-after-load "geiser-impl"
 '(add-to-list 'geiser-implementations-alist
              '((regexp ".") guile))) ; use guile otherwise
-
-;; quack
-(require 'quack)
-(setq quack-default-program "ikarus")
-(add-hook 'inferior-scheme-mode-hook (lambda () (paredit-mode +1)))
 
 ;; web stuff
 ;; Comment out nxhtml stuff while using multi web mode
