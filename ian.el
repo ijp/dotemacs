@@ -325,7 +325,6 @@ If buffer doesn't exist, does nothing."
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
 (put 'dired-find-alternate-file 'disabled nil)
 
-(require 'uniquify)
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":"
