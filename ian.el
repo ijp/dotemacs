@@ -401,11 +401,14 @@ If buffer doesn't exist, does nothing."
 (setq ido-auto-merge-work-directories-length -1)
 
 ;;;; Spellcheck
-(setq ispell-dictionary "british")
-(setq flyspell-use-meta-tab nil);; isn't working
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mode-map (kbd "M-TAB") nil)))
+;; Why "british" is not working, I have no idea, probably the
+;; dictionary files changed how they do naming
+(add-to-list 'ispell-dictionary-alist
+             '("en_GB" "[A-Za-z]" "[^A-Za-z]" "[']" nil
+               ("-B")
+               nil iso-8859-1))
+(setq ispell-dictionary "en_GB")
+(setq flyspell-use-meta-tab nil)
 ;; idea from http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
 (global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
 
