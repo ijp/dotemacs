@@ -416,6 +416,7 @@ If buffer doesn't exist, does nothing."
 (add-to-list 'load-path "~/src/emacs/magit/")
 (require 'magit)
 (setq magit-save-some-buffers nil)
+(require 'magit-blame)
 
 ;;;; Scheme
 (defun my-scheme-setup-indents (list)
