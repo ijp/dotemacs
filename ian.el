@@ -648,8 +648,6 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 (add-to-list 'load-path "/home/ian/src/emacs/erc-hl-nicks/")
 (require 'erc-hl-nicks)
 
-(setq erc-quit-reason 'erc-quit-reason-normal)
-
 (setq erc-kill-buffer-on-part t)
 (defun my-erc-quit (s)
   (or s "The garbage collector got me"))
