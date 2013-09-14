@@ -324,7 +324,7 @@ If buffer doesn't exist, does nothing."
 (setq c-default-style "linux")
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
 (put 'dired-find-alternate-file 'disabled nil)
-
+(setq yank-pop-change-selection t) ; suggest adding to better-defaults.el
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":"
