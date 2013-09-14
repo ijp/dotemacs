@@ -88,7 +88,6 @@ Symbols matching the text at point are put first in the completion list."
 (add-hook 'prog-mode-hook 'local-comment-auto-fill)
 ;(add-hook 'prog-mode-hook 'turn-on-hl-line-mode)
 (add-hook 'prog-mode-hook 'turn-on-save-place-mode)
-(add-hook 'prog-mode-hook 'pretty-lambdas)
 (add-hook 'prog-mode-hook 'add-watchwords)
 (add-hook 'prog-mode-hook 'idle-highlight)
   
@@ -115,13 +114,6 @@ Symbols matching the text at point are put first in the completion list."
       (find-file file))))
 
 ;; Cosmetic
-
-(defun pretty-lambdas ()
-  (font-lock-add-keywords
-   nil `(("(?\\(lambda\\>\\)"
-          (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                    ,(make-char 'greek-iso8859-7 107))
-                    nil))))))
 
 ;; Other
 
