@@ -633,9 +633,8 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 (defun my-erc-start ()
   (interactive)
   (save-current-buffer
-    (erc :server "irc.freenode.net" :port "6667" :nick "ijp")
-    (erc :server rizon-server :port "6667" :nick "ijp")
-    (erc :server "irc2.2ch.net" :port "6667" :nick "ijp")))
+    (dolist (server my-irc-servers)
+      (erc :server server :port "6667" :nick erc-nick))))
 
 (defun my-erc-quit-server ()
   (interactive)
