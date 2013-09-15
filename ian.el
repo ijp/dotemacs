@@ -169,10 +169,6 @@
 ;; need to find out how to refresh when I add a new include
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
-;; not sure I really need quack, but then I'd need to do my
-;;highlighting myself
-;;http://community.schemewiki.org/?emacs-syntax-hilight
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
