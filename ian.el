@@ -15,12 +15,6 @@
 
 (require 'mwe-log-commands)
 
-;; mode-compile
-(require 'mode-compile)
-(autoload 'mode-compile "mode-compile")
-(global-set-key "\C-cc" 'mode-compile)
-(autoload 'mode-compile-kill "mode-compile")
-(global-set-key "\C-ck" 'mode-compile-kill)
 
 ;; geiser
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
