@@ -16,6 +16,8 @@
 (require 'mwe-log-commands)
 
 
+(set-input-method "TeX")
+
 ;; geiser
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
 (load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
