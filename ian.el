@@ -732,7 +732,12 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (add-to-list 'load-path "/home/ian/src/emacs/erc-shoot")
 (require 'erc-shoot)
 
-(setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"))
+;; erc-track-exclude is available as a NO-distraction alternative
+(setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353")
+      erc-track-priority-faces-only
+      ;; They talk too damn much, and worst of all, it's on topic :/
+      '("#haskell")
+      )
 
 ;; Taken from jlf
 (defun erc-set-topic (topic)
