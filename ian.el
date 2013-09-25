@@ -3,7 +3,6 @@
 (menu-bar-mode t)
 (column-number-mode t)
 (add-to-list 'load-path "~/src/emacs/")
-(require 'revbufs)
 
 (load-theme 'monokai t)
 
