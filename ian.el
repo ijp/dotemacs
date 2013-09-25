@@ -153,7 +153,7 @@
 ; freedesktop complete /usr/share/sounds/freedesktop/stereo/complete.oga
 (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga")
 
-(define-key global-map "\C-ct" 'tea-time)
+(define-key global-map (kbd "C-c t") 'tea-time)
 
 (global-set-key (kbd "C-x 9") 'kill-buffer-and-window)
 
@@ -546,9 +546,9 @@ If buffer doesn't exist, does nothing."
 ;(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
 (require 'org-install)
 ;(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-log-done 'time)
 (setq org-agenda-files (list "~/org/notes.org"
