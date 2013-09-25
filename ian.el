@@ -18,6 +18,21 @@
 
 (set-input-method "TeX")
 
+;; Thanks forcer.
+(global-set-key (kbd "C-x 8 p") 'fc/unicode-info-at-point)
+(defun fc/unicode-info-at-point (&optional do-kill)
+  "Display the unicode name of the character at point."
+  (interactive "P")
+  (let ((char-code (elt (thing-at-point 'char) 0))
+        name)
+    (setq name (get-char-code-property char-code 'name))
+    (when (or (not name)
+              (= ?< (elt name 0)))
+      (setq name (get-char-code-property char-code 'old-name)))
+    (when do-kill
+      (kill-new name))
+    (message "%s" name)))
+
 ;; geiser
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
 (load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
