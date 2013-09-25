@@ -550,7 +550,7 @@ If buffer doesn't exist, does nothing."
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 
-(setq org-log-done t)
+(setq org-log-done 'time)
 (setq org-agenda-files (list "~/org/notes.org"
                              "~/org/appointments.org"
                              "~/org/habits.org"
