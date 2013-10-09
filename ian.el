@@ -856,3 +856,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         ("Asia/Calcutta" "Bangalore")
         ("Asia/Tokyo" "Tokyo")
         ("Pacific/Auckland" "Auckland")))
+;; proof general
+(load-file "~/src/emacs/ProofGeneral-4.2/generic/proof-site.el")
+
