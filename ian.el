@@ -14,6 +14,8 @@
 
 (require 'mwe-log-commands)
 
+(require 'misc)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
 
 (set-input-method "TeX")
 
