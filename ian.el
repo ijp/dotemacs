@@ -162,18 +162,7 @@
 
 (global-set-key (kbd "C-c q") 'refill-mode)
 
-;; Temporary until I see if dired-x or dired-aux provide this
-;; functionality (dired-do-find-marked-files ?)
-;; from http://stackoverflow.com/questions/1110118/in-emacs-dired-how-to-find-visit-multiple-files
-(eval-after-load "dired"
-  '(progn
-     (define-key dired-mode-map "F" 'my-dired-find-file)
-     (defun my-dired-find-file (&optional arg)
-       "Open each of the marked files, or the file under the point, or when prefix arg, the next N files "
-       (interactive "P")
-       (let* ((fn-list (dired-get-marked-files nil arg)))
-         (mapc 'find-file fn-list)))))
-;;; Not necessary in Emacs 24 I think, since F = dired-do-find-marked-files
+(require 'dired-x)
 
 (require 'c-eldoc)
 ;; Add in commonly used packages/include directorys
