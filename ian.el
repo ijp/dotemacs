@@ -847,6 +847,12 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         ("Asia/Calcutta" "Bangalore")
         ("Asia/Tokyo" "Tokyo")
         ("Pacific/Auckland" "Auckland")))
+;; Νøöβ§ ¢αn'τ ウИï©Øδε
+;; <ijp> fledermaus: actually, it could be a fun idea for an input method
+;; <fledermaus> ijp - what, random unil33t char for every key pressed?
+
 ;; proof general
 (load-file "~/src/emacs/ProofGeneral-4.2/generic/proof-site.el")
 
+;; Japanese Keyboard experiments
+(global-set-key (kbd "<henkan>") (kbd "<backspace>"))
