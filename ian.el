@@ -12,6 +12,10 @@
     (insert-file-contents filename)
     (read (current-buffer))))
 
+;; honestly, when was the last time anyone ever turned on overwrite
+;; mode _on purpose_.
+(global-set-key (kbd "<insert>") 'ignore)
+
 (require 'mwe-log-commands)
 
 (require 'misc)
