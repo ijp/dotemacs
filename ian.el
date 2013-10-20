@@ -507,9 +507,7 @@ If buffer doesn't exist, does nothing."
 (require 'gnugo)
 (require 'typing)
 
-;; I found this yow.lines at
-;; https://code.google.com/p/a2bot/source/browse/trunk/data/yow.lines?r=2
-(setq yow-file "~/.emacs.d/yow.lines")
+(setq yow-file "~/lib/homie-yow/homie.lines")
 
 ;;;; Abbrevs
 
