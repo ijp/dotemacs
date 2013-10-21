@@ -862,3 +862,4 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 ;; Japanese Keyboard experiments
 (global-set-key (kbd "<henkan>") (kbd "<backspace>"))
+(global-set-key (kbd "<muhenkan>") 'ido-switch-buffer)
