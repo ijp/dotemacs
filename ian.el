@@ -830,6 +830,9 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
     (if (featurep 'xemacs)
 	(redraw-modeline)
       (force-mode-line-update))))
+
+(erc-truncate-mode 1)
+
 ;;;; Newticker
 (require 'newsticker)
 (setq newsticker-frontend 'newsticker-plainview)
