@@ -19,6 +19,7 @@
 (add-to-list 'load-path dotfiles-dir)
 
 (require 'package)
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
