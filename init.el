@@ -627,6 +627,7 @@ If buffer doesn't exist, does nothing."
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
+(defalias 'org-dwim 'org-ctrl-c-ctrl-c)
 
 ;;;; Erc
 
