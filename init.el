@@ -1,21 +1,16 @@
-;; Load path etc.
-
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
-
 ;; Load up ELPA, the package manager
 
-(add-to-list 'load-path dotfiles-dir)
+(add-to-list 'load-path user-emacs-directory)
 
 (require 'package)
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
+(add-to-list 'load-path (concat user-emacs-directory "/elpa-to-submit"))
 
-(setq autoload-file (concat dotfiles-dir "loaddefs.el"))
-(setq package-user-dir (concat dotfiles-dir "elpa"))
-(setq custom-file (concat dotfiles-dir "custom.el"))
+(setq autoload-file (concat user-emacs-directory "loaddefs.el"))
+(setq package-user-dir (concat user-emacs-directory "elpa"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 
 ;; These should be loaded on startup rather than autoloaded on demand
 ;; since they are likely to be used in every session
@@ -39,9 +34,9 @@
 (load custom-file 'noerror)
 
 ;; You can keep system- or user-specific customizations here
-(setq system-specific-config (concat dotfiles-dir system-name ".el")
-      user-specific-config (concat dotfiles-dir user-login-name ".el")
-      user-specific-dir (concat dotfiles-dir user-login-name))
+(setq system-specific-config (concat user-emacs-directory system-name ".el")
+      user-specific-config (concat user-emacs-directory user-login-name ".el")
+      user-specific-dir (concat user-emacs-directory user-login-name))
 (add-to-list 'load-path user-specific-dir)
 
 (if (file-exists-p system-specific-config) (load system-specific-config))
@@ -204,7 +199,7 @@
 ;; Doing it this way sucks, next time use define-auto-insert
 
 (setq auto-insert-query nil)              ; stop asking already, jeez
-(setq auto-insert-directory (concat dotfiles-dir "inserts"))
+(setq auto-insert-directory (concat user-emacs-directory "inserts"))
 (auto-insert-mode 1)
 (setq auto-insert-alist (cons '("\\.sls$" . scheme-library) auto-insert-alist))
 
@@ -370,7 +365,7 @@ If buffer doesn't exist, does nothing."
 (setenv "PAGER" "cat")
 (setenv "NODE_NO_READLINE" "1")
 
-(set-register ?e `(file . ,(concat dotfiles-dir "init.el")))
+(set-register ?e `(file . ,(concat user-emacs-directory "init.el")))
 ;; might be useful, means I can just use C-SPC after C-u C-SPACE,
 ;; rather than having to keep using a prefix
 (setq user-mail-address "ianprice90@googlemail.com")
