@@ -29,7 +29,7 @@
                                   indentation space-after-tab)
       whitespace-line-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory (concat dotfiles-dir "oddmuse")
+      oddmuse-directory (concat user-emacs-directory "oddmuse")
       xterm-mouse-mode t)
 
 ;; Set this to whatever browser you use

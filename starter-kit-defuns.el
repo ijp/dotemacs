@@ -130,14 +130,14 @@ Symbols matching the text at point are put first in the completion list."
 (defun recompile-init ()
   "Byte-compile all your dotfiles again."
   (interactive)
-  (byte-recompile-directory dotfiles-dir 0)
+  (byte-recompile-directory user-emacs-directory 0)
   ;; TODO: remove elpa-to-submit once everything's submitted.
-  (byte-recompile-directory (concat dotfiles-dir "elpa-to-submit/") 0))
+  (byte-recompile-directory (concat user-emacs-directory "elpa-to-submit/") 0))
 
 (defun regen-autoloads (&optional force-regen)
   "Regenerate the autoload definitions file if necessary and load it."
   (interactive "P")
-  (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
+  (let ((autoload-dir (concat user-emacs-directory "/elpa-to-submit"))
         (generated-autoload-file autoload-file))
     (when (or force-regen
               (not (file-exists-p autoload-file))
