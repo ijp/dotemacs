@@ -67,9 +67,6 @@ Symbols matching the text at point are put first in the completion list."
 (defun turn-on-hl-line-mode ()
   (if window-system (hl-line-mode t)))
 
-(defun turn-on-save-place-mode ()
-  (setq save-place t))
-
 (defun turn-on-whitespace ()
   (whitespace-mode t))
 
@@ -87,7 +84,6 @@ Symbols matching the text at point are put first in the completion list."
 (add-hook 'prog-mode-hook 'local-column-number-mode)
 (add-hook 'prog-mode-hook 'local-comment-auto-fill)
 ;(add-hook 'prog-mode-hook 'turn-on-hl-line-mode)
-(add-hook 'prog-mode-hook 'turn-on-save-place-mode)
 (add-hook 'prog-mode-hook 'add-watchwords)
 (add-hook 'prog-mode-hook 'idle-highlight)
   
