@@ -31,15 +31,6 @@
 
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
-;;; Clojure
-
-(eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns "*.clj"))
-
-(defun clojure-project ()
-  (interactive)
-  (message "Deprecated in favour of M-x swank-clojure-project. Install swank-clojure from ELPA."))
-
 ;;; Enhance Lisp Modes
 
 (eval-after-load 'paredit
@@ -53,13 +44,6 @@
      '(("(\\|)" . 'esk-paren-face))))
   (add-hook
    (intern (concat (symbol-name x) "-mode-hook")) 'turn-on-paredit))
-
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("(\\(fn\\>\\)"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "ƒ")
-                               nil))))))
 
 (provide 'starter-kit-lisp)
 ;; starter-kit-lisp.el ends here
