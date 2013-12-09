@@ -908,3 +908,13 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;; Japanese Keyboard experiments
 (global-set-key (kbd "<henkan>") (kbd "<backspace>"))
 (global-set-key (kbd "<muhenkan>") 'ido-switch-buffer)
+
+
+;; free keybindings
+(add-to-list 'load-path "~/src/emacs/free-keys/")
+(require 'free-keys)
+;; TODO: fix free-keys so that I can use C-c
+(setq free-keys-modifiers '("" "C" "M" "C-M"; "C-c"
+                            ))
+;; consider using
+;; https://github.com/jwiegley/use-package/blob/master/bind-key.el
