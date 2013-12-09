@@ -440,6 +440,11 @@ If buffer doesn't exist, does nothing."
 (ido-hacks-mode t)
 (setq ido-auto-merge-work-directories-length -1)
 
+;; Idea taken from magnars' emacs rocks video
+(defadvice ido-imenu (before push-mark activate)
+  (push-mark))
+
+
 ;;;; Spellcheck
 ;; Why "british" is not working, I have no idea, probably the
 ;; dictionary files changed how they do naming
