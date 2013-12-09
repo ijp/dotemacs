@@ -918,3 +918,9 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
                             ))
 ;; consider using
 ;; https://github.com/jwiegley/use-package/blob/master/bind-key.el
+
+
+;; Ace Jump Mode
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "<muhenkan>") 'ace-jump-mode) ; Maybe C-c j?
+;; C-c i for ibuffer?
