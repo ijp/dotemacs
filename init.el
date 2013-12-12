@@ -789,7 +789,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 		(cons (apply 'concat (if (cdr ss) (butlast ss) ss)) 0))))
 	   (max-len
 	    (ignore-errors
-	      (parse-integer
+	      (read
 	       (cdr (assoc "TOPICLEN"
 			   (erc-with-server-buffer erc-server-parameters))))))
 	   (new-topic nil))
