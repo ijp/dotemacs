@@ -922,5 +922,9 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 ;; Ace Jump Mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "<muhenkan>") 'ace-jump-mode) ; Maybe C-c j?
-;; C-c i for ibuffer?
+(global-set-key (kbd "<muhenkan>") 'ace-jump-mode)
+
+;; More key crap
+(global-set-key (kbd "C-c i") 'imenu)
+(global-set-key (kbd "C-c d") 'diff-buffer-with-file)
+(global-set-key (kbd "C-x 8 \" RET") (lambda () (interactive) (insert "̈")))
