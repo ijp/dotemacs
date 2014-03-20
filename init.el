@@ -694,9 +694,9 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 
 (setq erc-kill-buffer-on-part t)
 (defun my-erc-quit (s)
-  (or s "The garbage collector got me"))
+  (or s "This ijp has ended peacefully"))
 (defun my-erc-part (s)
-  (or s "(prompt (begin (control f (f 0) (f 0)) (control f (f 0) (f 0))))"))
+  (or s "hopping the border to ##france"))
 (setq erc-part-reason 'my-erc-part)
 (setq erc-quit-reason 'my-erc-quit)
 
