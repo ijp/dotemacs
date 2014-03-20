@@ -656,12 +656,14 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
          "#haskell" "#haskell.jp" "#racket" "##juggling"
          "#coq"
          )
-        ("irc2.2ch.net" "#japanese" "#おもしろネタ速報" "#漫画雑談")
+        ("irc.juggler.jp" "#japanese" "#おもしろネタ速報" "#漫画雑談")
+        ; irc.juggler.jp / irc2.2ch.net
         (,rizon-server "#ajatt")
         ))
 
 (defun my-erc-coding-hook (server nick)
-  (when (string-match "2ch\\.net" server)
+  (when ;(string-match "2ch\\.net" server)
+        (string-match "juggler.jp" server)
     (save-current-buffer ;; necessary?
       (set-buffer (concat server ":6667"))
       (set (make-local-variable 'erc-server-coding-system)
@@ -673,7 +675,9 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 (defvar my-irc-servers
   `("irc.freenode.net"
     ,rizon-server
-    "irc2.2ch.net"))
+    ;; "irc2.2ch.net"
+    "irc.juggler.jp"
+    ))
 
 (defun my-erc-start ()
   (interactive)
