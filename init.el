@@ -617,7 +617,8 @@ If buffer doesn't exist, does nothing."
  '((scheme . t)
    (emacs-lisp . t)
    (ruby . t)
-   (python . t)))
+   (python . t)
+   (sh . t)))
 
 (setq org-src-window-setup 'other-window)
 (setq org-src-fontify-natively t)
