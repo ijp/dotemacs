@@ -369,6 +369,7 @@ If buffer doesn't exist, does nothing."
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":"
  uniquify-strip-common-suffix nil)
+(setq auto-save-include-big-deletions t)
 
 (require 'legalese)
 (setq legalese-default-license 'bsd)
