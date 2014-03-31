@@ -77,6 +77,15 @@
       (kill-new name))
     (message "%s" name)))
 
+;; less clutter on startup
+;; see http://bzg.fr/emacs-strip-tease.html
+(setq initial-scratch-message "")
+(setq inhibit-startup-echo-area-message "ian")
+;(eval '(setq inhibit-startup-echo-area-message "ian")) ; if byte-compiling
+; (toggle-frame-fullscreen) ; emacs > 24.4 , I think
+; (menu-bar-mode 1) ; undecided
+;; TODO: add his hidden mode-line hack
+
 ;; geiser
 ;(load-file "~/src/emacs/geiser/elisp/geiser.el")
 (load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
