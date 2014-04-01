@@ -664,7 +664,7 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 
 (setq erc-autojoin-channels-alist
       `(("freenode.net" "#emacs" "#scheme" "#guile"
-         "#haskell" "#haskell.jp" "#racket" "##juggling"
+         "#racket" "##juggling"
          "#coq"
          )
         ("irc.juggler.jp" "#japanese" "#おもしろネタ速報" "#漫画雑談")
