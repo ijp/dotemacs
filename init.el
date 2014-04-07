@@ -368,6 +368,7 @@ If buffer doesn't exist, does nothing."
 (setenv "PAGER" "cat")
 (setenv "NODE_NO_READLINE" "1")
 
+(set-register ?g `(file . ,(concat user-emacs-directory "fools")))
 (set-register ?e `(file . ,(concat user-emacs-directory "init.el")))
 ;; might be useful, means I can just use C-SPC after C-u C-SPACE,
 ;; rather than having to keep using a prefix
