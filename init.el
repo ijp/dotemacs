@@ -168,6 +168,13 @@
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
+;; eshell
+
+(defun eshell/clear ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
 ;; yasnippet
 (add-to-list 'load-path "~/src/emacs/yasnippet-0.6.1c")
 (require 'yasnippet)
