@@ -622,12 +622,11 @@ If buffer doesn't exist, does nothing."
 (setq org-default-notes-file "~/org/notes.org")
 
 ;; org contrib
-;; if this doesn't work out try deft (see bucket.org)
-(setq load-path (cons "~/src/emacs/org-mode/contrib/lisp/" load-path))
+(setq load-path (cons "/home/ian/src/emacs/org-velocity/" load-path))
 (require 'org-velocity)
 (setq org-velocity-bucket "~/org/bucket.org")
+(setq org-velocity-edit-entry t)
 (global-set-key (kbd "M-N") 'org-velocity-read)
-;; site recommend C-c v, use that?
 
 (org-babel-do-load-languages
  'org-babel-load-languages
