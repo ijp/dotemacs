@@ -168,11 +168,14 @@
 
 
 ;; eshell
+(require 'esh-module)
 
 (defun eshell/clear ()
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)))
+
+(add-to-list 'eshell-modules-list 'eshell-smart)
 
 ;; yasnippet
 (add-to-list 'load-path "~/src/emacs/yasnippet-0.6.1c")
