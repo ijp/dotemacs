@@ -28,7 +28,6 @@
 (require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
 
-(regen-autoloads)
 (load custom-file 'noerror)
 
 ;;; init.el ends here

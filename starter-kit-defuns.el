@@ -130,20 +130,6 @@ Symbols matching the text at point are put first in the completion list."
   ;; TODO: remove elpa-to-submit once everything's submitted.
   (byte-recompile-directory (concat user-emacs-directory "elpa-to-submit/") 0))
 
-(defun regen-autoloads (&optional force-regen)
-  "Regenerate the autoload definitions file if necessary and load it."
-  (interactive "P")
-  (let ((autoload-dir (concat user-emacs-directory "/elpa-to-submit"))
-        (generated-autoload-file autoload-file))
-    (when (or force-regen
-              (not (file-exists-p autoload-file))
-              (some (lambda (f) (file-newer-than-file-p f autoload-file))
-                    (directory-files autoload-dir t "\\.el$")))
-      (message "Updating autoloads...")
-      (let (emacs-lisp-mode-hook)
-        (update-directory-autoloads autoload-dir))))
-  (load autoload-file))
-
 (defun sudo-edit (&optional arg)
   (interactive "p")
   (if (or arg (not buffer-file-name))
