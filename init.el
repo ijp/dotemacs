@@ -90,8 +90,10 @@
 (add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
 (setq geiser-guile-load-init-file-p t)
 (eval-after-load "geiser-impl"
-'(add-to-list 'geiser-implementations-alist
-             '((regexp ".") guile))) ; use guile otherwise
+  '(setq geiser-implementations-alist
+         '(((regexp "\\.ss$")  racket)
+           ((regexp "\\.rkt$") racket)
+           ((regexp ".") guile))))
 
 ;; web stuff
 ;; Comment out nxhtml stuff while using multi web mode
