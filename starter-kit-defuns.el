@@ -123,13 +123,6 @@ Symbols matching the text at point are put first in the completion list."
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-(defun recompile-init ()
-  "Byte-compile all your dotfiles again."
-  (interactive)
-  (byte-recompile-directory user-emacs-directory 0)
-  ;; TODO: remove elpa-to-submit once everything's submitted.
-  (byte-recompile-directory (concat user-emacs-directory "elpa-to-submit/") 0))
-
 (defun sudo-edit (&optional arg)
   (interactive "p")
   (if (or arg (not buffer-file-name))
