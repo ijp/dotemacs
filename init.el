@@ -86,8 +86,6 @@
 ;; TODO: add his hidden mode-line hack
 
 ;; geiser
-;(load-file "~/src/emacs/geiser/elisp/geiser.el")
-(load "/home/ian/src/emacs/geiser/build/elisp/geiser-load")
 (setq geiser-active-implementations '(guile racket)); forget about racket for now :)
 (add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
 (setq geiser-guile-load-init-file-p t)
