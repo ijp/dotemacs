@@ -25,7 +25,6 @@
 (require 'starter-kit-defuns)
 (require 'starter-kit-bindings)
 (require 'starter-kit-misc)
-(require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
 
 (load custom-file 'noerror)
@@ -176,6 +175,33 @@
     (erase-buffer)))
 
 (add-to-list 'eshell-modules-list 'eshell-smart)
+
+(setq eshell-cmpl-cycle-completions t ; nil
+      eshell-save-history-on-exit t
+      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
+
+(eval-after-load 'esh-opt
+  '(progn
+     (require 'em-prompt)
+     (require 'em-term)
+     (require 'em-cmpl)
+     (setenv "PAGER" "cat")
+     (set-face-attribute 'eshell-prompt nil :foreground "turquoise1")
+
+     ;; TODO: submit these via M-x report-emacs-bug
+     (add-to-list 'eshell-visual-commands "ssh")
+     (add-to-list 'eshell-visual-commands "tail")
+     (add-to-list 'eshell-command-completions-alist
+                  '("gunzip" "gz\\'"))
+     (add-to-list 'eshell-command-completions-alist
+                  '("tar" "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'"))))
+
+(defun eshell/cds ()
+  "Change directory to the project's root."
+  (eshell/cd (locate-dominating-file default-directory "src")))
+
+(defun eshell/find (dir &rest opts)
+  (find-dired dir (mapconcat 'identity opts " ")))
 
 ;; yasnippet
 (add-to-list 'load-path "~/src/emacs/yasnippet-0.6.1c")
