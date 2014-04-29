@@ -854,6 +854,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (erc-match-mode 1)
 (setq erc-fools (read-sexp-from-file (concat user-emacs-directory "fools")))
+(setq-default erc-ignore-list '("jdoles" "[gG]uest")) ;; congrats to jdoles on being the
+;; first to make this list
 (set-face-attribute 'erc-fool-face nil :foreground "orange red")
 (setq erc-fool-highlight-type 'all)
 
