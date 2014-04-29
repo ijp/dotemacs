@@ -63,3 +63,8 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\"")
         "guile-user@gnu.org"))
 
 (setq message-use-followup-to 'use)
+
+;; cheers twb
+(setq mm-discouraged-alternatives '("text/html" "multipart/related")
+      gnus-buttonized-mime-types '("multipart/alternative"
+      "multipart/signed")) ;; Discarding text/html and show the text/plain version.
