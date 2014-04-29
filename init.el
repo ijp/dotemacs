@@ -39,6 +39,7 @@
 (delete-selection-mode t)
 (menu-bar-mode t)
 (column-number-mode t)
+(setq sentence-end-double-space nil)
 (add-to-list 'load-path "~/src/emacs/")
 
 (load-theme 'monokai t)
