@@ -625,10 +625,6 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "detre" "d'être")
 
 ;;;; Org Mode
-(setq load-path (cons "~/src/emacs/org-mode/lisp/" load-path))
-;(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
-(require 'org-install)
-;(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
