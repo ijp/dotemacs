@@ -95,23 +95,6 @@
            ((regexp "\\.rkt$") racket)
            ((regexp ".") guile))))
 
-;; web stuff
-;; Comment out nxhtml stuff while using multi web mode
-;;
-;; (load "/home/ian/src/emacs/nxhtml/autostart.el")
-;; (add-to-list 'load-path "~/src/emacs/rinari")
-;; (require 'rinari)
-(add-hook 'ruby-mode-hook 'ruby-electric-mode)
-;; (setq
-;;  nxhtml-global-minor-mode t
-;;  mumamo-chunk-coloring 'submode-colored
-;;  nxhtml-skip-welcome t
-;;  indent-region-mode t
-;;  rng-nxml-auto-validate-flag nil
-;;  nxml-degraded t)
-;; (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo-mode))
-;;
-
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
