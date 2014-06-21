@@ -532,6 +532,7 @@ If buffer doesn't exist, does nothing."
 (require 'srfi)
 
 ;;;; Gnus
+(setq mail-host-address "googlemail.com")
 (setq gnus-select-method '(nntp "news.btinternet.com"))
 ;; news.btopenworld.com was also suggested, but this seems to work fine
 
