@@ -301,12 +301,6 @@
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-;;;; Tuareg
-(add-to-list 'load-path  "~/src/emacs/tuareg-2.0.1")
-(add-to-list 'auto-mode-alist '("\\.ml\\w?" . tuareg-mode))
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
-
 ;;;; Functions
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
