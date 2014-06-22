@@ -197,8 +197,7 @@
 
 
 ;; Browse
-(global-set-key (kbd "M-#") 'browse-url)
-(global-set-key (kbd "C-'") 'browse-url-at-point)
+(global-set-key (kbd "C-c o") 'browse-url)
 
 ;;; Diminish
 (require 'diminish)
