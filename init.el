@@ -188,11 +188,8 @@
   (find-dired dir (mapconcat 'identity opts " ")))
 
 ;; yasnippet
-(add-to-list 'load-path "~/src/emacs/yasnippet-0.6.1c")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/src/emacs/yasnippet-0.6.1c/snippets/")
-
+(yas-global-mode 1)
+(global-set-key (kbd "C-c y") 'yas/expand)
 
 ;; New Python mode
 (add-to-list 'load-path "~/src/emacs/python.el/")
