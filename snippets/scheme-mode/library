@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: library
+# key: library
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region nil))
+# --
+#!r6rs
+(library (${1:`(scheme-library-name)`})
+(export $2
+        )
+(import $3
+        )
+
+$0
+
+)

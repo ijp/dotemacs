@@ -213,7 +213,6 @@
 (setq auto-insert-query nil)              ; stop asking already, jeez
 (setq auto-insert-directory (concat user-emacs-directory "inserts"))
 (auto-insert-mode 1)
-(setq auto-insert-alist (cons '("\\.sls$" . scheme-library) auto-insert-alist))
 
 ;; Tea Time
 (add-to-list 'load-path "~/src/emacs/tea-time")
@@ -509,22 +508,6 @@ If buffer doesn't exist, does nothing."
     (if (string-match name-regex buffer-name)
         (match-string 1 buffer-name)
       "")))
-
-(define-skeleton scheme-library
-  "A skeleton for creating Scheme-libraries"
-  nil
-  "#!r6rs\n(library "
-  ; library name
-  "(" (read-string "Enter a library name: " nil nil (scheme-library-name)) ")"
-  "\n"
-  ; export list
-  "(export " ("Enter an export: " str \n) ")" \n
-  ; import list
-  "(import " ("Enter an import: " "(" str ")" \n) ")" \n \n
-  ; definitions
-  ("Enter a function name: "
-   "(define (" str ("Enter an argument name: " " " str) ")" \n "#f)" \n \n)
-  ")")
 
 (require 'srfi)
 
