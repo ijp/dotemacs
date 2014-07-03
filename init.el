@@ -570,6 +570,7 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "lsit" "list")
 (define-global-abbrev "hygeinic" "hygienic")
 (define-global-abbrev "unhygeinic" "unhygienic")
+(define-global-abbrev "rennaisance" "renaissance")
 ;; can't have "non-sequiter" because - doesn't play nicely with abbrevs
 (define-global-abbrev "sequiter" "sequitur")
 
