@@ -455,7 +455,6 @@ If buffer doesn't exist, does nothing."
 (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
 
 ;;;; Ido
-(global-set-key (kbd "C-c TAB") 'ido-imenu)
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
 (setq ido-auto-merge-work-directories-length -1)

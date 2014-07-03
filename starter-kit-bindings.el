@@ -15,9 +15,6 @@
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 
-;; Jump to a definition in the current file. (This is awesome.)
-(global-set-key (kbd "C-x C-i") 'ido-imenu)
-
 ;; File finding
 (global-set-key (kbd "C-x f") 'recentf-ido-find-file)
 (global-set-key (kbd "C-c r") 'revert-buffer)
