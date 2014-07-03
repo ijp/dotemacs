@@ -937,3 +937,11 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (global-set-key (kbd "C-c i") 'imenu)
 (global-set-key (kbd "C-c d") 'diff-buffer-with-file)
 (global-set-key (kbd "C-x 8 \" RET") (lambda () (interactive) (insert "̈")))
+
+;; Color Identifiers
+(add-to-list 'load-path "~/src/emacs/color-identifiers-mode/")
+(require 'color-identifiers-mode)
+(defun turn-on-color-identifiers ()
+  (color-identifiers-mode 1))
+(add-hook 'prog-mode-hook 'turn-on-color-identifiers)
+
