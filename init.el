@@ -883,16 +883,14 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (erc-truncate-mode 1)
 
-;;;; Newticker
-(require 'newsticker)
+;;;; Org Feed
+;; http://orgmode.org/manual/RSS-Feeds.html
+(require 'org-feed)
 (defvar my-feeds-file (concat user-emacs-directory "feeds"))
-(setq newsticker-frontend 'newsticker-plainview)
-(setq newsticker-retrieval-interval (* 2 60 60))
-(setq newsticker-url-list-defaults nil)
-(setq newsticker-url-list (read-sexp-from-file my-feeds-file))
-(global-set-key (kbd "C-c C-r") 'newsticker-treeview)
-(setq newsticker-automatically-mark-items-as-old nil)
 (set-register ?f (cons 'file my-feeds-file))
+(setq org-feed-alist (read-sexp-from-file my-feeds-file))
+(setq org-feed-default-template "\n* TODO %h\n  %U\n  %description\n  %a\n")
+
 ;; TZ
 ;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 (setq display-time-world-list
