@@ -883,6 +883,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (erc-truncate-mode 1)
 
+(setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+
 ;;;; Org Feed
 ;; http://orgmode.org/manual/RSS-Feeds.html
 (require 'org-feed)
