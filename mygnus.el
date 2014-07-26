@@ -48,10 +48,6 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\"")
 (add-to-list 'gnus-secondary-select-methods
              '(nntp "news.gmane.org"))
 
-;; grc
-(add-to-list 'gnus-secondary-select-methods
-             '(nntp "news.grc.com"))
-
 
 ;; archive all outgoing messages in ~/Mail/archive/
 (setq gnus-message-archive-group "archive")
