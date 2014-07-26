@@ -460,11 +460,6 @@ If buffer doesn't exist, does nothing."
 (ido-hacks-mode t)
 (setq ido-auto-merge-work-directories-length -1)
 
-;; Idea taken from magnars' emacs rocks video
-(defadvice ido-imenu (before push-mark activate)
-  (push-mark))
-
-
 ;;;; Spellcheck
 (setq ispell-dictionary "british")
 (add-hook 'text-mode ' flyspell-mode)
