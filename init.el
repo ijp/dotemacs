@@ -229,6 +229,7 @@
 (global-set-key (kbd "C-c q") 'refill-mode)
 
 (require 'dired-x)
+(require 'dired-aux)
 
 (require 'c-eldoc)
 ;; Add in commonly used packages/include directorys
