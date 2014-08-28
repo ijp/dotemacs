@@ -13,7 +13,7 @@ To install my .emacs.d (based on technomancys)
 I need to install color-theme, w3m, and erlang-mode from my
 distributions package manager; the inconsolata font from my package
 manager; and I had to rename a bunch of 'Ian's to 'ian's.
-Also aspell & aspell-en
+Also hunspell-en-GB
 
 gnutls-utils is needed for gnus
 
