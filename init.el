@@ -568,6 +568,7 @@ If buffer doesn't exist, does nothing."
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(setq org-default-notes-file (concat user-emacs-directory "capture.org"))
 
 (setq org-log-done 'time)
 (setq org-agenda-files (list "~/org/notes.org"
@@ -614,6 +615,10 @@ If buffer doesn't exist, does nothing."
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
 (defalias 'org-dwim 'org-ctrl-c-ctrl-c)
+
+(setq org-completion-use-ido t)
+
+(setq org-catch-invisible-edits 'smart) ; 'smart ?
 
 ;;;; Erc
 
