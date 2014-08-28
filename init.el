@@ -769,7 +769,10 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
       erc-track-priority-faces-only
       ;; They talk too damn much, and worst of all, it's on topic :/
       '("#haskell")
-      )
+      erc-track-faces-priority-list
+      '(erc-current-nick
+        erc-keyword-face ; ?
+        erc-error-face))
 
 ;; Taken from jlf
 (defun erc-set-topic (topic)
