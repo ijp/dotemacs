@@ -562,6 +562,7 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "touche" "touché")
 (define-global-abbrev "blase" "blasé")
 (define-global-abbrev "detre" "d'être")
+(define-global-abbrev "cliche" "cliché")
 
 ;;;; Org Mode
 (global-set-key (kbd "C-c l") 'org-store-link)
