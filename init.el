@@ -938,3 +938,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   (color-identifiers-mode 1))
 (add-hook 'prog-mode-hook 'turn-on-color-identifiers)
 
+
+;; snakehump
+(global-set-key (kbd "C-}") 'snakehump-next-at-point)
+(global-set-key (kbd "C-{") 'snakehump-prev-at-point)
