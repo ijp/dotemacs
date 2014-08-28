@@ -243,17 +243,6 @@
 ;; thank god emacs made that back up the day before
 ;; ------------------------
 
-;; gists
-;; elpa version isn't working for me for whatever reason
-;;(setq gist-use-curl t)
-;;(load-file "~/src/emacs/gist.el/gist.el")
-(add-to-list 'load-path "~/src/emacs/tabulated-list.el/")
-(add-to-list 'load-path "~/src/emacs/logito/")
-(add-to-list 'load-path "~/src/emacs/pcache/")
-(add-to-list 'load-path "~/src/emacs/gh.el/")
-(add-to-list 'load-path "~/src/emacs/gist.el/")
-(require 'gist)
-
 (add-to-list 'load-path "/home/ian/src/emacs/hideshow-org/")
 (require 'hideshow-org)
 (global-set-key (kbd "C-c f") 'hs-org/minor-mode)
