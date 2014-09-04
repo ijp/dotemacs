@@ -6,8 +6,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(add-to-list 'load-path (concat user-emacs-directory "/elpa-to-submit"))
-
 (setq autoload-file (concat user-emacs-directory "loaddefs.el"))
 (setq package-user-dir (concat user-emacs-directory "elpa"))
 (setq custom-file (concat user-emacs-directory "custom.el"))
