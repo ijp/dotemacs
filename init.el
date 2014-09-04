@@ -54,8 +54,6 @@
 ;; mode _on purpose_.
 (global-set-key (kbd "<insert>") 'ignore)
 
-(require 'mwe-log-commands)
-
 (require 'misc)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
@@ -108,8 +106,6 @@
     (if mark-active (list (region-beginning) (region-end))
       (list (line-beginning-position)
         (line-beginning-position 2)))))
-
-(require 'pabbrev)
 
 (global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
@@ -488,8 +484,6 @@ If buffer doesn't exist, does nothing."
         (match-string 1 buffer-name)
       "")))
 
-(require 'srfi)
-
 ;;;; Gnus
 (setq mail-host-address "googlemail.com")
 (setq gnus-select-method '(nntp "news.btinternet.com"))
@@ -532,10 +526,6 @@ If buffer doesn't exist, does nothing."
 (setq bbdb-always-add-addresses 'my-always-add-addresses)
 
 ;;;; Fun stuff
-(require 'tetris)
-(require 'gnugo)
-(require 'typing)
-
 (setq yow-file "~/lib/homie-yow/homie.lines")
 
 ;;;; Abbrevs
