@@ -905,17 +905,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (global-set-key (kbd "<henkan>") (kbd "<backspace>"))
 (global-set-key (kbd "<muhenkan>") 'ido-switch-buffer)
 
-
-;; free keybindings
-(add-to-list 'load-path "~/src/emacs/free-keys/")
-(require 'free-keys)
-;; TODO: fix free-keys so that I can use C-c
-(setq free-keys-modifiers '("" "C" "M" "C-M"; "C-c"
-                            ))
-;; consider using
-;; https://github.com/jwiegley/use-package/blob/master/bind-key.el
-
-
 ;; Ace Jump Mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "<muhenkan>") 'ace-jump-mode)
