@@ -185,11 +185,6 @@
 (yas-global-mode 1)
 (global-set-key (kbd "C-c y") 'yas/expand)
 
-;; New Python mode
-(add-to-list 'load-path "~/src/emacs/python.el/")
-(require 'python)
-
-
 ;; Browse
 (global-set-key (kbd "C-c o") 'browse-url)
 
