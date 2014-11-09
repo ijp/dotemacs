@@ -395,6 +395,9 @@ If buffer doesn't exist, does nothing."
          ("\\.service$" . conf-mode)
          ("\\.unit$" . conf-mode)
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode) ; in emacs-goodies
+         ("\\.markdown\\'" . markdown-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("README\\.md\\'" . gfm-mode)
          ("\\.m$" . octave-mode))
        auto-mode-alist))
 
