@@ -865,13 +865,14 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
 
-;;;; Org Feed
-;; http://orgmode.org/manual/RSS-Feeds.html
-(require 'org-feed)
-(defvar my-feeds-file (concat user-emacs-directory "feeds"))
+;;;; Elfeed
 (set-register ?f (cons 'file my-feeds-file))
-(setq org-feed-alist (read-sexp-from-file my-feeds-file))
-(setq org-feed-default-template "\n* TODO %h\n  %U\n  %description\n  %a\n")
+(defvar my-feeds-file (concat user-emacs-directory "feeds"))
+
+(add-to-list 'load-path "~/src/emacs/elfeed/")
+(require 'elfeed)
+(global-set-key (kbd "C-c w") 'elfeed)
+(setq elfeed-feeds (read-sexp-from-file my-feeds-file))
 
 ;; TZ
 ;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
