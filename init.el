@@ -414,7 +414,7 @@ If buffer doesn't exist, does nothing."
          ("emacs" (or
                    (name . "^\\*scratch\\*$")
                    (name . "^\\*Messages\\*$")
-                   (filename . "~/.emacs.d/ian.el")))
+                   (filename . "~/.emacs.d/init.el")))
          ("erc" (mode . erc-mode))
          ("gnus" (or
                   (mode . gnus-group-mode)
