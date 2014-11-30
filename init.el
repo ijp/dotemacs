@@ -872,8 +872,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
 
 ;;;; Elfeed
-(set-register ?f (cons 'file my-feeds-file))
 (defvar my-feeds-file (concat user-emacs-directory "feeds"))
+(set-register ?f (cons 'file my-feeds-file))
 
 (add-to-list 'load-path "~/src/emacs/elfeed/")
 (require 'elfeed)
