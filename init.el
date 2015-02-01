@@ -675,12 +675,28 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 
 (setq erc-kill-buffer-on-part t)
 (defun my-erc-quit (s)
-  (or s "This ijp has ended peacefully"))
-(defun my-erc-part (s)
-  (or s "hopping the border to ##france"))
-(setq erc-part-reason 'my-erc-part)
+  (or s (concat "brb " (aref my-erc-quit-reasons (random (length my-erc-quit-reasons))))))
+
+(setq erc-part-reason 'my-erc-quit)
 (setq erc-quit-reason 'my-erc-quit)
 
+(setq my-erc-quit-reasons
+      ["proving riemann hypothesis"
+       "cleaning the augean stables"
+       "inventing something better than sliced bread"
+       "seducing Keira Knightley"
+       "seducing Alyson Hannigan"
+       "writing War and Peace and Zombies" ; romance of the three kingdoms
+       "founding new religion"
+       "writing connect4 fanfic"
+       "running for election"
+       "transitioning to kernel mode"
+       "enumerating the reals"
+       "trisecting the angle"
+       "doubling the cube"
+       "attempting to break the light barrier"
+       "coming up with a witty /quit message"
+       ])
 (erc-keep-place-mode 1)
 
 (defun erc-cmd-IGNORE (&optional user duration)
