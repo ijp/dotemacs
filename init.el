@@ -756,7 +756,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;; erc-track-exclude is available as a NO-distraction alternative
 (setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"
                                 "MODE" "324" "328" "329" "901"
-                                "332" "366")
+                                "332" "366"
+                                "333" "353" "477")
       erc-track-priority-faces-only
       ;; They talk too damn much, and worst of all, it's on topic :/
       '("#haskell")
