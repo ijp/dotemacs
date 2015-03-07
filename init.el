@@ -681,22 +681,8 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
 (setq erc-quit-reason 'my-erc-quit)
 
 (setq my-erc-quit-reasons
-      ["proving riemann hypothesis"
-       "cleaning the augean stables"
-       "inventing something better than sliced bread"
-       "seducing Keira Knightley"
-       "seducing Alyson Hannigan"
-       "writing War and Peace and Zombies" ; romance of the three kingdoms
-       "founding new religion"
-       "writing connect4 fanfic"
-       "running for election"
-       "transitioning to kernel mode"
-       "enumerating the reals"
-       "trisecting the angle"
-       "doubling the cube"
-       "attempting to break the light barrier"
-       "coming up with a witty /quit message"
-       ])
+      (read-sexp-from-file (concat user-emacs-directory "quit_messages")))
+
 (erc-keep-place-mode 1)
 
 (defun erc-cmd-IGNORE (&optional user duration)

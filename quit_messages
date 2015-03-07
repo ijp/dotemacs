@@ -1,0 +1,22 @@
+;; -*- mode: emacs-lisp -*-
+;; TODO: does this get screwed by a not initialising the seed?
+["proving riemann hypothesis"
+ "cleaning the augean stables"
+ "inventing something better than sliced bread"
+ "seducing Keira Knightley"
+ "seducing Alyson Hannigan"
+ "writing War and Peace and Zombies" ; romance of the three kingdoms?
+ "founding new religion"
+ "writing connect4 fanfic"
+ "running for election"
+ "transitioning to kernel mode"
+ "enumerating the reals"
+ "trisecting the angle"
+ "doubling the cube"
+ "attempting to break the light barrier"
+ "coming up with a witty /quit message"
+ "actualising self"
+ "reversing entropy"
+ "emacs training montage"
+ "shaving all those who don't shave themselves"
+ ]
