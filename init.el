@@ -873,6 +873,12 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
 
+(defun erc-ctcp-query-VERSION (proc nick login host to msg)
+  "Respond to a CTCP VERSION query."
+  (unless erc-disable-ctcp-replies
+    (erc-send-ctcp-notice nick "VERSION \C-btelnet\C-b"))
+  nil)
+
 ;;;; Elfeed
 (defvar my-feeds-file (concat user-emacs-directory "feeds"))
 (set-register ?f (cons 'file my-feeds-file))
