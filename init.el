@@ -936,6 +936,19 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;; snakehump
 (global-set-key (kbd "C-}") 'snakehump-next-at-point)
 (global-set-key (kbd "C-{") 'snakehump-prev-at-point)
+;; indirect region
+;; https://emacs.stackexchange.com/questions/10104/narrow-to-previous-restriction
+(defun indirect-region (beg end name)
+  "Open a new named indirect buffer of the current buffer,
+narrowed to region [BEG, END]."
+  (interactive "r\nsname of narrowed buffer: ")
+  (let ((new-buff
+         (make-indirect-buffer (current-buffer)
+                               (generate-new-buffer-name name)
+                               t)))
+    (switch-to-buffer new-buff nil t)
+    (narrow-to-region beg end)))
+
 ;; ws-butler
 (add-to-list 'load-path "~/src/emacs/ws-butler/")
 (require 'ws-butler)
