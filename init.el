@@ -38,7 +38,8 @@
 (setq sentence-end-double-space nil)
 (add-to-list 'load-path "~/src/emacs/")
 
-(load-theme 'monokai t)
+(let ((warning-minimum-level :error))
+  (load-theme 'monokai t))
 
 (defun read-sexp-from-file (filename)
   "reads one sexp from a file"
