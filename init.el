@@ -373,9 +373,6 @@ If buffer doesn't exist, does nothing."
 (require 'pretty-mode)
 (global-pretty-mode 1)
 
-(add-to-list 'load-path "/home/ian/src/emacs/ioccur/")
-(require 'ioccur)
-
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
 
