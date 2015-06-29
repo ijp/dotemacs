@@ -1,6 +1,5 @@
 ;; Load up ELPA, the package manager
 
-(add-to-list 'load-path user-emacs-directory)
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -18,7 +17,7 @@
 (require 'recentf)
 
 ;; Load up starter kit customizations
-
+(add-to-list 'load-path (concat user-emacs-directory "esk-remnants"))
 (require 'starter-kit-defuns)
 (require 'starter-kit-bindings)
 (require 'starter-kit-misc)
