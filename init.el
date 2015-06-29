@@ -453,10 +453,8 @@ If buffer doesn't exist, does nothing."
 (global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
 
 ;;;; Magit
-(add-to-list 'load-path "~/src/emacs/magit/")
-(require 'magit)
+(setq magit-last-seen-setup-instructions "1.4.0")
 (setq magit-save-some-buffers nil)
-(require 'magit-blame)
 
 ;;;; Scheme
 (defun my-scheme-setup-indents (list)
