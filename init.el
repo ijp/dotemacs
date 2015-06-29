@@ -614,6 +614,11 @@ If buffer doesn't exist, does nothing."
                            'erc-save-buffer-in-logs)))
 (add-hook 'erc-mode-hook 'abbrev-mode)
 
+
+;; Note, this needs color.el which was actually added in emacs 24
+(add-to-list 'load-path "/home/ian/src/emacs/erc-hl-nicks/")
+(require 'erc-hl-nicks)
+
 (erc-autojoin-mode 1)
 
 (defvar rizon-server "irc.x2x.cc"
@@ -663,10 +668,6 @@ http://wiki.rizon.net/index.php?title=Servers for a list.")
     (dolist (server my-irc-servers)
       (set-buffer (concat server ":6667"))
       (erc-quit-server nil))))
-
-;; Note, this needs color.el which was actually added in emacs 24
-(add-to-list 'load-path "/home/ian/src/emacs/erc-hl-nicks/")
-(require 'erc-hl-nicks)
 
 (setq erc-kill-buffer-on-part t)
 (defun my-erc-quit (s)
