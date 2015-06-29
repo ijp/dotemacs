@@ -936,3 +936,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;; snakehump
 (global-set-key (kbd "C-}") 'snakehump-next-at-point)
 (global-set-key (kbd "C-{") 'snakehump-prev-at-point)
+;; scpaste
+(setq scpaste-http-destination "http://shift-reset.com/pastes"
+      scpaste-scp-destination "ec2-user@shift-reset.com:pastes"
+      scpaste-user-name "ijp"
+      scpaste-user-address "http://shift-reset.com/")
