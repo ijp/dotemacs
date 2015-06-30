@@ -883,9 +883,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;;;; Elfeed
 (defvar my-feeds-file (concat user-emacs-directory "feeds"))
 (set-register ?f (cons 'file my-feeds-file))
-
-(add-to-list 'load-path "~/src/emacs/elfeed/")
-(require 'elfeed)
 (bind-key "C-c w" 'elfeed)
 (setq elfeed-feeds (read-sexp-from-file my-feeds-file))
 
