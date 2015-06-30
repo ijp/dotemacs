@@ -559,10 +559,8 @@ If buffer doesn't exist, does nothing."
 (setq org-default-notes-file (concat user-emacs-directory "capture.org"))
 
 (setq org-log-done 'time)
-(setq org-agenda-files (list "~/org/notes.org"
-                             "~/org/appointments.org"
-                             "~/org/habits.org"
-                             "~/org/coursera.org"
+(setq org-agenda-files (list "~/org/appointments.org"
+                             "~/org/university.org"
                              ))
 (setq org-habit-show-habits-only-for-today nil ) ; did I turn habit on
                                         ; with customize?
