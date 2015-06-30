@@ -1,3 +1,6 @@
+(add-to-list 'load-path "~/src/emacs/use-package")
+(require 'bind-key)
+
 ;; Load up ELPA, the package manager
 
 
@@ -49,15 +52,15 @@
 
 ;; honestly, when was the last time anyone ever turned on overwrite
 ;; mode _on purpose_.
-(global-set-key (kbd "<insert>") 'ignore)
+(bind-key "<insert>" 'ignore)
 
 (require 'misc)
-(global-set-key (kbd "M-z") 'zap-up-to-char)
+(bind-key "M-z" 'zap-up-to-char)
 
 (set-input-method "TeX")
 
 ;; Thanks forcer.
-(global-set-key (kbd "C-x 8 p") 'fc/unicode-info-at-point)
+(bind-key "C-x 8 p" 'fc/unicode-info-at-point)
 (defun fc/unicode-info-at-point (&optional do-kill)
   "Display the unicode name of the character at point."
   (interactive "P")
@@ -104,7 +107,7 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-(global-set-key (kbd "\C-c +") 'hs-toggle-hiding)
+(bind-key "\C-c +" 'hs-toggle-hiding)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 ;; I wish there was a programming "super mode" i could hook into
 ;; from http://www.emacswiki.org/emacs/HideShow
@@ -182,10 +185,10 @@
 
 ;; yasnippet
 (yas-global-mode 1)
-(global-set-key (kbd "C-c y") 'yas/expand)
+(bind-key "C-c y" 'yas/expand)
 
 ;; Browse
-(global-set-key (kbd "C-c o") 'browse-url)
+(bind-key "C-c o" 'browse-url)
 
 ;;; Diminish
 (require 'diminish)
@@ -208,13 +211,13 @@
 ; freedesktop complete /usr/share/sounds/freedesktop/stereo/complete.oga
 (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga")
 
-(define-key global-map (kbd "C-c t") 'tea-time)
+(bind-key "C-c t" 'tea-time)
 
-(global-set-key (kbd "C-x 9") 'kill-buffer-and-window)
+(bind-key "C-x 9" 'kill-buffer-and-window)
 
-(global-set-key (kbd "C-x TAB") 'indent-rigidly)
+(bind-key "C-x TAB" 'indent-rigidly)
 
-(global-set-key (kbd "C-c q") 'refill-mode)
+(bind-key "C-c q" 'refill-mode)
 
 (require 'dired-x)
 (require 'dired-aux)
@@ -233,7 +236,7 @@
 
 (add-to-list 'load-path "/home/ian/src/emacs/hideshow-org/")
 (require 'hideshow-org)
-(global-set-key (kbd "C-c f") 'hs-org/minor-mode)
+(bind-key "C-c f" 'hs-org/minor-mode)
 ; hs-org/minor-mode
 
 ;; no more annoying behavour in paredit after #
@@ -318,7 +321,7 @@ If buffer doesn't exist, does nothing."
         (kill-buffer buffer)
         (when file-name 
           (delete-file file-name))))))
-(global-set-key (kbd "C-x M-k") 'kill-buffer-and-file)
+(bind-key "C-x M-k" 'kill-buffer-and-file)
 
 ;; Taken from
 ;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
@@ -328,7 +331,7 @@ If buffer doesn't exist, does nothing."
   (if (= (point) (save-excursion (back-to-indentation) (point)))
       (beginning-of-line)
     (back-to-indentation)))
-(global-set-key (kbd "<home>") 'back-to-indentation-or-beginning)
+(bind-key "<home>" 'back-to-indentation-or-beginning)
 
 (require 'htmlfontify)
 (defun html-entity-encode-region (start end)
@@ -401,7 +404,7 @@ If buffer doesn't exist, does nothing."
          ("\\.xml$" . nxml-mode))
        auto-mode-alist))
 
-(global-set-key (kbd "C-x M-d") 'fixup-whitespace)
+(bind-key "C-x M-d" 'fixup-whitespace)
 
 ;;;; Ibuffer
 (setq ibuffer-saved-filter-groups
@@ -430,7 +433,8 @@ If buffer doesn't exist, does nothing."
           (lambda ()
             (ibuffer-switch-to-saved-filter-groups "default")))
 
-(add-hook 'ibuffer-mode-hook (lambda () (local-unset-key (kbd "C-x C-f"))))
+(eval-after-load 'ibuffer
+  '(unbind-key "C-x C-f" ibuffer-mode-map))
 
 ;;;; Tramp
 (require 'tramp)
@@ -447,7 +451,7 @@ If buffer doesn't exist, does nothing."
 ;; TODO: erc spelling
 (setq flyspell-use-meta-tab nil)
 ;; idea from http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
-(global-set-key (kbd "C-.") 'flyspell-auto-correct-word)
+(bind-key "C-." 'flyspell-auto-correct-word)
 
 ;;;; Magit
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -549,9 +553,9 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "cliche" "cliché")
 
 ;;;; Org Mode
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+(bind-key "C-c l" 'org-store-link)
+(bind-key "C-c a" 'org-agenda)
+(bind-key "C-c c" 'org-capture)
 (setq org-default-notes-file (concat user-emacs-directory "capture.org"))
 
 (setq org-log-done 'time)
@@ -577,7 +581,7 @@ If buffer doesn't exist, does nothing."
 (require 'org-velocity)
 (setq org-velocity-bucket "~/org/bucket.org")
 (setq org-velocity-edit-entry t)
-(global-set-key (kbd "M-N") 'org-velocity-read)
+(bind-key "M-N" 'org-velocity-read)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -608,10 +612,10 @@ If buffer doesn't exist, does nothing."
 
 (setq erc-nick "ijp")
 (setq erc-save-buffer-on-part t)
-(add-hook 'erc-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-l")
-                           'erc-save-buffer-in-logs)))
+
+(eval-after-load 'erc
+  '(bind-key "C-c C-l" 'erc-save-buffer-in-logs erc-mode-map))
+
 (add-hook 'erc-mode-hook 'abbrev-mode)
 
 
@@ -882,7 +886,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (add-to-list 'load-path "~/src/emacs/elfeed/")
 (require 'elfeed)
-(global-set-key (kbd "C-c w") 'elfeed)
+(bind-key "C-c w" 'elfeed)
 (setq elfeed-feeds (read-sexp-from-file my-feeds-file))
 
 ;; TZ
@@ -909,17 +913,17 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot"))
 
 ;; Japanese Keyboard experiments
-(global-set-key (kbd "<henkan>") (kbd "<backspace>"))
-(global-set-key (kbd "<muhenkan>") 'ido-switch-buffer)
+(bind-key "<henkan>" (kbd "<backspace>"))
+(bind-key "<muhenkan>" 'ido-switch-buffer)
 
 ;; Ace Jump Mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "<muhenkan>") 'ace-jump-mode)
+(bind-key "C-c SPC" 'ace-jump-mode)
+(bind-key "<muhenkan>" 'ace-jump-mode)
 
 ;; More key crap
-(global-set-key (kbd "C-c i") 'imenu)
-(global-set-key (kbd "C-c d") 'diff-buffer-with-file)
-(global-set-key (kbd "C-x 8 \" RET") (lambda () (interactive) (insert "̈")))
+(bind-key "C-c i" 'imenu)
+(bind-key "C-c d" 'diff-buffer-with-file)
+(bind-key "C-x 8 \" RET" (lambda () (interactive) (insert "̈")))
 
 ;; Color Identifiers
 (add-to-list 'load-path "~/src/emacs/color-identifiers-mode/")
@@ -930,8 +934,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 
 ;; snakehump
-(global-set-key (kbd "C-}") 'snakehump-next-at-point)
-(global-set-key (kbd "C-{") 'snakehump-prev-at-point)
+(bind-key "C-}" 'snakehump-next-at-point)
+(bind-key "C-{" 'snakehump-prev-at-point)
 ;; indirect region
 ;; https://emacs.stackexchange.com/questions/10104/narrow-to-previous-restriction
 (defun indirect-region (beg end name)
