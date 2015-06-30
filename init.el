@@ -396,7 +396,6 @@ If buffer doesn't exist, does nothing."
          ("\\.md\\'" . markdown-mode)
          ("README\\.md\\'" . gfm-mode)
          ("\\.m$" . octave-mode)
-         ("COMMIT_EDITMSG$" . diff-mode)
          ("\\.css$" . css-mode)
          ("\\.ya?ml$" . yaml-mode)
          ("\\.rb$" . ruby-mode)
