@@ -390,6 +390,7 @@ If buffer doesn't exist, does nothing."
          ("\\.sps$" . scheme-mode)
          ("\\.service$" . conf-mode)
          ("\\.unit$" . conf-mode)
+         ("\\.toml$" . conf-mode)
          ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode) ; in emacs-goodies
          ("\\.markdown\\'" . markdown-mode)
          ("\\.md\\'" . markdown-mode)
