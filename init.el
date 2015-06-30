@@ -437,6 +437,7 @@ If buffer doesn't exist, does nothing."
   '(unbind-key "C-x C-f" ibuffer-mode-map))
 
 ;;;; Tramp
+(setq tramp-ssh-controlmaster-options nil) ;; FIXES hanging tramp
 (require 'tramp)
 (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/")
 
