@@ -610,6 +610,7 @@ If buffer doesn't exist, does nothing."
 ;;;; Erc
 
 (setq erc-nick "ijp")
+(setq erc-user-full-name "Ian Price")
 (setq erc-save-buffer-on-part t)
 
 (eval-after-load 'erc
