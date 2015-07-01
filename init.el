@@ -543,6 +543,7 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "rennaisance" "renaissance")
 ;; can't have "non-sequiter" because - doesn't play nicely with abbrevs
 (define-global-abbrev "sequiter" "sequitur")
+(define-global-abbrev "fuschia" "fuchsia")
 
 ;; Foreign word abbrevs
 (define-global-abbrev "facade" "façade")
