@@ -798,7 +798,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (setq-default erc-ignore-list ;; TODO: consider using erc-ignore-reply-list
               '("jdoles" ;; congrats to jdoles on being the first to make this list
-                "[gG]uest" "average"))
+                "[gG]uest[^!]*!.*" "average"))
 
 (set-face-attribute 'erc-fool-face nil :foreground "orange red")
 (setq erc-fool-highlight-type 'all)
