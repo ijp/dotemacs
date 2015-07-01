@@ -762,9 +762,10 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
       ;; They talk too damn much, and worst of all, it's on topic :/
       '("#haskell")
       erc-track-faces-priority-list
-      '(erc-current-nick
-        erc-keyword-face ; ?
-        erc-error-face))
+      '(erc-current-nick-face erc-keyword-face))
+
+;; works around erc-hl-nicks for erc-track-faces-priority-list
+(add-to-list 'erc-hl-nicks-skip-faces "erc-current-nick-face")
 
 ;; Taken from jlf
 (defun erc-set-topic (topic)
