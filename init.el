@@ -166,7 +166,6 @@
      (require 'em-term)
      (require 'em-cmpl)
      (setenv "PAGER" "cat")
-     (set-face-attribute 'eshell-prompt nil :foreground "turquoise1")
 
      ;; TODO: submit these via M-x report-emacs-bug
      (add-to-list 'eshell-visual-commands "ssh")
