@@ -352,7 +352,7 @@ If buffer doesn't exist, does nothing."
 (set-register ?b '(file . "~/org/2014-books.org"))
 ;; might be useful, means I can just use C-SPC after C-u C-SPACE,
 ;; rather than having to keep using a prefix
-(setq user-mail-address "ianprice90@googlemail.com")
+(setq user-mail-address "ianprice90@gmail.com")
 (setq set-mark-command-repeat-pop t)
 (setq prolog-program-name "gprolog")
 (setq sql-sqlite-program "sqlite3")
