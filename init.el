@@ -869,6 +869,10 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 	(redraw-modeline)
       (force-mode-line-update))))
 
+(setq erc-pcomplete-nick-postfix ": ")
+(add-to-list 'erc-complete-functions 'erc-pcomplete)
+(setq pcomplete-cycle-cutoff-length nil)
+
 (erc-truncate-mode 1)
 
 (setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
