@@ -378,9 +378,6 @@ If buffer doesn't exist, does nothing."
 (require 'browse-kill-ring)
 (browse-kill-ring-default-keybindings)
 
-(add-to-list 'load-path "~/src/emacs/jd-el")
-(require 'rainbow-mode)
-(autoload 'rainbow-mode "rainbow-mode")
 (add-hook 'css-mode-hook 'rainbow-mode)
 
 (setq auto-mode-alist
