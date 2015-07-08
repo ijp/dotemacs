@@ -189,8 +189,6 @@
 
 ;;; Diminish
 (require 'diminish)
-(eval-after-load 'paredit
-'(diminish 'paredit-mode "Ped"))
 (add-hook 'emacs-lisp-mode-hook
           (lambda () (setq mode-name "elisp")))
 
@@ -233,23 +231,8 @@
   :load-path "~/src/emacs/hideshow-org/"
   :bind ("C-c f" . hs-org/minor-mode))
 
-;; no more annoying behavour in paredit after #
-;; need to figure this out better for bytevectors etc.
-;; may just set it to (lambda (a b) nil)
-;;(setq paredit-space-for-delimiter-predicates nil) (not)
-(setq paredit-space-for-delimiter-predicates
-      (list (lambda (endp delimiter)
-              ;; for some reason it is useing ( as the delimiter
-              ;;(not (eql delimiter ?#))
-              ;; 40 and 91 are ( and [
-              (not (member delimiter '(40 91 ?#))))))
-;; (eval-after-load "paredit"
-;;   '(add-to-list 'paredit-space-for-delimiter-predicates
-;;                 (lambda (endp delimiter)
-;;                  (not (eql delimiter ?#)))))
-
-
-;; I get errors for this, but I'm not sure what the deal is yet
+(use-package paredit
+  :diminish (paredit-mode . "Ped"))
 
 
 ;;;; Haskell
