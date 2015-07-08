@@ -823,7 +823,10 @@ narrowed to region [BEG, END]."
   :init (add-hook 'prog-mode-hook 'ws-butler-mode))
 
 ;; scpaste
-(setq scpaste-http-destination "http://shift-reset.com/pastes"
-      scpaste-scp-destination "ec2-user@shift-reset.com:pastes"
-      scpaste-user-name "ijp"
-      scpaste-user-address "http://shift-reset.com/")
+(use-package scpaste
+  :commands scpaste
+  :init
+  (setq scpaste-http-destination "http://shift-reset.com/pastes"
+        scpaste-scp-destination "ec2-user@shift-reset.com:pastes"
+        scpaste-user-name "ijp"
+        scpaste-user-address "http://shift-reset.com/"))
