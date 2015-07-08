@@ -333,15 +333,17 @@ If buffer doesn't exist, does nothing."
     (back-to-indentation)))
 (bind-key "<home>" 'back-to-indentation-or-beginning)
 
-(require 'htmlfontify)
-(defun html-entity-encode-region (start end)
-  ;; Thanks to fledermaus for pointing out the functions below, so I
-  ;; could write this one
-  (interactive "r")
-  (narrow-to-region start end)
-  (hfy-html-enkludge-buffer)
-  (hfy-html-dekludge-buffer)
-  (widen))
+(use-package htmlfontify
+  :commands hfy-html-enkludge-buffer
+  :init
+  (defun html-entity-encode-region (start end)
+    ;; Thanks to fledermaus for pointing out the functions below, so I
+    ;; could write this one
+    (interactive "r")
+    (narrow-to-region start end)
+    (hfy-html-enkludge-buffer)
+    (hfy-html-dekludge-buffer)
+    (widen)))
 
 ;;;; Misc
 (setenv "PAGER" "cat")
