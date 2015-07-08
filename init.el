@@ -368,8 +368,10 @@ If buffer doesn't exist, does nothing."
  uniquify-strip-common-suffix nil)
 (setq auto-save-include-big-deletions t)
 
-(require 'legalese)
-(setq legalese-default-license 'bsd)
+(use-package legalese
+  :commands legalese
+  :config
+  (setq legalese-default-license 'bsd))
 
 (use-package hide-copyleft
   :commands hide-copyleft-region
