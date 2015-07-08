@@ -370,8 +370,11 @@ If buffer doesn't exist, does nothing."
 
 (require 'legalese)
 (setq legalese-default-license 'bsd)
-(autoload 'hide-copyleft-region   "hide-copyleft" nil t)
-(add-hook 'prog-mode-hook 'hide-copyleft-region)
+
+(use-package hide-copyleft
+  :commands hide-copyleft-region
+  :init
+  (add-hook 'prog-mode-hook 'hide-copyleft-region))
 
 (require 'pretty-mode)
 (global-pretty-mode 1)
