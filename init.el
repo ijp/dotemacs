@@ -397,34 +397,34 @@ If buffer doesn't exist, does nothing."
 (bind-key "C-x M-d" 'fixup-whitespace)
 
 ;;;; Ibuffer
-(setq ibuffer-saved-filter-groups
-      ;; or maybe just ibuffer-filter-groups?
-      '(("default"
-         ("dired" (mode . dired-mode))
-         ("emacs" (or
-                   (name . "^\\*scratch\\*$")
-                   (name . "^\\*Messages\\*$")
-                   (filename . "~/.emacs.d/init.el")))
-         ("erc" (mode . erc-mode))
-         ("gnus" (or
-                  (mode . gnus-group-mode)
-                  (mode . gnus-summary-mode)
-                  (mode . gnus-article-mode)
-                  (name . "^\\.newsrc-dribble$")
-                  (name . "^.bbdb$")
-                  (name . "^\\*BBDB\\*$")))
-         ("scheme" (or
-                    (mode . scheme-mode)
-                    (mode . geiser-repl-mode)
-                    (name . "^.*[Gg]eiser.*$")
-                    (name . "^\\*scheme\\*$"))))))
-
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-switch-to-saved-filter-groups "default")))
-
-(eval-after-load 'ibuffer
-  '(unbind-key "C-x C-f" ibuffer-mode-map))
+(use-package ibuffer
+  :init
+  (defun my-ibuffer-switch-to-default ()
+    (ibuffer-switch-to-saved-filter-groups "default"))
+  (add-hook 'ibuffer-mode-hook 'my-ibuffer-switch-to-default)
+  :config
+  (setq ibuffer-saved-filter-groups
+        ;; or maybe just ibuffer-filter-groups?
+        '(("default"
+           ("dired" (mode . dired-mode))
+           ("emacs" (or
+                     (name . "^\\*scratch\\*$")
+                     (name . "^\\*Messages\\*$")
+                     (filename . "~/.emacs.d/init.el")))
+           ("erc" (mode . erc-mode))
+           ("gnus" (or
+                    (mode . gnus-group-mode)
+                    (mode . gnus-summary-mode)
+                    (mode . gnus-article-mode)
+                    (name . "^\\.newsrc-dribble$")
+                    (name . "^.bbdb$")
+                    (name . "^\\*BBDB\\*$")))
+           ("scheme" (or
+                      (mode . scheme-mode)
+                      (mode . geiser-repl-mode)
+                      (name . "^.*[Gg]eiser.*$")
+                      (name . "^\\*scheme\\*$"))))))
+  (unbind-key "C-x C-f" ibuffer-mode-map))
 
 ;;;; Tramp
 (use-package tramp
