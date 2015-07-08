@@ -222,11 +222,11 @@
 (require 'dired-x)
 (require 'dired-aux)
 
-(require 'c-eldoc)
-;; Add in commonly used packages/include directorys
-(setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ -I/usr/include `guile-config compile`") ; not sure if /usr/include is necessary but oh well
-;; need to find out how to refresh when I add a new include
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+(use-package c-eldoc
+  :commands c-turn-on-eldoc-mode
+  :init (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+  :config
+  (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ -I/usr/include `guile-config compile`"))
 
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
