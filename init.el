@@ -750,10 +750,13 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   (set-face-attribute 'erc-fool-face nil :foreground "orange red"))
 
 ;;;; Elfeed
-(defvar my-feeds-file (concat user-emacs-directory "feeds"))
-(set-register ?f (cons 'file my-feeds-file))
-(bind-key "C-c w" 'elfeed)
-(setq elfeed-feeds (read-sexp-from-file my-feeds-file))
+(use-package elfeed
+  :bind ("C-c w" . elfeed)
+  :init
+  (defvar my-feeds-file (concat user-emacs-directory "feeds"))
+  (set-register ?f (cons 'file my-feeds-file))
+  :config
+  (setq elfeed-feeds (read-sexp-from-file my-feeds-file)))
 
 ;; TZ
 ;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
