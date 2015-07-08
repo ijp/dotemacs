@@ -55,8 +55,8 @@
 ;; mode _on purpose_.
 (bind-key "<insert>" 'ignore)
 
-(require 'misc)
-(bind-key "M-z" 'zap-up-to-char)
+(use-package misc
+  :bind ("M-z" . zap-up-to-char))
 
 (set-input-method "TeX")
 
