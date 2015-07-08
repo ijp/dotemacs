@@ -254,17 +254,6 @@
 
 ;; I get errors for this, but I'm not sure what the deal is yet
 
-(add-to-list 'load-path "~/src/emacs/multi-web-mode/")
-(require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-
-(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-(multi-web-global-mode 1)
-
 
 ;;;; Haskell
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
