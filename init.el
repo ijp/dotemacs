@@ -148,40 +148,40 @@
 
 
 ;; eshell
-(require 'esh-module)
-
-(defun eshell/clear ()
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
-
-(add-to-list 'eshell-modules-list 'eshell-smart)
-
-(setq eshell-cmpl-cycle-completions t ; nil
+(use-package eshell
+  :commands eshell
+  :config
+  (setq eshell-cmpl-cycle-completions t ; nil
       eshell-save-history-on-exit t
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
-(eval-after-load 'esh-opt
-  '(progn
-     (require 'em-prompt)
-     (require 'em-term)
-     (require 'em-cmpl)
-     (setenv "PAGER" "cat")
+  (defun eshell/clear ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (erase-buffer)))
 
-     ;; TODO: submit these via M-x report-emacs-bug
-     (add-to-list 'eshell-visual-commands "ssh")
-     (add-to-list 'eshell-visual-commands "tail")
-     (add-to-list 'eshell-command-completions-alist
-                  '("gunzip" "gz\\'"))
-     (add-to-list 'eshell-command-completions-alist
-                  '("tar" "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'"))))
+  (defun eshell/cds ()
+    "Change directory to the project's root."
+    (eshell/cd (locate-dominating-file default-directory "src")))
 
-(defun eshell/cds ()
-  "Change directory to the project's root."
-  (eshell/cd (locate-dominating-file default-directory "src")))
+  (defun eshell/find (dir &rest opts)
+    (find-dired dir (mapconcat 'identity opts " "))))
 
-(defun eshell/find (dir &rest opts)
-  (find-dired dir (mapconcat 'identity opts " ")))
+(use-package esh-module
+  :config
+  (add-to-list 'eshell-modules-list 'eshell-smart))
+
+(use-package em-term
+  :config
+  (add-to-list 'eshell-visual-commands "ssh")
+  (add-to-list 'eshell-visual-commands "tail"))
+
+(use-package em-cmpl
+  :config
+  (add-to-list 'eshell-command-completions-alist
+               '("gunzip" . "gz\\'"))
+  (add-to-list 'eshell-command-completions-alist
+               '("tar" . "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'")))
 
 ;; yasnippet
 (yas-global-mode 1)
