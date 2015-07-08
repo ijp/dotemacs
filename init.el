@@ -574,11 +574,13 @@ If buffer doesn't exist, does nothing."
 (setq org-default-notes-file "~/org/notes.org")
 
 ;; org contrib
-(setq load-path (cons "/home/ian/src/emacs/org-velocity/" load-path))
-(require 'org-velocity)
-(setq org-velocity-bucket "~/org/bucket.org")
-(setq org-velocity-edit-entry t)
-(bind-key "M-N" 'org-velocity-read)
+(use-package org-velocity
+  :load-path "~/src/emacs/org-velocity/"
+  :bind ("M-N" . org-velocity-read)
+  :config
+  (setq org-velocity-bucket "~/org/bucket.org")
+  (setq org-velocity-edit-entry t)
+  )
 
 (org-babel-do-load-languages
  'org-babel-load-languages
