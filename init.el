@@ -30,10 +30,7 @@
 (load custom-file 'noerror)
 
 ;;; init.el ends here
-(put 'set-goal-column 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
+(setq disabled-command-function nil) ; handle all disabled commands -  thanks YoungFrog
 
 (add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
 (delete-selection-mode t)
@@ -348,7 +345,6 @@ If buffer doesn't exist, does nothing."
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (setq c-default-style "linux")
 (add-hook 'java-mode-hook (lambda () (c-set-style "java")))
-(put 'dired-find-alternate-file 'disabled nil)
 (setq yank-pop-change-selection t) ; suggest adding to better-defaults.el
 (setq
  uniquify-buffer-name-style 'post-forward
