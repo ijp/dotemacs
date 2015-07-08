@@ -179,9 +179,11 @@
                '("tar" . "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'")))
 
 ;; yasnippet
-(yas-global-mode 1)
-(bind-key "C-c y" 'yas/expand)
-
+(use-package yasnippet
+  :bind ("C-c y" . yas-expand)
+  :init
+  (add-hook 'prog-mode-hook 'yas-minor-mode)
+  (add-hook 'text-mode-hook 'yas-minor-mode))
 ;; Browse
 (bind-key "C-c o" 'browse-url)
 
