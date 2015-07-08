@@ -82,14 +82,15 @@
 ;; TODO: add his hidden mode-line hack
 
 ;; geiser
-(setq geiser-active-implementations '(guile racket)); forget about racket for now :)
-(add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
-(setq geiser-guile-load-init-file-p t)
-(eval-after-load "geiser-impl"
-  '(setq geiser-implementations-alist
-         '(((regexp "\\.ss$")  racket)
-           ((regexp "\\.rkt$") racket)
-           ((regexp ".") guile))))
+(use-package geiser
+  :config
+  (setq geiser-active-implementations '(guile)
+        geiser-guile-load-init-file-p t
+        geiser-implementations-alist '(((regexp "\\.ss$")  racket)
+                                       ((regexp "\\.rkt$") racket)
+                                       ((regexp ".") guile)))
+  (add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
+  (add-hook 'geiser-repl-mode-hook #'turn-on-company-mode))
 
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -136,7 +137,6 @@
 (defun turn-on-company-mode ()
   (company-mode +1))
 (add-hook 'scheme-mode-hook #'turn-on-company-mode)
-(add-hook 'geiser-repl-mode-hook #'turn-on-company-mode)
 
 
 ;; Commented out, until I can figure out how to turn this off for
