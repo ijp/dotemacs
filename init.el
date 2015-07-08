@@ -604,215 +604,190 @@ If buffer doesn't exist, does nothing."
     (setq org-velocity-edit-entry t)))
 
 ;;;; Erc
+(use-package erc
+  :defer t
+  :init
+  (add-hook 'erc-mode-hook 'abbrev-mode)
 
-(setq erc-nick "ijp")
-(setq erc-user-full-name "Ian Price")
-(setq erc-save-buffer-on-part t)
+  (setq erc-nick "ijp")
 
-(eval-after-load 'erc
-  '(bind-key "C-c C-l" 'erc-save-buffer-in-logs erc-mode-map))
-
-(add-hook 'erc-mode-hook 'abbrev-mode)
-
-(use-package erc-hl-nicks
-  :load-path "/home/ian/src/emacs/erc-hl-nicks/")
-
-(erc-autojoin-mode 1)
-
-(defvar rizon-server "irc.x2x.cc"
-  "Which rizon server to connect to.
+  (defvar rizon-server "irc.x2x.cc"
+    "Which rizon server to connect to.
 irc.rizon.net operates a round robin, where it will connect you
 to one of a bunch of other servers. This is a pain with autojoin,
 so just always connect to one specifically. See
 http://wiki.rizon.net/index.php?title=Servers for a list.")
 
-(setq erc-autojoin-channels-alist
-      `(("freenode.net" "#emacs" "#scheme" "#guile"
-         "#racket" "##juggling"
-         "#coq" "#guix"
-         )
-        ("irc.juggler.jp" "#japanese" "#おもしろネタ速報" "#漫画雑談")
-        ; irc.juggler.jp / irc2.2ch.net
-        (,rizon-server "#ajatt")
-        ))
+  (defvar my-irc-servers `("irc.freenode.net" ,rizon-server "irc.juggler.jp"))
 
-(defun my-erc-coding-hook (server nick)
-  (when ;(string-match "2ch\\.net" server)
-        (string-match "juggler.jp" server)
-    (save-current-buffer ;; necessary?
-      (set-buffer (concat server ":6667"))
+  (defun my-erc-start ()
+    (interactive)
+    (save-current-buffer
+      (dolist (server my-irc-servers)
+        (erc :server server :port "6667" :nick erc-nick))))
+
+  :config
+  (bind-key "C-c C-l" 'erc-save-buffer-in-logs erc-mode-map)
+
+  (setq erc-autojoin-channels-alist
+        `(("freenode.net" "#emacs" "#scheme" "#guile" "#racket"
+           "##juggling" "#coq" "#guix")
+          ("juggler.jp" "#japanese" "#おもしろネタ速報" "#漫画雑談")
+          (,rizon-server "#ajatt"))
+        erc-fool-highlight-type 'all
+        erc-fools (read-sexp-from-file (concat user-emacs-directory "fools"))
+        erc-join-buffer 'bury
+        erc-kill-buffer-on-part t
+        erc-lurker-hide-list '("JOIN" "PART" "QUIT")
+        erc-part-reason 'my-erc-quit
+        erc-quit-reason 'my-erc-quit
+        erc-save-buffer-on-part t
+        ;; erc-track-exclude is available as a NO-distraction alternative
+        erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"
+                                  "MODE" "324" "328" "329" "901" "332" "366"
+                                  "333" "353" "477")
+        erc-track-faces-priority-list '(erc-current-nick-face erc-keyword-face)
+        erc-track-priority-faces-only '("#haskell") ; They talk too damn much, and worst of all, it's on topic :/
+        erc-track-shorten-aggressively 'max
+        erc-track-shorten-start 2       ; fixes the one channel issue
+        erc-user-full-name "Ian Price"
+        my-erc-quit-reasons (read-sexp-from-file (concat user-emacs-directory "quit_messages"))
+        pcomplete-cycle-cutoff-length nil)
+
+  (setq-default erc-ignore-list ;; TODO: consider using erc-ignore-reply-list
+                '("jdoles" ;; congrats to jdoles on being the first to make this list
+                  "[gG]uest[^!]*!.*" "average"))
+
+  (erc-autojoin-mode 1)
+  (erc-keep-place-mode 1)
+  (erc-truncate-mode 1)
+
+  (defun my-erc-coding-hook (server nick)
+    (when (string-match "juggler.jp" server)
       (set (make-local-variable 'erc-server-coding-system)
-           '(iso-2022-jp . undecided)))))
+           '(iso-2022-jp . undecided))))
 
-;; This must come _before_ autojoin in the hook, so pushing it on after.
-(add-hook 'erc-after-connect 'my-erc-coding-hook)
+  ;; This must come _before_ autojoin in the hook, so pushing it on after.
+  (add-hook 'erc-after-connect 'my-erc-coding-hook)
+  (add-to-list 'erc-complete-functions 'erc-pcomplete)
 
-(defvar my-irc-servers
-  `("irc.freenode.net"
-    ,rizon-server
-    ;; "irc2.2ch.net"
-    "irc.juggler.jp"
-    ))
-
-(defun my-erc-start ()
-  (interactive)
-  (save-current-buffer
-    (dolist (server my-irc-servers)
-      (erc :server server :port "6667" :nick erc-nick))))
-
-(defun my-erc-quit-server ()
-  (interactive)
-  (save-current-buffer
-    (dolist (server my-irc-servers)
-      (set-buffer (concat server ":6667"))
-      (erc-quit-server nil))))
-
-(setq erc-kill-buffer-on-part t)
-(defun my-erc-quit (s)
-  (or s (concat "brb " (aref my-erc-quit-reasons (random (length my-erc-quit-reasons))))))
-
-(setq erc-part-reason 'my-erc-quit)
-(setq erc-quit-reason 'my-erc-quit)
-
-(setq my-erc-quit-reasons
-      (read-sexp-from-file (concat user-emacs-directory "quit_messages")))
-
-(erc-keep-place-mode 1)
-
-(defun erc-cmd-IGNORE (&optional user duration)
-  ;; Duration is in minutes.
-  "Ignore USER.  This should be a regexp matching nick!user@host.
+  (defun erc-cmd-IGNORE (&optional user duration)
+    ;; Duration is in minutes.
+    "Ignore USER.  This should be a regexp matching nick!user@host.
 If no USER argument is specified, list the contents of `erc-ignore-list'."
-  (if user
-      (let ((quoted (regexp-quote user)))
-	(when (and (not (string= user quoted))
-		   (y-or-n-p (format "Use regexp-quoted form (%s) instead? "
-				     quoted)))
-	  (setq user quoted))
-	(erc-display-line
-	 (erc-make-notice (format "Now ignoring %s" user))
-	 'active)
-	(erc-with-server-buffer (add-to-list 'erc-ignore-list user))
-        (if duration
-            (run-at-time (* 60 (timer-duration duration)) nil 'erc-cmd-UNIGNORE user)))
-    (if (null (erc-with-server-buffer erc-ignore-list))
-	(erc-display-line (erc-make-notice "Ignore list is empty") 'active)
-      (erc-display-line (erc-make-notice "Ignore list:") 'active)
-      (mapc #'(lambda (item)
-		(erc-display-line (erc-make-notice item)
-				  'active))
-	    (erc-with-server-buffer erc-ignore-list))))
-  t)
+    (if user
+        (let ((quoted (regexp-quote user)))
+          (when (and (not (string= user quoted))
+                     (y-or-n-p (format "Use regexp-quoted form (%s) instead? "
+                                       quoted)))
+            (setq user quoted))
+          (erc-display-line
+           (erc-make-notice (format "Now ignoring %s" user))
+           'active)
+          (erc-with-server-buffer (add-to-list 'erc-ignore-list user))
+          (if duration
+              (run-at-time (* 60 (timer-duration duration)) nil 'erc-cmd-UNIGNORE user)))
+      (if (null (erc-with-server-buffer erc-ignore-list))
+          (erc-display-line (erc-make-notice "Ignore list is empty") 'active)
+        (erc-display-line (erc-make-notice "Ignore list:") 'active)
+        (mapc #'(lambda (item)
+                  (erc-display-line (erc-make-notice item)
+                                    'active))
+              (erc-with-server-buffer erc-ignore-list))))
+    t)
 
-(setq erc-join-buffer 'bury)
-(setq erc-track-shorten-aggressively 'max)
-(setq erc-track-shorten-start 2) ;; fixes the one channel issue
+  (defun erc-ctcp-query-VERSION (proc nick login host to msg)
+    "Respond to a CTCP VERSION query."
+    (unless erc-disable-ctcp-replies
+      (erc-send-ctcp-notice nick "VERSION \C-btelnet\C-b"))
+    nil)
 
-;; ta offby1
-;; modified from something from bpt
-(defun erc-rank-stalkers ()
-  "See who is in the same IRC channels as me."
-  (interactive)
-  (let ((tbl (make-hash-table :test 'equal)))
-    (dolist (buf (erc-channel-list nil))
-      (message "%s..." (buffer-name buf))
-      (dolist (nick (mapcar (lambda (thing) (aref (car thing) 1))
-                            (with-current-buffer buf (erc-get-channel-user-list))))
-        (when (not (equal nick erc-nick))
-          (puthash nick (cons (buffer-name buf)
-                              (gethash nick tbl '()))
-                   tbl))))
-    (with-output-to-temp-buffer
-        "*IRC stalkers*"
-      (let ((list '()))
-        (maphash (lambda (k v) (push (cons k v) list)) tbl)
+  ;; ta offby1
+  ;; modified from something from bpt
+  (defun erc-rank-stalkers ()
+    "See who is in the same IRC channels as me."
+    (interactive)
+    (let ((tbl (make-hash-table :test 'equal)))
+      (dolist (buf (erc-channel-list nil))
+        (message "%s..." (buffer-name buf))
+        (dolist (nick (mapcar (lambda (thing) (aref (car thing) 1))
+                              (with-current-buffer buf (erc-get-channel-user-list))))
+          (when (not (equal nick erc-nick))
+            (puthash nick (cons (buffer-name buf)
+                                (gethash nick tbl '()))
+                     tbl))))
+      (with-output-to-temp-buffer
+          "*IRC stalkers*"
+        (let ((list '()))
+          (maphash (lambda (k v) (push (cons k v) list)) tbl)
 
-        ;; Sort the alist by number of channels.  Be nice if I could
-        ;; break ties by noting how recently someone has spoken --
-        ;; more recent would bring them to the front of the list.
-        (setq list (sort* list '> :key (lambda (thing)
-                                         (length (cdr thing)))))
+          ;; Sort the alist by number of channels.  Be nice if I could
+          ;; break ties by noting how recently someone has spoken --
+          ;; more recent would bring them to the front of the list.
+          (setq list (sort* list '> :key (lambda (thing)
+                                           (length (cdr thing)))))
 
-        (princ (format "%-15s %s %s\n" "Nick" "channels in common with" erc-nick))
-        (princ "----------------------------------\n")
-        (let ((count 1))
-          (while (and (not (null list)) (< count 20))
-            (princ (let ((x (pop list)))
-                     (format "%-15s %d %s\n"
-                             (car x)
-                             (length (cdr x))
-                             (sort (cdr x) 'string-lessp))))
-            (incf count)))))))
+          (princ (format "%-15s %s %s\n" "Nick" "channels in common with" erc-nick))
+          (princ "----------------------------------\n")
+          (let ((count 1))
+            (while (and (not (null list)) (< count 20))
+              (princ (let ((x (pop list)))
+                       (format "%-15s %d %s\n"
+                               (car x)
+                               (length (cdr x))
+                               (sort (cdr x) 'string-lessp))))
+              (incf count)))))))
 
-(use-package erc-shoot
-  :load-path "/home/ian/src/emacs/erc-shoot")
+  ;; Taken from jlf
+  (defun erc-set-topic (topic)
+    "Prompt for a TOPIC for the current channel."
+    (interactive
+     (list
+      (let* ((prompt (concat "Set topic of " (erc-default-target) ": "))
+             (cur-topic
+              (when erc-channel-topic
+                (let ((ss (split-string erc-channel-topic "\C-o")))
+                  (cons (apply 'concat (if (cdr ss) (butlast ss) ss)) 0))))
+             (max-len
+              (ignore-errors
+                (read
+                 (cdr (assoc "TOPICLEN"
+                             (erc-with-server-buffer erc-server-parameters))))))
+             (new-topic nil))
+        (while (or (null new-topic)
+                   (and max-len
+                        (> (length new-topic) max-len)
+                        (prog1
+                            (message "New length of %s exceeds server's maximum of %s" (length new-topic) max-len)
+                          ;; FIXME there has to be a better approach than sleep-for, but what is it?
+                          (sleep-for 2))))
+          (setq new-topic (read-from-minibuffer prompt (or new-topic cur-topic))))
+        new-topic)))
+    (let ((topic-list (split-string topic "\C-o"))) ; strip off the topic setter
+      (erc-cmd-TOPIC (concat (erc-default-target) " " (car topic-list)))))
 
-;; erc-track-exclude is available as a NO-distraction alternative
-(setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"
-                                "MODE" "324" "328" "329" "901"
-                                "332" "366"
-                                "333" "353" "477")
-      erc-track-priority-faces-only
-      ;; They talk too damn much, and worst of all, it's on topic :/
-      '("#haskell")
-      erc-track-faces-priority-list
-      '(erc-current-nick-face erc-keyword-face))
+  (defun my-erc-quit (s)
+    (or s (concat "brb " (aref my-erc-quit-reasons (random (length my-erc-quit-reasons))))))
 
-;; works around erc-hl-nicks for erc-track-faces-priority-list
-(add-to-list 'erc-hl-nicks-skip-faces "erc-current-nick-face")
+  (defun my-erc-quit-server ()
+    (interactive)
+    (save-current-buffer
+      (dolist (server my-irc-servers)
+        (set-buffer (concat server ":6667"))
+        (erc-quit-server nil))))
 
-;; Taken from jlf
-(defun erc-set-topic (topic)
-  "Prompt for a TOPIC for the current channel."
-  (interactive
-   (list
-    (let* ((prompt (concat "Set topic of " (erc-default-target) ": "))
-	   (cur-topic
-	    (when erc-channel-topic
-	      (let ((ss (split-string erc-channel-topic "\C-o")))
-		(cons (apply 'concat (if (cdr ss) (butlast ss) ss)) 0))))
-	   (max-len
-	    (ignore-errors
-	      (read
-	       (cdr (assoc "TOPICLEN"
-			   (erc-with-server-buffer erc-server-parameters))))))
-	   (new-topic nil))
-      (while (or (null new-topic)
-		 (and max-len
-		      (> (length new-topic) max-len)
-		      (prog1
-			  (message "New length of %s exceeds server's maximum of %s" (length new-topic) max-len)
-			;; FIXME there has to be a better approach than sleep-for, but what is it?
-			(sleep-for 2))))
-	(setq new-topic (read-from-minibuffer prompt (or new-topic cur-topic))))
-      new-topic)))
-      (let ((topic-list (split-string topic "\C-o"))) ; strip off the topic setter
-	(erc-cmd-TOPIC (concat (erc-default-target) " " (car topic-list)))))
+  (use-package erc-hl-nicks
+    :config
+    ;; works around erc-hl-nicks for erc-track-faces-priority-list
+    (add-to-list 'erc-hl-nicks-skip-faces "erc-current-nick-face"))
 
-(erc-match-mode 1)
-(setq erc-fools (read-sexp-from-file (concat user-emacs-directory "fools")))
+  (use-package erc-shoot
+    :load-path "/home/ian/src/emacs/erc-shoot")
 
-(setq-default erc-ignore-list ;; TODO: consider using erc-ignore-reply-list
-              '("jdoles" ;; congrats to jdoles on being the first to make this list
-                "[gG]uest[^!]*!.*" "average"))
-
-(set-face-attribute 'erc-fool-face nil :foreground "orange red")
-(setq erc-fool-highlight-type 'all)
-
-
-(setq erc-pcomplete-nick-postfix ": ")
-(add-to-list 'erc-complete-functions 'erc-pcomplete)
-(setq pcomplete-cycle-cutoff-length nil)
-
-(erc-truncate-mode 1)
-
-(setq erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
-
-(defun erc-ctcp-query-VERSION (proc nick login host to msg)
-  "Respond to a CTCP VERSION query."
-  (unless erc-disable-ctcp-replies
-    (erc-send-ctcp-notice nick "VERSION \C-btelnet\C-b"))
-  nil)
+  ;; match-mode is delayed to here until I figure out the interaction
+  ;; with erc-hl-nicks
+  (erc-match-mode 1)
+  (set-face-attribute 'erc-fool-face nil :foreground "orange red"))
 
 ;;;; Elfeed
 (defvar my-feeds-file (concat user-emacs-directory "feeds"))
