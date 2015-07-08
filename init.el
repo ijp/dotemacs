@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/src/emacs/use-package")
+(require 'use-package)
 (require 'bind-key)
 
 ;; Load up ELPA, the package manager
