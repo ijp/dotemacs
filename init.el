@@ -618,10 +618,8 @@ If buffer doesn't exist, does nothing."
 
 (add-hook 'erc-mode-hook 'abbrev-mode)
 
-
-;; Note, this needs color.el which was actually added in emacs 24
-(add-to-list 'load-path "/home/ian/src/emacs/erc-hl-nicks/")
-(require 'erc-hl-nicks)
+(use-package erc-hl-nicks
+  :load-path "/home/ian/src/emacs/erc-hl-nicks/")
 
 (erc-autojoin-mode 1)
 
