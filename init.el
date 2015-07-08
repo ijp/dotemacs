@@ -801,8 +801,10 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   (add-hook 'prog-mode-hook 'turn-on-color-identifiers))
 
 ;; snakehump
-(bind-key "C-}" 'snakehump-next-at-point)
-(bind-key "C-{" 'snakehump-prev-at-point)
+(use-package snakehump
+  :bind (("C-}" . snakehump-next-at-point)
+         ("C-{" . snakehump-prev-at-point)))
+
 ;; indirect region
 ;; https://emacs.stackexchange.com/questions/10104/narrow-to-previous-restriction
 (defun indirect-region (beg end name)
