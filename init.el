@@ -748,8 +748,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
                              (sort (cdr x) 'string-lessp))))
             (incf count)))))))
 
-(add-to-list 'load-path "/home/ian/src/emacs/erc-shoot")
-(require 'erc-shoot)
+(use-package erc-shoot
+  :load-path "/home/ian/src/emacs/erc-shoot")
 
 ;; erc-track-exclude is available as a NO-distraction alternative
 (setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "333" "353"
