@@ -557,60 +557,51 @@ If buffer doesn't exist, does nothing."
 (define-global-abbrev "cliche" "cliché")
 
 ;;;; Org Mode
-(bind-key "C-c l" 'org-store-link)
-(bind-key "C-c a" 'org-agenda)
-(bind-key "C-c c" 'org-capture)
-(setq org-default-notes-file (concat user-emacs-directory "capture.org"))
-
-(setq org-log-done 'time)
-(setq org-agenda-files (list "~/org/appointments.org"
-                             "~/org/university.org"
-                             ))
-(setq org-habit-show-habits-only-for-today nil ) ; did I turn habit on
-                                        ; with customize?
-;; I think either org mode or emacs starter kit changes this setting :(
-(add-hook 'org-mode-hook (lambda () (toggle-truncate-lines -1)))
-
-(setq org-todo-keywords
-      '((sequence "TODO" "|" "DONE")
-        ;; bugs
-        (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" )
-        ))
-(setq org-default-notes-file "~/org/notes.org")
-
-;; org contrib
-(use-package org-velocity
-  :load-path "~/src/emacs/org-velocity/"
-  :bind ("M-N" . org-velocity-read)
+(use-package org
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture))
   :config
-  (setq org-velocity-bucket "~/org/bucket.org")
-  (setq org-velocity-edit-entry t)
-  )
+  (setq org-default-notes-file (concat user-emacs-directory "capture.org")
+        org-log-done 'time
+        org-agenda-files (list "~/org/appointments.org"
+                               "~/org/university.org")
+        org-habit-show-habits-only-for-today nil
+        org-todo-keywords '((sequence "TODO" "|" "DONE")
+                            ;; bugs
+                            (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" ))
+        org-src-window-setup 'other-window
+        org-src-fontify-natively t
+        org-completion-use-ido t
+        org-catch-invisible-edits 'smart)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((scheme . t)
-   (emacs-lisp . t)
-   (ruby . t)
-   (python . t)
-   (sh . t)))
+  ;; see (info "(org) Breaking down tasks")
+  (defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-log-states)   ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-(setq org-src-window-setup 'other-window)
-(setq org-src-fontify-natively t)
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-;; see (info "(org) Breaking down tasks")
-(defun org-summary-todo (n-done n-not-done)
-  "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  (let (org-log-done org-log-states)   ; turn off logging
-    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  ;; I think either org mode or emacs starter kit changes this setting :(
+  (defun turn-off-truncate-lines ()
+    (toggle-truncate-lines -1))
+  (add-hook 'org-mode-hook 'turn-off-truncate-lines)
 
-(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((scheme . t)
+     (emacs-lisp . t)
+     (ruby . t)
+     (python . t)
+     (sh . t)))
 
-(defalias 'org-dwim 'org-ctrl-c-ctrl-c)
-
-(setq org-completion-use-ido t)
-
-(setq org-catch-invisible-edits 'smart) ; 'smart ?
+  (use-package org-velocity
+    :load-path "~/src/emacs/org-velocity/"
+    :bind ("M-N" . org-velocity-read)
+    :config
+    (setq org-velocity-bucket "~/org/bucket.org")
+    (setq org-velocity-edit-entry t)))
 
 ;;;; Erc
 
