@@ -426,12 +426,12 @@ If buffer doesn't exist, does nothing."
 (setq ido-auto-merge-work-directories-length -1)
 
 ;;;; Spellcheck
-(setq ispell-dictionary "british")
-(add-hook 'text-mode ' flyspell-mode)
-;; TODO: erc spelling
-(setq flyspell-use-meta-tab nil)
-;; idea from http://frequal.com/Perspectives/EmacsTip03-FlyspellAutoCorrectWord.html
-(bind-key "C-." 'flyspell-auto-correct-word)
+(use-package flyspell-mode
+  :bind ("C-." . flyspell-auto-correct-word)
+  :config
+  (setq flyspell-use-meta-tab nil
+        ispell-dictionary "british")
+  (add-hook 'text-mode 'flyspell-mode))
 
 ;;;; Magit
 (use-package magit
