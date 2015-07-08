@@ -433,8 +433,12 @@ If buffer doesn't exist, does nothing."
 (bind-key "C-." 'flyspell-auto-correct-word)
 
 ;;;; Magit
-(setq magit-last-seen-setup-instructions "1.4.0")
-(setq magit-save-some-buffers nil)
+(use-package magit
+  :commands magit-status
+  :init
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  :config
+  (setq magit-save-some-buffers nil))
 
 ;;;; Scheme
 (defun my-scheme-setup-indents (list)
