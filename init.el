@@ -768,12 +768,14 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 ;; <fledermaus> ijp - what, random unil33t char for every key pressed?
 
 ;; proof general
-(load-file "~/src/emacs/ProofGeneral-4.2/generic/proof-site.el")
-;; cpdt
-(setq coq-prog-args
-      '("-emacs" ; needed?
-        "-I" "/home/ian/lib/cpdt/src"
-        "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot"))
+(use-package proof-site
+  :load-path "~/src/emacs/ProofGeneral-4.2/generic/"
+  :mode ("\\.v\\'" . coq-mode)
+  :config
+  (setq coq-prog-args
+        '("-emacs"                      ; needed?
+          "-I" "/home/ian/lib/cpdt/src"
+          "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot")))
 
 ;; Ace Jump Mode
 (use-package ace-jump-mode
