@@ -861,12 +861,13 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (bind-key "C-x 8 \" RET" (lambda () (interactive) (insert "̈")))
 
 ;; Color Identifiers
-(add-to-list 'load-path "~/src/emacs/color-identifiers-mode/")
-(require 'color-identifiers-mode)
-(defun turn-on-color-identifiers ()
-  (color-identifiers-mode 1))
-(add-hook 'prog-mode-hook 'turn-on-color-identifiers)
-
+(use-package color-identifiers-mode
+  :load-path "~/src/emacs/color-identifiers-mode/"
+  :commands color-identifiers-mode
+  :init
+  (defun turn-on-color-identifiers ()
+    (color-identifiers-mode 1))
+  (add-hook 'prog-mode-hook 'turn-on-color-identifiers))
 
 ;; snakehump
 (bind-key "C-}" 'snakehump-next-at-point)
