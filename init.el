@@ -131,11 +131,12 @@
 ;;              'make-buffer-executable-except-r6rs-libs
 ;;              nil)
 
-(add-to-list 'load-path "/home/ian/src/emacs/company")
-(autoload 'company-mode "company" nil t)
+(use-package company
+  :commands company-mode
+  :init
+  (defun turn-on-company-mode ()
+    (company-mode +1)))
 
-(defun turn-on-company-mode ()
-  (company-mode +1))
 (add-hook 'scheme-mode-hook #'turn-on-company-mode)
 
 
