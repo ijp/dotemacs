@@ -42,9 +42,6 @@
 (let ((warning-minimum-level :error))
   (load-theme 'monokai t))
 
-(use-package misc
-  :bind ("M-z" . zap-up-to-char))
-
 (set-input-method "TeX")
 
 ;; less clutter on startup
@@ -55,17 +52,6 @@
 ; (toggle-frame-fullscreen) ; emacs > 24.4 , I think
 ; (menu-bar-mode 1) ; undecided
 ;; TODO: add his hidden mode-line hack
-
-;; geiser
-(use-package geiser
-  :config
-  (setq geiser-active-implementations '(guile)
-        geiser-guile-load-init-file-p t
-        geiser-implementations-alist '(((regexp "\\.ss$")  racket)
-                                       ((regexp "\\.rkt$") racket)
-                                       ((regexp ".") guile)))
-  (add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
-  (add-hook 'geiser-repl-mode-hook #'turn-on-company-mode))
 
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -105,68 +91,12 @@
 ;;              'make-buffer-executable-except-r6rs-libs
 ;;              nil)
 
-(use-package company
-  :commands company-mode
-  :init
-  (defun turn-on-company-mode ()
-    (company-mode +1)))
-
 ;; Commented out, until I can figure out how to turn this off for
 ;; certain git repos
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-
-;; eshell
-(use-package eshell
-  :commands eshell
-  :config
-  (setq eshell-cmpl-cycle-completions t ; nil
-      eshell-save-history-on-exit t
-      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
-
-  (defun eshell/clear ()
-    (interactive)
-    (let ((inhibit-read-only t))
-      (erase-buffer)))
-
-  (defun eshell/cds ()
-    "Change directory to the project's root."
-    (eshell/cd (locate-dominating-file default-directory "src")))
-
-  (defun eshell/find (dir &rest opts)
-    (find-dired dir (mapconcat 'identity opts " "))))
-
-(use-package esh-module
-  :config
-  (add-to-list 'eshell-modules-list 'eshell-smart))
-
-(use-package em-term
-  :config
-  (add-to-list 'eshell-visual-commands "ssh")
-  (add-to-list 'eshell-visual-commands "tail"))
-
-(use-package em-cmpl
-  :config
-  (add-to-list 'eshell-command-completions-alist
-               '("gunzip" . "gz\\'"))
-  (add-to-list 'eshell-command-completions-alist
-               '("tar" . "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'")))
-
-;; yasnippet
-(use-package yasnippet
-  :bind ("C-c y" . yas-expand)
-  :init
-  (add-hook 'prog-mode-hook 'yas-minor-mode)
-  (add-hook 'text-mode-hook 'yas-minor-mode))
-
 ;;; Diminish
 (require 'diminish)
-
-(use-package lisp-mode
-  :init
-  (defun my-rename-elisp-mode ()
-    (setq mode-name "elisp"))
-  (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode))
 
 ;; Auto inserts
 ;; Doing it this way sucks, next time use define-auto-insert
@@ -175,57 +105,12 @@
 (setq auto-insert-directory (concat user-emacs-directory "inserts"))
 (auto-insert-mode 1)
 
-;; Tea Time
-(use-package tea-time
-  :load-path "~/src/emacs/tea-time"
-  :bind ("C-c t" . tea-time)
-  :config
-  (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga"))
-
-(use-package dired
-  :commands dired-mode
-  :config
-  (use-package dired-x)
-  (use-package dired-aux))
-
-(use-package c-eldoc
-  :commands c-turn-on-eldoc-mode
-  :init (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-  :config
-  (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ -I/usr/include `guile-config compile`"))
 
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
 ;; thank god emacs made that back up the day before
 ;; ------------------------
-
-(use-package hideshow-org
-  :load-path "~/src/emacs/hideshow-org/"
-  :bind ("C-c f" . hs-org/minor-mode))
-
-(use-package paredit
-  :diminish (paredit-mode . "Ped"))
-
-
-;;;; Haskell
-(use-package haskell-mode
-  :config
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index))
-
-(use-package htmlfontify
-  :commands hfy-html-enkludge-buffer
-  :init
-  (defun html-entity-encode-region (start end)
-    ;; Thanks to fledermaus for pointing out the functions below, so I
-    ;; could write this one
-    (interactive "r")
-    (narrow-to-region start end)
-    (hfy-html-enkludge-buffer)
-    (hfy-html-dekludge-buffer)
-    (widen)))
 
 ;;;; Misc
 (setenv "PAGER" "cat")
@@ -250,16 +135,6 @@
  uniquify-separator ":"
  uniquify-strip-common-suffix nil)
 (setq auto-save-include-big-deletions t)
-
-(use-package legalese
-  :commands legalese
-  :config
-  (setq legalese-default-license 'bsd))
-
-(use-package hide-copyleft
-  :commands hide-copyleft-region
-  :init
-  (add-hook 'prog-mode-hook 'hide-copyleft-region))
 
 (require 'pretty-mode)
 (global-pretty-mode 1)
@@ -290,91 +165,10 @@
        auto-mode-alist))
 
 
-;;;; Ibuffer
-(use-package ibuffer
-  :init
-  (defun my-ibuffer-switch-to-default ()
-    (ibuffer-switch-to-saved-filter-groups "default"))
-  (add-hook 'ibuffer-mode-hook 'my-ibuffer-switch-to-default)
-  :config
-  (setq ibuffer-saved-filter-groups
-        ;; or maybe just ibuffer-filter-groups?
-        '(("default"
-           ("dired" (mode . dired-mode))
-           ("emacs" (or
-                     (name . "^\\*scratch\\*$")
-                     (name . "^\\*Messages\\*$")
-                     (filename . "~/.emacs.d/init.el")))
-           ("erc" (mode . erc-mode))
-           ("gnus" (or
-                    (mode . gnus-group-mode)
-                    (mode . gnus-summary-mode)
-                    (mode . gnus-article-mode)
-                    (name . "^\\.newsrc-dribble$")
-                    (name . "^.bbdb$")
-                    (name . "^\\*BBDB\\*$")))
-           ("scheme" (or
-                      (mode . scheme-mode)
-                      (mode . geiser-repl-mode)
-                      (name . "^.*[Gg]eiser.*$")
-                      (name . "^\\*scheme\\*$"))))))
-  (unbind-key "C-x C-f" ibuffer-mode-map))
-
-;;;; Tramp
-(use-package tramp
-  :init (setq tramp-ssh-controlmaster-options nil) ;; FIXES hanging tramp
-  :config
-  (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/"))
-
 ;;;; Ido
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
 (setq ido-auto-merge-work-directories-length -1)
-
-;;;; Spellcheck
-(use-package flyspell-mode
-  :bind ("C-." . flyspell-auto-correct-word)
-  :config
-  (setq flyspell-use-meta-tab nil
-        ispell-dictionary "british")
-  (add-hook 'text-mode 'flyspell-mode))
-
-;;;; Magit
-(use-package magit
-  :commands magit-status
-  :init
-  (setq magit-last-seen-setup-instructions "1.4.0")
-  :config
-  (setq magit-save-some-buffers nil))
-
-;;;; Scheme
-(use-package scheme
-  :config
-  (defun my-scheme-setup-indents (list)
-    (mapc (lambda (p)
-            (let ((level (car p))
-                  (vars  (cdr p)))
-              (mapc (lambda (var)
-                      (put var 'scheme-indent-function level))
-                    vars)))
-          list))
-
-  (my-scheme-setup-indents
-   '((1 with-test-prefix pass-if call-with-input-string with-syntax*
-        with-code-coverage with-implicit catch call-with-prompt stream-case
-        when-let syntax-parameterize syntax-parse while until)
-     (2 cases test-case)))
-
-  (defun scheme-library-name ()
-  "Determines the scheme library name based on the buffer name, otherwise empty string"
-  (interactive)
-  (let ((buffer-name (buffer-file-name))
-        (name-regex ".*/\\(.*?\\)\\..*"))
-    (if (string-match name-regex buffer-name)
-        (match-string 1 buffer-name)
-      "")))
-
-  (add-hook 'scheme-mode-hook #'turn-on-company-mode))
 
 ;;;; BBDB
 (add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
@@ -418,54 +212,70 @@
 ;;;; Abbrevs
 (read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
 
-;;;; Org Mode
-(use-package org
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c c" . org-capture))
+;; TZ
+;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+(setq display-time-world-list
+      '(("America/Los_Angeles" "Seattle")
+        ("America/New_York" "New York")
+        ("Europe/London" "London")
+        ("Europe/Paris" "Paris")
+        ("Europe/Istanbul" "Istanbul")
+        ("Asia/Calcutta" "Bangalore")
+        ("Asia/Tokyo" "Tokyo")
+        ("Pacific/Auckland" "Auckland")))
+;; Νøöβ§ ¢αn'τ ウИï©Øδε
+;; <ijp> fledermaus: actually, it could be a fun idea for an input method
+;; <fledermaus> ijp - what, random unil33t char for every key pressed?
+
+(use-package ace-jump-mode
+  :bind ("C-c SPC" . ace-jump-mode))
+
+(use-package c-eldoc
+  :commands c-turn-on-eldoc-mode
+  :init (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
   :config
-  (setq org-default-notes-file (concat user-emacs-directory "capture.org")
-        org-log-done 'time
-        org-agenda-files (list "~/org/appointments.org"
-                               "~/org/university.org")
-        org-habit-show-habits-only-for-today nil
-        org-todo-keywords '((sequence "TODO" "|" "DONE")
-                            ;; bugs
-                            (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" ))
-        org-src-window-setup 'other-window
-        org-src-fontify-natively t
-        org-completion-use-ido t
-        org-catch-invisible-edits 'smart)
+  (setq c-eldoc-includes "`pkg-config gtk+-2.0 --cflags` -I./ -I../ -I/usr/include `guile-config compile`"))
 
-  ;; see (info "(org) Breaking down tasks")
-  (defun org-summary-todo (n-done n-not-done)
-    "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-log-states)   ; turn off logging
-      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+(use-package color-identifiers-mode
+  :load-path "~/src/emacs/color-identifiers-mode/"
+  :commands color-identifiers-mode
+  :init
+  (defun turn-on-color-identifiers ()
+    (color-identifiers-mode 1))
+  (add-hook 'prog-mode-hook 'turn-on-color-identifiers))
 
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+(use-package company
+  :commands company-mode
+  :init
+  (defun turn-on-company-mode ()
+    (company-mode +1)))
 
-  ;; I think either org mode or emacs starter kit changes this setting :(
-  (defun turn-off-truncate-lines ()
-    (toggle-truncate-lines -1))
-  (add-hook 'org-mode-hook 'turn-off-truncate-lines)
+(use-package dired
+  :commands dired-mode
+  :config
+  (use-package dired-x)
+  (use-package dired-aux))
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((scheme . t)
-     (emacs-lisp . t)
-     (ruby . t)
-     (python . t)
-     (sh . t)))
+(use-package elfeed
+  :bind ("C-c w" . elfeed)
+  :init
+  (defvar my-feeds-file (concat user-emacs-directory "feeds"))
+  (set-register ?f (cons 'file my-feeds-file))
+  :config
+  (setq elfeed-feeds (read-sexp-from-file my-feeds-file)))
 
-  (use-package org-velocity
-    :load-path "~/src/emacs/org-velocity/"
-    :bind ("M-N" . org-velocity-read)
-    :config
-    (setq org-velocity-bucket "~/org/bucket.org")
-    (setq org-velocity-edit-entry t)))
+(use-package em-cmpl
+  :config
+  (add-to-list 'eshell-command-completions-alist
+               '("gunzip" . "gz\\'"))
+  (add-to-list 'eshell-command-completions-alist
+               '("tar" . "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'")))
 
-;;;; Erc
+(use-package em-term
+  :config
+  (add-to-list 'eshell-visual-commands "ssh")
+  (add-to-list 'eshell-visual-commands "tail"))
+
 (use-package erc
   :defer t
   :init
@@ -651,31 +461,172 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   (erc-match-mode 1)
   (set-face-attribute 'erc-fool-face nil :foreground "orange red"))
 
-;;;; Elfeed
-(use-package elfeed
-  :bind ("C-c w" . elfeed)
-  :init
-  (defvar my-feeds-file (concat user-emacs-directory "feeds"))
-  (set-register ?f (cons 'file my-feeds-file))
+(use-package esh-module
   :config
-  (setq elfeed-feeds (read-sexp-from-file my-feeds-file)))
+  (add-to-list 'eshell-modules-list 'eshell-smart))
 
-;; TZ
-;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-(setq display-time-world-list
-      '(("America/Los_Angeles" "Seattle")
-        ("America/New_York" "New York")
-        ("Europe/London" "London")
-        ("Europe/Paris" "Paris")
-        ("Europe/Istanbul" "Istanbul")
-        ("Asia/Calcutta" "Bangalore")
-        ("Asia/Tokyo" "Tokyo")
-        ("Pacific/Auckland" "Auckland")))
-;; Νøöβ§ ¢αn'τ ウИï©Øδε
-;; <ijp> fledermaus: actually, it could be a fun idea for an input method
-;; <fledermaus> ijp - what, random unil33t char for every key pressed?
+(use-package eshell
+  :commands eshell
+  :config
+  (setq eshell-cmpl-cycle-completions t ; nil
+      eshell-save-history-on-exit t
+      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
-;; proof general
+  (defun eshell/clear ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (erase-buffer)))
+
+  (defun eshell/cds ()
+    "Change directory to the project's root."
+    (eshell/cd (locate-dominating-file default-directory "src")))
+
+  (defun eshell/find (dir &rest opts)
+    (find-dired dir (mapconcat 'identity opts " "))))
+
+(use-package flyspell-mode
+  :bind ("C-." . flyspell-auto-correct-word)
+  :config
+  (setq flyspell-use-meta-tab nil
+        ispell-dictionary "british")
+  (add-hook 'text-mode 'flyspell-mode))
+
+(use-package geiser
+  :config
+  (setq geiser-active-implementations '(guile)
+        geiser-guile-load-init-file-p t
+        geiser-implementations-alist '(((regexp "\\.ss$")  racket)
+                                       ((regexp "\\.rkt$") racket)
+                                       ((regexp ".") guile)))
+  (add-hook 'geiser-repl-mode-hook #'turn-on-paredit)
+  (add-hook 'geiser-repl-mode-hook #'turn-on-company-mode))
+
+(use-package haskell-mode
+  :config
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index))
+
+(use-package hide-copyleft
+  :commands hide-copyleft-region
+  :init
+  (add-hook 'prog-mode-hook 'hide-copyleft-region))
+
+(use-package hideshow-org
+  :load-path "~/src/emacs/hideshow-org/"
+  :bind ("C-c f" . hs-org/minor-mode))
+
+(use-package htmlfontify
+  :commands hfy-html-enkludge-buffer
+  :init
+  (defun html-entity-encode-region (start end)
+    ;; Thanks to fledermaus for pointing out the functions below, so I
+    ;; could write this one
+    (interactive "r")
+    (narrow-to-region start end)
+    (hfy-html-enkludge-buffer)
+    (hfy-html-dekludge-buffer)
+    (widen)))
+
+(use-package ibuffer
+  :init
+  (defun my-ibuffer-switch-to-default ()
+    (ibuffer-switch-to-saved-filter-groups "default"))
+  (add-hook 'ibuffer-mode-hook 'my-ibuffer-switch-to-default)
+  :config
+  (setq ibuffer-saved-filter-groups
+        ;; or maybe just ibuffer-filter-groups?
+        '(("default"
+           ("dired" (mode . dired-mode))
+           ("emacs" (or
+                     (name . "^\\*scratch\\*$")
+                     (name . "^\\*Messages\\*$")
+                     (filename . "~/.emacs.d/init.el")))
+           ("erc" (mode . erc-mode))
+           ("gnus" (or
+                    (mode . gnus-group-mode)
+                    (mode . gnus-summary-mode)
+                    (mode . gnus-article-mode)
+                    (name . "^\\.newsrc-dribble$")
+                    (name . "^.bbdb$")
+                    (name . "^\\*BBDB\\*$")))
+           ("scheme" (or
+                      (mode . scheme-mode)
+                      (mode . geiser-repl-mode)
+                      (name . "^.*[Gg]eiser.*$")
+                      (name . "^\\*scheme\\*$"))))))
+  (unbind-key "C-x C-f" ibuffer-mode-map))
+
+(use-package legalese
+  :commands legalese
+  :config
+  (setq legalese-default-license 'bsd))
+
+(use-package lisp-mode
+  :init
+  (defun my-rename-elisp-mode ()
+    (setq mode-name "elisp"))
+  (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode))
+
+(use-package magit
+  :commands magit-status
+  :init
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  :config
+  (setq magit-save-some-buffers nil))
+
+(use-package misc
+  :bind ("M-z" . zap-up-to-char))
+
+(use-package org
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture))
+  :config
+  (setq org-default-notes-file (concat user-emacs-directory "capture.org")
+        org-log-done 'time
+        org-agenda-files (list "~/org/appointments.org"
+                               "~/org/university.org")
+        org-habit-show-habits-only-for-today nil
+        org-todo-keywords '((sequence "TODO" "|" "DONE")
+                            ;; bugs
+                            (sequence "FOUND" "REPORTED" "|" "FIXED" "ACCEPTED" ))
+        org-src-window-setup 'other-window
+        org-src-fontify-natively t
+        org-completion-use-ido t
+        org-catch-invisible-edits 'smart)
+
+  ;; see (info "(org) Breaking down tasks")
+  (defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-log-states)   ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+  ;; I think either org mode or emacs starter kit changes this setting :(
+  (defun turn-off-truncate-lines ()
+    (toggle-truncate-lines -1))
+  (add-hook 'org-mode-hook 'turn-off-truncate-lines)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((scheme . t)
+     (emacs-lisp . t)
+     (ruby . t)
+     (python . t)
+     (sh . t)))
+
+  (use-package org-velocity
+    :load-path "~/src/emacs/org-velocity/"
+    :bind ("M-N" . org-velocity-read)
+    :config
+    (setq org-velocity-bucket "~/org/bucket.org")
+    (setq org-velocity-edit-entry t)))
+
+(use-package paredit
+  :diminish (paredit-mode . "Ped"))
+
 (use-package proof-site
   :load-path "~/src/emacs/ProofGeneral-4.2/generic/"
   :mode ("\\.v\\'" . coq-mode)
@@ -685,31 +636,38 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
           "-I" "/home/ian/lib/cpdt/src"
           "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot")))
 
-;; Ace Jump Mode
-(use-package ace-jump-mode
-  :bind ("C-c SPC" . ace-jump-mode))
+(use-package scheme
+  :config
+  (defun my-scheme-setup-indents (list)
+    (mapc (lambda (p)
+            (let ((level (car p))
+                  (vars  (cdr p)))
+              (mapc (lambda (var)
+                      (put var 'scheme-indent-function level))
+                    vars)))
+          list))
 
-;; Color Identifiers
-(use-package color-identifiers-mode
-  :load-path "~/src/emacs/color-identifiers-mode/"
-  :commands color-identifiers-mode
-  :init
-  (defun turn-on-color-identifiers ()
-    (color-identifiers-mode 1))
-  (add-hook 'prog-mode-hook 'turn-on-color-identifiers))
+  (my-scheme-setup-indents
+   '((1 with-test-prefix pass-if call-with-input-string with-syntax*
+        with-code-coverage with-implicit catch call-with-prompt stream-case
+        when-let syntax-parameterize syntax-parse while until)
+     (2 cases test-case)))
 
-;; snakehump
+  (defun scheme-library-name ()
+  "Determines the scheme library name based on the buffer name, otherwise empty string"
+  (interactive)
+  (let ((buffer-name (buffer-file-name))
+        (name-regex ".*/\\(.*?\\)\\..*"))
+    (if (string-match name-regex buffer-name)
+        (match-string 1 buffer-name)
+      "")))
+
+  (add-hook 'scheme-mode-hook #'turn-on-company-mode))
+
 (use-package snakehump
   :bind (("C-}" . snakehump-next-at-point)
          ("C-{" . snakehump-prev-at-point)))
 
-;; ws-butler
-(use-package ws-butler
-  :load-path "~/src/emacs/ws-butler/"
-  :commands ws-butler-mode
-  :init (add-hook 'prog-mode-hook 'ws-butler-mode))
-
-;; scpaste
 (use-package scpaste
   :commands scpaste
   :init
@@ -717,6 +675,28 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         scpaste-scp-destination "ec2-user@shift-reset.com:pastes"
         scpaste-user-name "ijp"
         scpaste-user-address "http://shift-reset.com/"))
+
+(use-package tea-time
+  :load-path "~/src/emacs/tea-time"
+  :bind ("C-c t" . tea-time)
+  :config
+  (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga"))
+
+(use-package tramp
+  :init (setq tramp-ssh-controlmaster-options nil) ;; FIXES hanging tramp
+  :config
+  (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/"))
+
+(use-package ws-butler
+  :load-path "~/src/emacs/ws-butler/"
+  :commands ws-butler-mode
+  :init (add-hook 'prog-mode-hook 'ws-butler-mode))
+
+(use-package yasnippet
+  :bind ("C-c y" . yas-expand)
+  :init
+  (add-hook 'prog-mode-hook 'yas-minor-mode)
+  (add-hook 'text-mode-hook 'yas-minor-mode))
 
 ;;;; Functions
 
