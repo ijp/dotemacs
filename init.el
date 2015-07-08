@@ -530,31 +530,7 @@ If buffer doesn't exist, does nothing."
 (setq yow-file "~/lib/homie-yow/homie.lines")
 
 ;;;; Abbrevs
-
-;; Misspellings file taken from
-;; https://secure.wikimedia.org/wikipedia/en/wiki/Wikipedia:Lists_of_common_misspellings/For_machines
-;; and the processed with
-;; sed -e 's/\(.*\)->\(.*\),.*/\1->\2/' -e "/.*[-'\";][^>].*->.*/d" -e
-;; 's/\(.*\)\->\(.*\)/(define-global-abbrev "\1" "\2")/'
-;; .emacs.d/misspelling_abbrevs.bak > .emacs.d/misspelling_abbrevs
 (read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
-;; other misspellings of mine
-(define-global-abbrev "lsit" "list")
-(define-global-abbrev "hygeinic" "hygienic")
-(define-global-abbrev "unhygeinic" "unhygienic")
-(define-global-abbrev "rennaisance" "renaissance")
-;; can't have "non-sequiter" because - doesn't play nicely with abbrevs
-(define-global-abbrev "sequiter" "sequitur")
-(define-global-abbrev "fuschia" "fuchsia")
-
-;; Foreign word abbrevs
-(define-global-abbrev "facade" "façade")
-(define-global-abbrev "naive" "naïve")
-(define-global-abbrev "naivete" "naïveté")
-(define-global-abbrev "touche" "touché")
-(define-global-abbrev "blase" "blasé")
-(define-global-abbrev "detre" "d'être")
-(define-global-abbrev "cliche" "cliché")
 
 ;;;; Org Mode
 (use-package org
