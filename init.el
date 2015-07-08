@@ -48,17 +48,12 @@
     (insert-file-contents filename)
     (read (current-buffer))))
 
-;; honestly, when was the last time anyone ever turned on overwrite
-;; mode _on purpose_.
-(bind-key "<insert>" 'ignore)
-
 (use-package misc
   :bind ("M-z" . zap-up-to-char))
 
 (set-input-method "TeX")
 
 ;; Thanks forcer.
-(bind-key "C-x 8 p" 'fc/unicode-info-at-point)
 (defun fc/unicode-info-at-point (&optional do-kill)
   "Display the unicode name of the character at point."
   (interactive "P")
@@ -106,7 +101,6 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-(bind-key "\C-c +" 'hs-toggle-hiding)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 ;; I wish there was a programming "super mode" i could hook into
 ;; from http://www.emacswiki.org/emacs/HideShow
@@ -184,8 +178,6 @@
   :init
   (add-hook 'prog-mode-hook 'yas-minor-mode)
   (add-hook 'text-mode-hook 'yas-minor-mode))
-;; Browse
-(bind-key "C-c o" 'browse-url)
 
 ;;; Diminish
 (require 'diminish)
@@ -209,12 +201,6 @@
   :bind ("C-c t" . tea-time)
   :config
   (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga"))
-
-(bind-key "C-x 9" 'kill-buffer-and-window)
-
-(bind-key "C-x TAB" 'indent-rigidly)
-
-(bind-key "C-c q" 'refill-mode)
 
 (use-package dired
   :commands dired-mode
@@ -296,7 +282,6 @@ If buffer doesn't exist, does nothing."
         (kill-buffer buffer)
         (when file-name 
           (delete-file file-name))))))
-(bind-key "C-x M-k" 'kill-buffer-and-file)
 
 ;; Taken from
 ;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
@@ -306,7 +291,6 @@ If buffer doesn't exist, does nothing."
   (if (= (point) (save-excursion (back-to-indentation) (point)))
       (beginning-of-line)
     (back-to-indentation)))
-(bind-key "<home>" 'back-to-indentation-or-beginning)
 
 (use-package htmlfontify
   :commands hfy-html-enkludge-buffer
@@ -382,7 +366,6 @@ If buffer doesn't exist, does nothing."
          ("\\.xml$" . nxml-mode))
        auto-mode-alist))
 
-(bind-key "C-x M-d" 'fixup-whitespace)
 
 ;;;; Ibuffer
 (use-package ibuffer
@@ -783,11 +766,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
 
-;; More key crap
-(bind-key "C-c i" 'imenu)
-(bind-key "C-c d" 'diff-buffer-with-file)
-(bind-key "C-x 8 \" RET" (lambda () (interactive) (insert "̈")))
-
 ;; Color Identifiers
 (use-package color-identifiers-mode
   :load-path "~/src/emacs/color-identifiers-mode/"
@@ -829,3 +807,22 @@ narrowed to region [BEG, END]."
         scpaste-scp-destination "ec2-user@shift-reset.com:pastes"
         scpaste-user-name "ijp"
         scpaste-user-address "http://shift-reset.com/"))
+
+
+;;;; Bindings
+
+;; honestly, when was the last time anyone ever turned on overwrite
+;; mode _on purpose_.
+(bind-key "<insert>" 'ignore)
+(bind-key "<home>" 'back-to-indentation-or-beginning)
+(bind-key "C-c d" 'diff-buffer-with-file)
+(bind-key "C-c i" 'imenu)
+(bind-key "C-c o" 'browse-url)
+(bind-key "C-c q" 'refill-mode)
+(bind-key "\C-c +" 'hs-toggle-hiding)
+(bind-key "C-x TAB" 'indent-rigidly)
+(bind-key "C-x M-d" 'fixup-whitespace)
+(bind-key "C-x M-k" 'kill-buffer-and-file)
+(bind-key "C-x 8 p" 'fc/unicode-info-at-point)
+(bind-key "C-x 8 \" RET" (lambda () (interactive) (insert "̈")))
+(bind-key "C-x 9" 'kill-buffer-and-window)
