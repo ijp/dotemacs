@@ -216,8 +216,11 @@
 
 (bind-key "C-c q" 'refill-mode)
 
-(require 'dired-x)
-(require 'dired-aux)
+(use-package dired
+  :commands dired-mode
+  :config
+  (use-package dired-x)
+  (use-package dired-aux))
 
 (use-package c-eldoc
   :commands c-turn-on-eldoc-mode
