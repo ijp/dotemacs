@@ -205,13 +205,11 @@
 (auto-insert-mode 1)
 
 ;; Tea Time
-(add-to-list 'load-path "~/src/emacs/tea-time")
-(require 'tea-time)
-; drip-sounce /usr/share/sounds/gnome/default/alerts/drip.ogg 
-; freedesktop complete /usr/share/sounds/freedesktop/stereo/complete.oga
-(setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga")
-
-(bind-key "C-c t" 'tea-time)
+(use-package tea-time
+  :load-path "~/src/emacs/tea-time"
+  :bind ("C-c t" . tea-time)
+  :config
+  (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga"))
 
 (bind-key "C-x 9" 'kill-buffer-and-window)
 
