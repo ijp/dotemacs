@@ -884,9 +884,10 @@ narrowed to region [BEG, END]."
     (narrow-to-region beg end)))
 
 ;; ws-butler
-(add-to-list 'load-path "~/src/emacs/ws-butler/")
-(require 'ws-butler)
-(add-hook 'prog-mode-hook 'ws-butler-mode)
+(use-package ws-butler
+  :load-path "~/src/emacs/ws-butler/"
+  :commands ws-butler-mode
+  :init (add-hook 'prog-mode-hook 'ws-butler-mode))
 
 ;; scpaste
 (setq scpaste-http-destination "http://shift-reset.com/pastes"
