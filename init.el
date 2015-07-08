@@ -234,10 +234,9 @@
 ;; thank god emacs made that back up the day before
 ;; ------------------------
 
-(add-to-list 'load-path "/home/ian/src/emacs/hideshow-org/")
-(require 'hideshow-org)
-(bind-key "C-c f" 'hs-org/minor-mode)
-; hs-org/minor-mode
+(use-package hideshow-org
+  :load-path "~/src/emacs/hideshow-org/"
+  :bind ("C-c f" . hs-org/minor-mode))
 
 ;; no more annoying behavour in paredit after #
 ;; need to figure this out better for bytevectors etc.
