@@ -485,11 +485,6 @@ If buffer doesn't exist, does nothing."
         (match-string 1 buffer-name)
       "")))
 
-;;;; Gnus
-(setq mail-host-address "googlemail.com")
-(setq gnus-select-method '(nntp "news.btinternet.com"))
-;; news.btopenworld.com was also suggested, but this seems to work fine
-
 ;;;; BBDB
 (add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
 ;; add tex to tex search path
