@@ -137,9 +137,6 @@
   (defun turn-on-company-mode ()
     (company-mode +1)))
 
-(add-hook 'scheme-mode-hook #'turn-on-company-mode)
-
-
 ;; Commented out, until I can figure out how to turn this off for
 ;; certain git repos
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -441,22 +438,24 @@ If buffer doesn't exist, does nothing."
   (setq magit-save-some-buffers nil))
 
 ;;;; Scheme
-(defun my-scheme-setup-indents (list)
-  (mapc (lambda (p)
-          (let ((level (car p))
-                (vars  (cdr p)))
-            (mapc (lambda (var)
-                    (put var 'scheme-indent-function level))
-                  vars)))
-        list))
+(use-package scheme
+  :config
+  (defun my-scheme-setup-indents (list)
+    (mapc (lambda (p)
+            (let ((level (car p))
+                  (vars  (cdr p)))
+              (mapc (lambda (var)
+                      (put var 'scheme-indent-function level))
+                    vars)))
+          list))
 
-(my-scheme-setup-indents
- '((1 with-test-prefix pass-if call-with-input-string with-syntax*
-      with-code-coverage with-implicit catch call-with-prompt stream-case
-      when-let syntax-parameterize syntax-parse while until)
-   (2 cases test-case)))
+  (my-scheme-setup-indents
+   '((1 with-test-prefix pass-if call-with-input-string with-syntax*
+        with-code-coverage with-implicit catch call-with-prompt stream-case
+        when-let syntax-parameterize syntax-parse while until)
+     (2 cases test-case)))
 
-(defun scheme-library-name ()
+  (defun scheme-library-name ()
   "Determines the scheme library name based on the buffer name, otherwise empty string"
   (interactive)
   (let ((buffer-name (buffer-file-name))
@@ -464,6 +463,8 @@ If buffer doesn't exist, does nothing."
     (if (string-match name-regex buffer-name)
         (match-string 1 buffer-name)
       "")))
+
+  (add-hook 'scheme-mode-hook #'turn-on-company-mode))
 
 ;;;; BBDB
 (add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
