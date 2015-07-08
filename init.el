@@ -42,30 +42,10 @@
 (let ((warning-minimum-level :error))
   (load-theme 'monokai t))
 
-(defun read-sexp-from-file (filename)
-  "reads one sexp from a file"
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (read (current-buffer))))
-
 (use-package misc
   :bind ("M-z" . zap-up-to-char))
 
 (set-input-method "TeX")
-
-;; Thanks forcer.
-(defun fc/unicode-info-at-point (&optional do-kill)
-  "Display the unicode name of the character at point."
-  (interactive "P")
-  (let ((char-code (elt (thing-at-point 'char) 0))
-        name)
-    (setq name (get-char-code-property char-code 'name))
-    (when (or (not name)
-              (= ?< (elt name 0)))
-      (setq name (get-char-code-property char-code 'old-name)))
-    (when do-kill
-      (kill-new name))
-    (message "%s" name)))
 
 ;; less clutter on startup
 ;; see http://bzg.fr/emacs-strip-tease.html
@@ -234,63 +214,6 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   (add-hook 'haskell-mode-hook 'imenu-add-menubar-index))
-
-;;;; Functions
-(defun rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-	(filename (buffer-file-name)))
-    (if (not filename)
-	(message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
-	(progn (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
-
-(defun move-buffer-file (dir)
-  "Moves both current buffer and file it's visiting to DIR."
-  (interactive "DNew directory: ")
-  (let* ((name (buffer-name))
-	 (filename (buffer-file-name))
-	 (dir
-          (if (string-match dir "\\(?:/\\|\\\\)$")
-              (substring dir 0 -1) dir))
-	 (newname (concat dir "/" name)))
-
-    (if (not filename)
-	(message "Buffer '%s' is not visiting a file!" name)
-      (progn (copy-file filename newname 1)
-             (delete-file filename)
-             (set-visited-file-name newname)
-             (set-buffer-modified-p nil)
-             t))))
-
-(defun kill-buffer-and-file (arg)
-  "Kills a buffer, and the file the BUFFER is visiting, if it is visiting one.
-If called with a prefix argument, kills the current buffer.
-If called without a prefix argument, reads a buffer name using ido-read-buffer.
-If buffer doesn't exist, does nothing."
-  (interactive "P")
-  (let ((buffer (get-buffer (if arg
-                                (current-buffer)
-                              (ido-read-buffer "Kill buffer: ")))))
-    (when buffer
-      (let ((file-name (buffer-file-name buffer)))
-        (kill-buffer buffer)
-        (when file-name 
-          (delete-file file-name))))))
-
-;; Taken from
-;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
-;; I wonder why I never thought of this
-(defun back-to-indentation-or-beginning ()
-  (interactive)
-  (if (= (point) (save-excursion (back-to-indentation) (point)))
-      (beginning-of-line)
-    (back-to-indentation)))
 
 (use-package htmlfontify
   :commands hfy-html-enkludge-buffer
@@ -780,19 +703,6 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   :bind (("C-}" . snakehump-next-at-point)
          ("C-{" . snakehump-prev-at-point)))
 
-;; indirect region
-;; https://emacs.stackexchange.com/questions/10104/narrow-to-previous-restriction
-(defun indirect-region (beg end name)
-  "Open a new named indirect buffer of the current buffer,
-narrowed to region [BEG, END]."
-  (interactive "r\nsname of narrowed buffer: ")
-  (let ((new-buff
-         (make-indirect-buffer (current-buffer)
-                               (generate-new-buffer-name name)
-                               t)))
-    (switch-to-buffer new-buff nil t)
-    (narrow-to-region beg end)))
-
 ;; ws-butler
 (use-package ws-butler
   :load-path "~/src/emacs/ws-butler/"
@@ -808,6 +718,93 @@ narrowed to region [BEG, END]."
         scpaste-user-name "ijp"
         scpaste-user-address "http://shift-reset.com/"))
 
+;;;; Functions
+
+;; http://www.emacswiki.org/cgi-bin/wiki?BackToIndentationOrBeginning
+(defun back-to-indentation-or-beginning ()
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+      (beginning-of-line)
+    (back-to-indentation)))
+
+;; Thanks forcer.
+(defun fc/unicode-info-at-point (&optional do-kill)
+  "Display the unicode name of the character at point."
+  (interactive "P")
+  (let ((char-code (elt (thing-at-point 'char) 0))
+        name)
+    (setq name (get-char-code-property char-code 'name))
+    (when (or (not name)
+              (= ?< (elt name 0)))
+      (setq name (get-char-code-property char-code 'old-name)))
+    (when do-kill
+      (kill-new name))
+    (message "%s" name)))
+
+;; https://emacs.stackexchange.com/questions/10104/narrow-to-previous-restriction
+(defun indirect-region (beg end name)
+  "Open a new named indirect buffer of the current buffer,
+narrowed to region [BEG, END]."
+  (interactive "r\nsname of narrowed buffer: ")
+  (let ((new-buff
+         (make-indirect-buffer (current-buffer)
+                               (generate-new-buffer-name name)
+                               t)))
+    (switch-to-buffer new-buff nil t)
+    (narrow-to-region beg end)))
+
+(defun kill-buffer-and-file (arg)
+  "Kills a buffer, and the file the BUFFER is visiting, if it is visiting one.
+If called with a prefix argument, kills the current buffer.
+If called without a prefix argument, reads a buffer name using ido-read-buffer.
+If buffer doesn't exist, does nothing."
+  (interactive "P")
+  (let ((buffer (get-buffer (if arg
+                                (current-buffer)
+                              (ido-read-buffer "Kill buffer: ")))))
+    (when buffer
+      (let ((file-name (buffer-file-name buffer)))
+        (kill-buffer buffer)
+        (when file-name
+          (delete-file file-name))))))
+
+(defun move-buffer-file (dir)
+  "Moves both current buffer and file it's visiting to DIR."
+  (interactive "DNew directory: ")
+  (let* ((name (buffer-name))
+         (filename (buffer-file-name))
+         (dir
+          (if (string-match dir "\\(?:/\\|\\\\)$")
+              (substring dir 0 -1) dir))
+         (newname (concat dir "/" name)))
+
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (progn (copy-file filename newname 1)
+             (delete-file filename)
+             (set-visited-file-name newname)
+             (set-buffer-modified-p nil)
+             t))))
+
+(defun read-sexp-from-file (filename)
+  "reads one sexp from a file"
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (read (current-buffer))))
+
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn (rename-file name new-name 1)
+               (rename-buffer new-name)
+               (set-visited-file-name new-name)
+               (set-buffer-modified-p nil))))))
 
 ;;;; Bindings
 
