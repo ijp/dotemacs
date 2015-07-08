@@ -778,13 +778,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         "-I" "/home/ian/lib/cpdt/src"
         "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot"))
 
-;; Japanese Keyboard experiments
-(bind-key "<henkan>" (kbd "<backspace>"))
-(bind-key "<muhenkan>" 'ido-switch-buffer)
-
 ;; Ace Jump Mode
 (bind-key "C-c SPC" 'ace-jump-mode)
-(bind-key "<muhenkan>" 'ace-jump-mode)
 
 ;; More key crap
 (bind-key "C-c i" 'imenu)
