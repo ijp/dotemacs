@@ -189,8 +189,12 @@
 
 ;;; Diminish
 (require 'diminish)
-(add-hook 'emacs-lisp-mode-hook
-          (lambda () (setq mode-name "elisp")))
+
+(use-package lisp-mode
+  :init
+  (defun my-rename-elisp-mode ()
+    (setq mode-name "elisp"))
+  (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode))
 
 ;; Auto inserts
 ;; Doing it this way sucks, next time use define-auto-insert
