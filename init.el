@@ -779,7 +779,8 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
         "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot"))
 
 ;; Ace Jump Mode
-(bind-key "C-c SPC" 'ace-jump-mode)
+(use-package ace-jump-mode
+  :bind ("C-c SPC" . ace-jump-mode))
 
 ;; More key crap
 (bind-key "C-c i" 'imenu)
