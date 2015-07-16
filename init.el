@@ -114,8 +114,6 @@
 (require 'pretty-mode)
 (global-pretty-mode 1)
 
-(require 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
 
 (add-hook 'css-mode-hook 'rainbow-mode)
 
@@ -157,6 +155,10 @@
         ;; names and returns nil on invalid, or 'ask if valid
         '(("From" . "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org")
           ("Newsgroups:" . "gmane.lisp.scheme.reports"))))
+
+(use-package browse-kill-ring
+  :config
+  (browse-kill-ring-default-keybindings))
 
 (use-package c-eldoc
   :commands c-turn-on-eldoc-mode
