@@ -141,42 +141,6 @@
 (ido-hacks-mode t)
 (setq ido-auto-merge-work-directories-length -1)
 
-;;;; BBDB
-(add-to-list 'load-path "~/src/emacs/bbdb/lisp/")
-;; add tex to tex search path
-;; add info to info search path
-(require 'bbdb)
-(bbdb-initialize 'gnus 'message)
-;(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-;;done automatically by above
-(setq bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook)
-(setq bbdb/news-auto-create-p 'bbdb-ignore-some-messages-hook)
-(setq bbdb-ignore-some-messages-alist
-      ;; doesn't work if they already have an entry?
-      ;; I think I can hack around this by writing a function creating
-      ;; a bbdb-always-add-addresses function that checks for invalid
-      ;; names and returns nil on invalid, or 'ask if valid
-      '(("From" . "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org")
-        ("Newsgroups:" . "gmane.lisp.scheme.reports")))
-;(setq bbdb/news-auto-create-p t)
-(setq bbdb-north-american-phone-numbers-p nil)
-(setq bbdb-use-pop-up nil)
-(setq bbdb-offer-save 'save-automagically)
-
-(defun net-address-trash-p (net-address)
-  (string-match "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org"
-                net-address))
-
-
-(defun my-always-add-addresses ()
-  "Checks if net address is trash, if so don't add it to BBDB"
-  (if (net-address-trash-p net)
-      ;(progn (message "trash") nil)
-      nil
-    'ask))
-
-(setq bbdb-always-add-addresses 'my-always-add-addresses)
-
 ;;;; Fun stuff
 (setq yow-file "~/lib/homie-yow/homie.lines")
 
@@ -200,6 +164,36 @@
 
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
+
+(use-package bbdb-com
+  :load-path "~/src/emacs/bbdb/lisp/"
+  :commands (bbdb bbdb-create)
+  :config
+  (bbdb-initialize 'gnus 'message) ; init?
+
+  (defun net-address-trash-p (net-address)
+    (string-match "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org"
+                  net-address))
+
+  (defun my-always-add-addresses ()
+    "Checks if net address is trash, if so don't add it to BBDB"
+    (if (net-address-trash-p net)
+        nil
+      'ask))
+
+  (setq bbdb-always-add-addresses 'my-always-add-addresses
+        bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook
+        bbdb/news-auto-create-p 'bbdb-ignore-some-messages-hook
+        bbdb-north-american-phone-numbers-p nil
+        bbdb-offer-save 'save-automagically
+        bbdb-use-pop-up nil
+        bbdb-ignore-some-messages-alist
+        ;; doesn't work if they already have an entry?
+        ;; I think I can hack around this by writing a function creating
+        ;; a bbdb-always-add-addresses function that checks for invalid
+        ;; names and returns nil on invalid, or 'ask if valid
+        '(("From" . "INVALID\\|invalid\\|noreply\\|googlegroups\\|public.gmane.org")
+          ("Newsgroups:" . "gmane.lisp.scheme.reports"))))
 
 (use-package c-eldoc
   :commands c-turn-on-eldoc-mode
