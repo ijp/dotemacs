@@ -110,8 +110,6 @@
  uniquify-strip-common-suffix nil)
 (setq auto-save-include-big-deletions t)
 
-(add-hook 'css-mode-hook 'rainbow-mode)
-
 ;;;; Fun stuff
 (setq yow-file "~/lib/homie-yow/homie.lines")
 
@@ -627,6 +625,11 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
         '("-emacs"                      ; needed?
           "-I" "/home/ian/lib/cpdt/src"
           "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot")))
+
+(use-package rainbow-mode
+  :commands rainbow-mode
+  :init
+  (add-hook 'css-mode-hook 'rainbow-mode))
 
 (use-package rfcview
   :mode ("\\rfc[0-9][0-9][0-9][0-9].txt\\'" . rfcview-mode))
