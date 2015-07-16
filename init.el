@@ -23,7 +23,6 @@
 ;; Load up starter kit customizations
 (add-to-list 'load-path (concat user-emacs-directory "esk-remnants"))
 (require 'starter-kit-defuns)
-(require 'starter-kit-bindings)
 (require 'starter-kit-misc)
 (require 'starter-kit-lisp)
 
@@ -455,6 +454,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
 
 (use-package eshell
   :commands eshell
+  :bind ("C-x m" . eshell)
   :config
   (setq eshell-cmpl-cycle-completions t ; nil
       eshell-save-history-on-exit t
@@ -557,7 +557,7 @@ If no USER argument is specified, list the contents of `erc-ignore-list'."
   (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode))
 
 (use-package magit
-  :commands magit-status
+  :bind ("C-x g" . magit-status)
   :init
   (setq magit-last-seen-setup-instructions "1.4.0")
   :config
@@ -781,13 +781,26 @@ If buffer doesn't exist, does nothing."
 (bind-key "<insert>" 'ignore)
 (bind-key "<home>" 'back-to-indentation-or-beginning)
 (bind-key "C-c d" 'diff-buffer-with-file)
+(bind-key "C-c e" 'eval-and-replace)
 (bind-key "C-c i" 'imenu)
+(bind-key "C-c n" 'cleanup-buffer)
 (bind-key "C-c o" 'browse-url)
 (bind-key "C-c q" 'refill-mode)
-(bind-key "\C-c +" 'hs-toggle-hiding)
+(bind-key "C-c r" 'revert-buffer)
+(bind-key "C-c +" 'hs-toggle-hiding)
+(bind-key "C-h a" 'apropos)
+(bind-key "C-x \\" 'align-regexp)
+(bind-key "C-x f" 'recentf-ido-find-file)
 (bind-key "C-x TAB" 'indent-rigidly)
 (bind-key "C-x M-d" 'fixup-whitespace)
 (bind-key "C-x M-k" 'kill-buffer-and-file)
 (bind-key "C-x 8 p" 'fc/unicode-info-at-point)
 (bind-key "C-x 8 \" RET" (lambda () (interactive) (insert "̈")))
 (bind-key "C-x 9" 'kill-buffer-and-window)
+(bind-key "C-+" 'text-scale-increase)
+(bind-key "C--" 'text-scale-decrease)
+(bind-key "C-M-h" 'backward-kill-word)
+
+(bind-key "C-o" 'isearch-occur isearch-mode-map)
+;; FIXME: should be in use-package but no isearch feature, and
+;; can't coax use-package to not require it
