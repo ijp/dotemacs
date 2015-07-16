@@ -14,8 +14,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(setq autoload-file (concat user-emacs-directory "loaddefs.el"))
-(setq package-user-dir (concat user-emacs-directory "elpa"))
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
 ;; These should be loaded on startup rather than autoloaded on demand
@@ -97,8 +95,6 @@
 ;; rather than having to keep using a prefix
 (setq user-mail-address "ianprice90@gmail.com")
 (setq set-mark-command-repeat-pop t)
-(setq prolog-program-name "gprolog")
-(setq sql-sqlite-program "sqlite3")
 (setq vc-follow-symlinks t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (setq c-default-style "linux")
