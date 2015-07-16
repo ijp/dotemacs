@@ -1,3 +1,8 @@
+;; ----- NEVER FORGET -----
+;; I think I'm missing some stuff, but it's a small price to pay
+;; considering I accidentally deleted my ian.el
+;; thank god emacs made that back up the day before
+;; ------------------------
 (add-to-list 'load-path "~/src/emacs/use-package")
 (require 'use-package)
 (require 'bind-key)
@@ -80,12 +85,6 @@
 
 ;;; Diminish
 (require 'diminish)
-
-;; ----- NEVER FORGET -----
-;; I think I'm missing some stuff, but it's a small price to pay
-;; considering I accidentally deleted my ian.el
-;; thank god emacs made that back up the day before
-;; ------------------------
 
 ;;;; Misc
 (setenv "PAGER" "cat")
