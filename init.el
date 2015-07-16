@@ -111,10 +111,6 @@
  uniquify-strip-common-suffix nil)
 (setq auto-save-include-big-deletions t)
 
-(require 'pretty-mode)
-(global-pretty-mode 1)
-
-
 (add-hook 'css-mode-hook 'rainbow-mode)
 
 ;;;; Fun stuff
@@ -618,6 +614,11 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
 
 (use-package paredit
   :diminish (paredit-mode . "Ped"))
+
+(use-package pretty-mode
+  :commands turn-on-pretty-mode
+  :init
+  (add-hook 'prog-mode-hook 'turn-on-pretty-mode))
 
 (use-package proof-site
   :load-path "~/src/emacs/ProofGeneral-4.2/generic/"
