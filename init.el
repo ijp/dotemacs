@@ -119,23 +119,6 @@
 
 (add-hook 'css-mode-hook 'rainbow-mode)
 
-(setq auto-mode-alist
-      (append
-       '(("\\.sls$" . scheme-mode)
-         ("\\.sps$" . scheme-mode)
-         ("\\.service$" . conf-mode)
-         ("\\.unit$" . conf-mode)
-         ("\\.toml$" . conf-mode)
-         ("\\rfc[0-9][0-9][0-9][0-9].txt$" . rfcview-mode) ; in emacs-goodies
-         ("\\.markdown\\'" . markdown-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("README\\.md\\'" . gfm-mode)
-         ("\\.m$" . octave-mode)
-         ("\\.js\\(on\\)?$" . js2-mode)
-         ("\\.xml$" . nxml-mode))
-       auto-mode-alist))
-
-
 ;;;; Ido
 (require 'ido-hacks) ;; OMFG
 (ido-hacks-mode t)
@@ -199,6 +182,11 @@
   :init
   (defun turn-on-company-mode ()
     (company-mode +1)))
+
+(use-package conf-mode
+  :mode (("\\.service\\'" . conf-mode)
+         ("\\.unit\\'" . conf-mode)
+         ("\\.toml\\'" . conf-mode)))
 
 (use-package dired
   :commands dired-mode
@@ -545,6 +533,9 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
                       (name . "^\\*scheme\\*$"))))))
   (unbind-key "C-x C-f" ibuffer-mode-map))
 
+(use-package js2-mode
+  :mode "\\.js\\(on\\)?\\'")
+
 (use-package legalese
   :commands legalese
   :config
@@ -563,8 +554,19 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
   :config
   (setq magit-save-some-buffers nil))
 
+(use-package markdown-mode
+  :mode (("\\.markdown\\'" . markdown-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("README\\.md\\'" . gfm-mode)))
+
 (use-package misc
   :bind ("M-z" . zap-up-to-char))
+
+(use-package nxml-mode
+  :mode "\\.xml\\'")
+
+(use-package octave
+  :mode ("\\.m\\'" . octave-mode))
 
 (use-package org
   :bind (("C-c l" . org-store-link)
@@ -624,7 +626,12 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
           "-I" "/home/ian/lib/cpdt/src"
           "-R" "/home/ian/src/coq/ynot/src/coq/" "Ynot")))
 
+(use-package rfcview
+  :mode ("\\rfc[0-9][0-9][0-9][0-9].txt\\'" . rfcview-mode))
+
 (use-package scheme
+  :mode (("\\.sls\\'" . scheme-mode)
+         ("\\.sps\\'" . scheme-mode))
   :config
   (defun my-scheme-setup-indents (list)
     (mapc (lambda (p)
