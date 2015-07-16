@@ -98,14 +98,6 @@
 ;;; Diminish
 (require 'diminish)
 
-;; Auto inserts
-;; Doing it this way sucks, next time use define-auto-insert
-
-(setq auto-insert-query nil)              ; stop asking already, jeez
-(setq auto-insert-directory (concat user-emacs-directory "inserts"))
-(auto-insert-mode 1)
-
-
 ;; ----- NEVER FORGET -----
 ;; I think I'm missing some stuff, but it's a small price to pay
 ;; considering I accidentally deleted my ian.el
