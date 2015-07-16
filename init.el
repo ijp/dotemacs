@@ -70,25 +70,9 @@
 ;; I wish there was a programming "super mode" i could hook into
 ;; from http://www.emacswiki.org/emacs/HideShow
 (add-to-list 'hs-special-modes-alist
-	     '(ruby-mode
-	       "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
-	       (lambda (arg) (ruby-end-of-block)) nil))
-
-;; from http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
-(defun make-buffer-executable-except-r6rs-libs ()
-  ;; *cough* hack *cough*
-  (unless (string-match "\\.sls$" (buffer-name))
-    (executable-make-buffer-file-executable-if-script-p)))
-
-;; More effort than it was worth at the moment
-
-;; (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-;; (add-hook 'after-save-hook
-;;           'make-buffer-executable-except-r6rs-libs)
-;; (remove-hook 'after-save-hook
-;;              'make-buffer-executable-except-r6rs-libs
-;;              nil)
+             '(ruby-mode
+               "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
+               (lambda (arg) (ruby-end-of-block)) nil))
 
 ;; Commented out, until I can figure out how to turn this off for
 ;; certain git repos
