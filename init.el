@@ -119,11 +119,6 @@
 
 (add-hook 'css-mode-hook 'rainbow-mode)
 
-;;;; Ido
-(require 'ido-hacks) ;; OMFG
-(ido-hacks-mode t)
-(setq ido-auto-merge-work-directories-length -1)
-
 ;;;; Fun stuff
 (setq yow-file "~/lib/homie-yow/homie.lines")
 
@@ -532,6 +527,11 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
                       (name . "^.*[Gg]eiser.*$")
                       (name . "^\\*scheme\\*$"))))))
   (unbind-key "C-x C-f" ibuffer-mode-map))
+
+(use-package ido-hacks
+  :config
+  (setq ido-auto-merge-work-directories-length -1)
+  (ido-hacks-mode t))
 
 (use-package js2-mode
   :mode "\\.js\\(on\\)?\\'")
