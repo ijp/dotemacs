@@ -147,21 +147,6 @@
 ;;;; Abbrevs
 (read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
 
-;; TZ
-;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-(setq display-time-world-list
-      '(("America/Los_Angeles" "Seattle")
-        ("America/New_York" "New York")
-        ("Europe/London" "London")
-        ("Europe/Paris" "Paris")
-        ("Europe/Istanbul" "Istanbul")
-        ("Asia/Calcutta" "Bangalore")
-        ("Asia/Tokyo" "Tokyo")
-        ("Pacific/Auckland" "Auckland")))
-;; Νøöβ§ ¢αn'τ ウИï©Øδε
-;; <ijp> fledermaus: actually, it could be a fun idea for an input method
-;; <fledermaus> ijp - what, random unil33t char for every key pressed?
-
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
 
@@ -684,6 +669,20 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
   :bind ("C-c t" . tea-time)
   :config
   (setq tea-time-sound "/usr/share/sounds/freedesktop/stereo/complete.oga"))
+
+(use-package time
+  :commands display-time-world
+  :config
+  ;; https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  (setq display-time-world-list
+        '(("America/Los_Angeles" "Seattle")
+          ("America/New_York" "New York")
+          ("Europe/London" "London")
+          ("Europe/Paris" "Paris")
+          ("Europe/Istanbul" "Istanbul")
+          ("Asia/Calcutta" "Bangalore")
+          ("Asia/Tokyo" "Tokyo")
+          ("Pacific/Auckland" "Auckland"))))
 
 (use-package tramp
   :init (setq tramp-ssh-controlmaster-options nil) ;; FIXES hanging tramp
