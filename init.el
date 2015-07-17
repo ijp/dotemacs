@@ -738,6 +738,10 @@ If buffer doesn't exist, does nothing."
              (set-buffer-modified-p nil)
              t))))
 
+(defun my-theme-enable ()
+   (let ((warning-minimum-level :error))
+     (load-theme 'monokai t)))
+
 (defun read-sexp-from-file (filename)
   "reads one sexp from a file"
   (with-temp-buffer
@@ -823,8 +827,7 @@ If buffer doesn't exist, does nothing."
 
 (add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
 
-(let ((warning-minimum-level :error))
-  (load-theme 'monokai t))
+(add-hook 'after-init-hook 'my-theme-enable)
 
 (load custom-file 'noerror)
 
