@@ -19,7 +19,6 @@
 (add-to-list 'load-path (concat user-emacs-directory "esk-remnants"))
 (require 'starter-kit-defuns)
 (require 'starter-kit-misc)
-(require 'starter-kit-lisp)
 
 (add-to-list 'load-path "~/src/emacs/")
 (require 'diminish)
@@ -469,10 +468,28 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
   (setq legalese-default-license 'bsd))
 
 (use-package lisp-mode
-  :init
+  :config
   (defun my-rename-elisp-mode ()
     (setq mode-name "elisp"))
-  (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode))
+
+  (defun esk-remove-elc-on-save ()
+    "If you're saving an elisp file, likely the .elc is no longer valid."
+    (make-local-variable 'after-save-hook)
+    (add-hook 'after-save-hook
+              (lambda ()
+                (if (file-exists-p (concat buffer-file-name "c"))
+                    (delete-file (concat buffer-file-name "c"))))))
+
+  (add-hook 'emacs-lisp-mode-hook 'my-rename-elisp-mode)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
+
+  (bind-key "M-." 'find-function-at-point emacs-lisp-mode-map)
+  (bind-key "TAB" 'lisp-complete-symbol read-expression-map)
+  (bind-keys :map lisp-mode-shared-map
+             ("RET" . reindent-then-newline-and-indent)
+             ("C-\\" . lisp-complete-symbol)
+             ("C-c v" . eval-buffer)))
 
 (use-package magit
   :bind ("C-x g" . magit-status)
@@ -542,7 +559,16 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
     (setq org-velocity-edit-entry t)))
 
 (use-package paredit
-  :diminish (paredit-mode . "Ped"))
+  :diminish (paredit-mode . "Ped")
+  :commands paredit-mode
+  :init
+  (defun turn-on-paredit ()
+    (paredit-mode t))
+  (add-hook 'scheme-mode-hook 'turn-on-paredit)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
+  (add-hook 'lisp-mode-hook 'turn-on-paredit)
+  :config
+  (bind-key "M-)" 'paredit-forward-slurp-sexp paredit-mode-map))
 
 (use-package pretty-mode
   :commands turn-on-pretty-mode

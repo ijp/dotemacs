@@ -26,9 +26,6 @@
 (defun turn-on-whitespace ()
   (whitespace-mode t))
 
-(defun turn-on-paredit ()
-  (paredit-mode t))
-
 (defun turn-off-tool-bar ()
   (tool-bar-mode -1))
 
@@ -94,12 +91,6 @@
   "Insert a time-stamp according to locale's date and time format."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
-
-(defun esk-paredit-nonlisp ()
-  "Turn on paredit mode for non-lisps."
-  (set (make-local-variable 'paredit-space-delimiter-chars)
-       (list ?\"))
-  (paredit-mode 1))
 
 ;; A monkeypatch to cause annotate to ignore whitespace
 (defun vc-git-annotate-command (file buf &optional rev)
