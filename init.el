@@ -31,29 +31,16 @@
 
 (load custom-file 'noerror)
 
-;;; init.el ends here
-(setq disabled-command-function nil) ; handle all disabled commands -  thanks YoungFrog
-
 (add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
 (delete-selection-mode t)
 (menu-bar-mode t)
 (column-number-mode t)
-(setq sentence-end-double-space nil)
 (add-to-list 'load-path "~/src/emacs/")
 
 (let ((warning-minimum-level :error))
   (load-theme 'monokai t))
 
 (set-input-method "TeX")
-
-;; less clutter on startup
-;; see http://bzg.fr/emacs-strip-tease.html
-(setq initial-scratch-message "")
-(setq inhibit-startup-echo-area-message "ian")
-;(eval '(setq inhibit-startup-echo-area-message "ian")) ; if byte-compiling
-; (toggle-frame-fullscreen) ; emacs > 24.4 , I think
-; (menu-bar-mode 1) ; undecided
-;; TODO: add his hidden mode-line hack
 
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -88,23 +75,7 @@
 (setenv "PAGER" "cat")
 (setenv "NODE_NO_READLINE" "1")
 
-;; might be useful, means I can just use C-SPC after C-u C-SPACE,
-;; rather than having to keep using a prefix
-(setq user-mail-address "ianprice90@gmail.com")
-(setq set-mark-command-repeat-pop t)
-(setq vc-follow-symlinks t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(setq c-default-style "linux")
-(add-hook 'java-mode-hook (lambda () (c-set-style "java")))
-(setq yank-pop-change-selection t) ; suggest adding to better-defaults.el
-(setq
- uniquify-buffer-name-style 'post-forward
- uniquify-separator ":"
- uniquify-strip-common-suffix nil)
-(setq auto-save-include-big-deletions t)
-
-;;;; Fun stuff
-(setq yow-file "~/lib/homie-yow/homie.lines")
 
 ;;;; Abbrevs
 (read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
@@ -827,3 +798,23 @@ If buffer doesn't exist, does nothing."
 (set-register ?b '(file . "~/org/2015-books.org"))
 (set-register ?e `(file . ,(concat user-emacs-directory "init.el")))
 (set-register ?g `(file . ,(concat user-emacs-directory "fools")))
+
+;;;; Misc Settings
+
+(setq auto-save-include-big-deletions t
+      c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "linux"))
+      disabled-command-function nil ; handle all disabled commands -  thanks YoungFrog
+      inhibit-startup-echo-area-message "ian"
+      initial-scratch-message ""
+      sentence-end-double-space nil
+      set-mark-command-repeat-pop t
+      uniquify-buffer-name-style 'post-forward
+      uniquify-separator ":"
+      uniquify-strip-common-suffix nil
+      user-mail-address "ianprice90@gmail.com"
+      vc-follow-symlinks t
+      yank-pop-change-selection t ; suggest adding to better-defaults.el
+      yow-file "~/lib/homie-yow/homie.lines"
+      )
