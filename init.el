@@ -7,40 +7,22 @@
 (require 'use-package)
 (require 'bind-key)
 
-;; Load up ELPA, the package manager
-
-
 (require 'package)
 (setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-
-;; These should be loaded on startup rather than autoloaded on demand
-;; since they are likely to be used in every session
 
 (require 'ffap)
 (require 'ansi-color)
 (require 'recentf)
 
-;; Load up starter kit customizations
 (add-to-list 'load-path (concat user-emacs-directory "esk-remnants"))
 (require 'starter-kit-defuns)
 (require 'starter-kit-misc)
 (require 'starter-kit-lisp)
 
-(load custom-file 'noerror)
-
-(add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
-(delete-selection-mode t)
-(menu-bar-mode t)
-(column-number-mode t)
 (add-to-list 'load-path "~/src/emacs/")
-
-(let ((warning-minimum-level :error))
-  (load-theme 'monokai t))
-
-(set-input-method "TeX")
+(require 'diminish)
 
 ; From http://emacs-fu.blogspot.com/2009/11/copying-lines-without-selecting-them.html
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -64,18 +46,7 @@
                "\\(def\\|do\\|{\\)" "\\(end\\|end\\|}\\)" "#"
                (lambda (arg) (ruby-end-of-block)) nil))
 
-;; Commented out, until I can figure out how to turn this off for
-;; certain git repos
-;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;;; Diminish
-(require 'diminish)
-
-;;;; Misc
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-
-;;;; Abbrevs
-(read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
+;;;; Use-Packages
 
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
@@ -802,6 +773,7 @@ If buffer doesn't exist, does nothing."
       c-default-style '((java-mode . "java")
                         (awk-mode . "awk")
                         (other . "linux"))
+      custom-file (concat user-emacs-directory "custom.el")
       disabled-command-function nil ; handle all disabled commands -  thanks YoungFrog
       inhibit-startup-echo-area-message "ian"
       initial-scratch-message ""
@@ -818,3 +790,18 @@ If buffer doesn't exist, does nothing."
 
 (setenv "PAGER" "cat")
 (setenv "NODE_NO_READLINE" "1")
+
+(delete-selection-mode t)
+(menu-bar-mode t)
+(column-number-mode t)
+
+(add-to-list 'default-frame-alist '(font . "Inconsolata-10"))
+
+(let ((warning-minimum-level :error))
+  (load-theme 'monokai t))
+
+(load custom-file 'noerror)
+
+(set-input-method "TeX")
+
+(read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
