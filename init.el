@@ -7,11 +7,6 @@
 (require 'use-package)
 (require 'bind-key)
 
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
-
 (require 'ffap)
 (require 'ansi-color)
 (require 'recentf)
@@ -557,6 +552,12 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
     :config
     (setq org-velocity-bucket "~/org/bucket.org")
     (setq org-velocity-edit-entry t)))
+
+(use-package package
+  :bind ("C-c p" . list-packages)
+  :config
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/")))
 
 (use-package paredit
   :diminish (paredit-mode . "Ped")
