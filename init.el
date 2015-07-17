@@ -799,6 +799,7 @@ If buffer doesn't exist, does nothing."
       c-default-style '((java-mode . "java")
                         (awk-mode . "awk")
                         (other . "linux"))
+      cookie-file "~/lib/homie-yow/homie.lines"
       custom-file (concat user-emacs-directory "custom.el")
       disabled-command-function nil ; handle all disabled commands -  thanks YoungFrog
       inhibit-startup-echo-area-message "ian"
@@ -811,7 +812,6 @@ If buffer doesn't exist, does nothing."
       user-mail-address "ianprice90@gmail.com"
       vc-follow-symlinks t
       yank-pop-change-selection t ; suggest adding to better-defaults.el
-      yow-file "~/lib/homie-yow/homie.lines"
       )
 
 (setenv "PAGER" "cat")
