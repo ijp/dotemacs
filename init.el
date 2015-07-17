@@ -72,9 +72,6 @@
 (require 'diminish)
 
 ;;;; Misc
-(setenv "PAGER" "cat")
-(setenv "NODE_NO_READLINE" "1")
-
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;;; Abbrevs
@@ -818,3 +815,6 @@ If buffer doesn't exist, does nothing."
       yank-pop-change-selection t ; suggest adding to better-defaults.el
       yow-file "~/lib/homie-yow/homie.lines"
       )
+
+(setenv "PAGER" "cat")
+(setenv "NODE_NO_READLINE" "1")
