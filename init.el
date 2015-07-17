@@ -434,12 +434,12 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
   :config
   (setq ibuffer-saved-filter-groups
         ;; or maybe just ibuffer-filter-groups?
-        '(("default"
+        `(("default"
            ("dired" (mode . dired-mode))
            ("emacs" (or
                      (name . "^\\*scratch\\*$")
                      (name . "^\\*Messages\\*$")
-                     (filename . "~/.emacs.d/init.el")))
+                     (filename . ,user-init-file)))
            ("erc" (mode . erc-mode))
            ("gnus" (or
                     (mode . gnus-group-mode)
@@ -631,7 +631,7 @@ the opportunity to do it again\" - from \"The Wizardy Compiled\""
 (use-package tramp
   :init (setq tramp-ssh-controlmaster-options nil) ;; FIXES hanging tramp
   :config
-  (setq tramp-auto-save-directory "/home/ian/.emacs.d/trampdir/"))
+  (setq tramp-auto-save-directory (locate-user-emacs-file "trampdir")))
 
 (use-package ws-butler
   :load-path "~/src/emacs/ws-butler/"
@@ -764,7 +764,7 @@ If buffer doesn't exist, does nothing."
 ;; can't coax use-package to not require it
 
 (set-register ?b '(file . "~/org/2015-books.org"))
-(set-register ?e `(file . ,(concat user-emacs-directory "init.el")))
+(set-register ?e `(file . ,user-init-file))
 (set-register ?g `(file . ,(concat user-emacs-directory "fools")))
 
 ;;;; Misc Settings
@@ -804,4 +804,4 @@ If buffer doesn't exist, does nothing."
 
 (set-input-method "TeX")
 
-(read-abbrev-file "~/.emacs.d/misspelling_abbrevs")
+(read-abbrev-file (locate-user-emacs-file "misspelling_abbrevs"))
